@@ -62,4 +62,18 @@ socket.on('connection', (client) => {
         client.leave(roomId);
         socket.in(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
     });
+
+    client.on('send', (data) => {
+        let roomId, message;
+
+        try {
+            ({roomId, message} = data);
+        }
+        catch (e) {
+            winston.error('Got invalid client-leave-room message (data: ' + data + ') from client ' + client.id);
+            return;
+        }
+        winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
+        socket.in(roomId).emit('message', message);
+    });
 });
