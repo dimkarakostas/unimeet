@@ -14,6 +14,14 @@ const UnichatClient = {
             console.log('Connected');
             this._socket.emit('client-hello');
         });
+        this._socket.on('server-hello', (client_id) => {
+            this._clientId = client_id;
+            console.log('Active, my id is ' + client_id + ', joining room ' + this._roomId);
+            this._socket.emit('join-room', {
+                roomId: this._roomId
+            });
+            this._canSendMessages = true;
+        });
     }
 };
 
