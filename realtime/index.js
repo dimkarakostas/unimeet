@@ -19,3 +19,12 @@ winston.info('Unichat realtime service');
 winston.info('Listening on port ' + PORT);
 
 const socket = io.listen(PORT);
+
+socket.on('connection', (client) => {
+    winston.debug('New connection from client ' + client.id);
+
+    client.on('client-hello', (data) => {
+        winston.debug('Client ' + client.id + ' sent client-hello.');
+        client.emit('server-hello', client.id);
+    });
+});
