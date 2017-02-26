@@ -45,4 +45,21 @@ socket.on('connection', (client) => {
         _rooms.push(roomId);
         winston.debug('Client\'s rooms: ' + _rooms);
     });
+
+    client.on('client-leave-room', (data) => {
+        // client-leave-room is received either because the client wants to leave the room
+        // or because the server notified it that it is the last one after a conversation
+        let roomId;
+
+        try {
+            ({roomId} = data);
+        }
+        catch (e) {
+            winston.error('Got invalid client-leave-room message (data: ' + data + ') from client ' + client.id);
+            return;
+        }
+        winston.debug('Client ' + client.id + ' wished to leave room ' + roomId);
+        client.leave(roomId);
+        socket.in(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
+    });
 });
