@@ -76,4 +76,13 @@ socket.on('connection', (client) => {
         winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
         socket.in(roomId).emit('message', message);
     });
+
+    client.on('disconnect', () => {
+        winston.debug('Client ' + client.id + ' disconnected');
+        winston.debug('Client\'s rooms: ' + _rooms);
+        for (let i=0; i < _rooms.length; i++) {
+            winston.debug('Notifying room ' + _rooms[i] + ' for the disconnection');
+            socket.in(_rooms[i]).emit('message', 'Your partner ' + client.id + ' has left.');
+        }
+    });
 });
