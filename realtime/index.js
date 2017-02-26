@@ -21,10 +21,28 @@ winston.info('Listening on port ' + PORT);
 const socket = io.listen(PORT);
 
 socket.on('connection', (client) => {
+    let _rooms = [];
     winston.debug('New connection from client ' + client.id);
 
     client.on('client-hello', (data) => {
         winston.debug('Client ' + client.id + ' sent client-hello.');
         client.emit('server-hello', client.id);
+    });
+
+    client.on('join-room', (data) => {
+        // join-room is received after connection has been established with successful client-hello/server-hello messages
+        let roomId;
+
+        try {
+            ({roomId} = data);
+        }
+        catch (e) {
+            winston.error('Got invalid join-room message (data: ' + data + ') from client ' + client.id);
+            return;
+        }
+        winston.debug('Client ' + client.id + ' wishes to join room ' + roomId);
+        client.join(roomId);
+        _rooms.push(roomId);
+        winston.debug('Client\'s rooms: ' + _rooms);
     });
 });
