@@ -26,6 +26,10 @@ const UnichatClient = {
             console.log('Received message:');
             console.log('\t' + message);
         });
+        this._socket.on('disconnect', () => {
+            console.log('Realtime disconnected');
+            this._canSendMessages = false;
+        });
     }
 };
 
