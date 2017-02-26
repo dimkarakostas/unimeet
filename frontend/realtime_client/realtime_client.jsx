@@ -22,6 +22,10 @@ const UnichatClient = {
             });
             this._canSendMessages = true;
         });
+        this._socket.on('message', (message) => {
+            console.log('Received message:');
+            console.log('\t' + message);
+        });
     }
 };
 
