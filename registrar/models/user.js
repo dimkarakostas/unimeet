@@ -35,6 +35,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: false
         },
+        interestedIn: DataTypes.BOOLEAN, // null -> both, false -> male, true -> female
         isChatting: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
