@@ -1,0 +1,26 @@
+{
+  "development": {
+    "dialect": "mysql",
+    "host": "127.0.0.1",
+    "username": "unichat",
+    "password": "unichat",
+    "database": "unichat",
+    "dialectOptions": {
+        "socketPath": "/var/run/mysqld/mysqld.sock"
+    }
+  },
+  "test": {
+    "dialect": "sqlite",
+    "database": ":memory:"
+  },
+  "production": {
+    "dialect": "mysql",
+    "host": "127.0.0.1",
+    "username": "unichat",
+    "password": "unichat",
+    "database": "unichat",
+    "dialectOptions": {
+        "socketPath": "/var/run/mysqld/mysqld.sock"
+    }
+  }
+}
