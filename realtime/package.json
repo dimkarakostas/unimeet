@@ -1,7 +1,7 @@
 {
-  "name": "unichat",
+  "name": "unichat-realtime",
   "version": "1.0.0",
-  "description": "Unichat chat service",
+  "description": "Unichat chat service realtime component",
   "main": "index.js",
   "scripts": {
     "start": "node --harmony index.js"
