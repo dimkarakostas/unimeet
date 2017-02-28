@@ -30,6 +30,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         school: DataTypes.STRING,
         university: DataTypes.STRING,
+        sex: {  // false -> male, true -> female
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
         isChatting: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
