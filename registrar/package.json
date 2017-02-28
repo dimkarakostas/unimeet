@@ -13,7 +13,8 @@
     "socket.io": "^1.4.5",
     "winston": "^2.2.0",
     "sequelize": "^3.30.2",
-    "mysql": "^2.13.0"
+    "mysql": "^2.13.0",
+    "bcrypt": "^1.0.2"
   },
   "devDependencies": {
     "socket.io-client": "^1.4.8",
