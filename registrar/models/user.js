@@ -27,6 +27,9 @@ module.exports = function(sequelize, DataTypes) {
         },
         password_confirmation: {
             type: DataTypes.VIRTUAL
+        },
+        school: DataTypes.STRING,
+        university: DataTypes.STRING,
         }
     }, {
         indexes: [
