@@ -30,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         school: DataTypes.STRING,
         university: DataTypes.STRING,
+        isChatting: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     }, {
         indexes: [
