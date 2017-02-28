@@ -29,7 +29,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.VIRTUAL
         },
         school: DataTypes.STRING,
-        university: DataTypes.STRING,
         sex: {  // false -> male, true -> female
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -51,6 +50,17 @@ module.exports = function(sequelize, DataTypes) {
                     return this;
                 else
                     return false;
+            }
+        }
+    }, {
+        classMethods: {
+            associate: (models) => {
+                User.belongsTo(models.University, {
+                    onDelete: "CASCADE",
+                    foreignkey: {
+                        allowNull: false
+                    }
+                });
             }
         }
     });
