@@ -51,11 +51,16 @@ module.exports = function(sequelize, DataTypes) {
                 else
                     return false;
             }
-        }
-    }, {
+        },
         classMethods: {
             associate: (models) => {
                 User.belongsTo(models.University, {
+                    onDelete: "CASCADE",
+                    foreignkey: {
+                        allowNull: false
+                    }
+                });
+                User.belongsTo(models.School, {
                     onDelete: "CASCADE",
                     foreignkey: {
                         allowNull: false
