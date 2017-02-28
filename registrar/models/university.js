@@ -14,6 +14,12 @@ module.exports = function(sequelize, DataTypes) {
         indexes: [
             {unique: true, fields: ['name']}
         ],
+        classMethods: {
+            associate: (models) => {
+                University.hasMany(models.User);
+                University.hasMany(models.School);
+            }
+        }
     });
 
     return University;
