@@ -20,8 +20,9 @@ winston.info('Unichat registrar service');
 winston.info('Connecting to database...');
 
 const addUser = (user) => {
-    models.User.create(user).then(() => {
-        winston.debug('User ' + user.username + ' has been created.');
+    return models.User.create(user).then((user) => {
+        winston.debug('User ' + user.email + ' has been created.');
+        return user;
     }).catch((e) => {
         if (e.name == 'SequelizeValidationError') {
             if (e.message.startsWith("notNull Violation")) {
