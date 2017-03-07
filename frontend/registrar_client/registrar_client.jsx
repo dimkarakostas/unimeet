@@ -14,6 +14,24 @@ const UnichatRegistrarClient = {
         this._socket.on('disconnect', () => {
             console.log('Registrar disconnected');
         });
+        this._socket.on('server-hello', () => {
+            let _form = {
+                email: '2jim@jim.com',
+                sex: 1,
+                password: 'password',
+                password_confirmation: 'password',
+                UniversityId: 1
+            };
+            this.register(_form);
+        });
+        this._socket.on('server-register', (data) => {
+            console.log('Registration complete: ' + data.message);
+        });
+    },
+    register(form) {
+        console.log('Registering...');
+        this._socket.emit('register', form);
+    },
     },
 };
 
