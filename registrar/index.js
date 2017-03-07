@@ -55,6 +55,7 @@ const addUser = (user) => {
 models.sequelize.sync().then( () => {
     winston.info('Listening on port ' + PORT);
     const socket = io.listen(PORT);
+    let userLine = [];
     socket.on('connection', (client) => {
         winston.debug('New connection from client ' + client.id);
 
@@ -87,6 +88,31 @@ models.sequelize.sync().then( () => {
                 winston.debug(message);
                 client.emit('server-register', {message: message});
             });
+        });
+
+        client.on('start-chat', (data) => {
+            let email;
+            try {
+                ({email} = data);
+            }
+            catch (e) {
+                winston.error('Got invalid register message (data: ' + data + ') from client ' + client.id);
+                return;
+            }
+            winston.debug('Client ' + email + ' wishes to start chatting.');
+
+            if (userLine.length > 0) {
+                let partnerEmail, partnerClientId;
+                ({partnerEmail, partnerClientId} = userLine.pop());
+                let roomId = email + partnerEmail;
+
+                client.emit('server-start-chat', {partnerEmail: partnerEmail, roomId: roomId});
+                socket.in(partnerClientId).emit('server-start-chat', {partnerEmail: email, roomId: roomId});
+            }
+            else {
+                let clientId = client.id;
+                userLine.push({partnerEmail: email, partnerClientId: clientId});
+            }
         });
     });
 });
