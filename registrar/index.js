@@ -62,5 +62,31 @@ models.sequelize.sync().then( () => {
             winston.debug('Client ' + client.id + ' sent client-hello.');
             client.emit('server-hello', client.id);
         });
+
+        client.on('register', (data) => {
+            winston.debug('Client ' + client.id + ' wants to register.');
+            let email, sex, password, password_confirmation, UniversityId;
+
+            try {
+                ({email, sex, password, password_confirmation, UniversityId} = data);
+            }
+            catch (e) {
+                winston.error('Got invalid register message (data: ' + data + ') from client ' + client.id);
+                return;
+            }
+
+            let message;
+            addUser(data)
+            .then((user) => {
+                message = 'User with mail ' + user.email + ' was registered.';
+            })
+            .catch((e) => {
+                message = e.message;
+            })
+            .finally(() => {
+                winston.debug(message);
+                client.emit('server-register', {message: message});
+            });
+        });
     });
 });
