@@ -24,29 +24,31 @@ const addUser = (user) => {
         winston.debug('User ' + user.email + ' has been created.');
         return user;
     }).catch((e) => {
+        let errorMessage;
         if (e.name == 'SequelizeValidationError') {
             if (e.message.startsWith("notNull Violation")) {
-                winston.error(user.username + ': Please fill all necessary fields.');
+                errorMessage = user.username + ': Please fill all necessary fields.';
             }
             else if (e.message.startsWith("Validation error: Validation isEmail failed")) {
-                winston.error(user.username + ': Invalid email given.');
+                errorMessage = user.username + ': Invalid email given.';
             }
             else if (e.message.startsWith("Password confirmation")) {
-                winston.error(user.username + ': Passwords don\'t match');
+                errorMessage = user.username + ': Passwords don\'t match';
             }
             else if (e.message.startsWith("Password should be at least 6 characters")) {
-                winston.error(user.username + ': ' + e.message);
+                errorMessage = user.username + ': ' + e.message;
             }
             else {
                 throw e;
             }
         }
         else if (e.name == 'SequelizeUniqueConstraintError') {
-            winston.error(user.email + ': Email already exists.');
+            errorMessage = user.email + ': Email already exists.';
         }
         else {
             throw e;
         }
+        throw new Error(errorMessage);
     });
 };
 
