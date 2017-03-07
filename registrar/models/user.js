@@ -28,7 +28,6 @@ module.exports = function(sequelize, DataTypes) {
         password_confirmation: {
             type: DataTypes.VIRTUAL
         },
-        school: DataTypes.STRING,
         sex: {  // false -> male, true -> female
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -55,12 +54,6 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: (models) => {
                 User.belongsTo(models.University, {
-                    onDelete: "CASCADE",
-                    foreignkey: {
-                        allowNull: false
-                    }
-                });
-                User.belongsTo(models.School, {
                     onDelete: "CASCADE",
                     foreignkey: {
                         allowNull: false
