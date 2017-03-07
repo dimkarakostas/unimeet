@@ -55,4 +55,7 @@ const addUser = (user) => {
 models.sequelize.sync().then( () => {
     winston.info('Listening on port ' + PORT);
     const socket = io.listen(PORT);
+    socket.on('connection', (client) => {
+        winston.debug('New connection from client ' + client.id);
+    });
 });
