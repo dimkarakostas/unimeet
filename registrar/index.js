@@ -57,5 +57,10 @@ models.sequelize.sync().then( () => {
     const socket = io.listen(PORT);
     socket.on('connection', (client) => {
         winston.debug('New connection from client ' + client.id);
+
+        client.on('client-hello', () => {
+            winston.debug('Client ' + client.id + ' sent client-hello.');
+            client.emit('server-hello', client.id);
+        });
     });
 });
