@@ -23,15 +23,22 @@ const UnichatRegistrarClient = {
                 UniversityId: 1
             };
             this.register(_form);
+            this.startChatting('2jim@jim.com');
         });
         this._socket.on('server-register', (data) => {
             console.log('Registration complete: ' + data.message);
+        });
+        this._socket.on('server-start-chat', (data) => {
+            console.log('Starting chat with ' + data.partnerEmail + ' in room ' + data.roomId);
         });
     },
     register(form) {
         console.log('Registering...');
         this._socket.emit('register', form);
     },
+    startChatting(email) {
+        console.log('Wishing to start chatting...');
+        this._socket.emit('start-chat', {email: email});
     },
 };
 
