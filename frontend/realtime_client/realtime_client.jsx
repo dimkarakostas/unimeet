@@ -21,6 +21,7 @@ const UnichatClient = {
                 roomId: this._roomId
             });
             this._canSendMessages = true;
+            this.send_message();
         });
         this._socket.on('message', (message) => {
             console.log('Received message:');
@@ -30,6 +31,23 @@ const UnichatClient = {
             console.log('Realtime disconnected');
             this._canSendMessages = false;
         });
+    },
+    send_message() {
+        console.log('Can send messages? ' + this._canSendMessages);
+        let message = 'Hello room, I am ' + this._clientId;
+        setTimeout(
+            () => {
+                if (this._canSendMessages) {
+                    console.log('Sending message to room: ' + message);
+                    this._socket.emit('send', {
+                        roomId: this._roomId,
+                        message: message
+                    });
+                };
+                this.send_message();
+            },
+            2000
+        );
     }
 };
 
