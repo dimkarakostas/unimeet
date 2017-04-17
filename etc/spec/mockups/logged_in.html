@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Unichat</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/logged-in.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.2.0.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Tether JavaScript for tooltip positioning -->
+    <script src="js/tether.min.js"></script>
+
+    <!-- Custom JavaScript library for logged_in page -->
+    <script src="js/logged_in.js"></script>
+
+    <!-- Custom JavaScript library for entire Unichat -->
+    <script src="js/unichat.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="./index.html">Unichat</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./index.html">Log out</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="chat-now">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+                    <a class="chat-now" href="./chat.html">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3><span class="glyphicon glyphicon-comment"></span> Chat now</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Container -->
+
+    </div>
+    <!-- /.chat-now -->
+
+    <div class="account-setup-section">
+
+        <div class="container">
+            <div class="row">
+                <h2 class="section-heading">Set up your account</h2>
+                <div class="col-lg-4 col-sm-4 text-center">
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#account-info-modal">Account information</button>
+                    <div id="account-info-modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Account information
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                                </div>
+                                <form class="form-horizontal" role="change-account-info" action="#change-account-info">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-6 contro-label">Gender:</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" name="sex" id="sex">
+                                                    <option value="undefined" selected>Undefined</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 text-center">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#interested-in-modal">Interested in</button>
+                    <div id="interested-in-modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Interested in
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                                </div>
+                                <form class="form-horizontal" role="change-account-info" action="#change-account-info">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-6 contro-label">I want to talk to:</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" name="sex" id="sex">
+                                                    <option value="undefined">Whatever</option>
+                                                    <option value="female" selected>Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="search-box">
+                                            <input type="text" class="search form-control input-md" placeholder="Search for university/country...">
+                                        </div>
+                                        <div class="form-group">
+                                            <table class="table table-hover table-bordered results">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-md-5 col-xs-5 text-center">University</th>
+                                                        <th class="col-md-3 col-xs-3 text-center">Country</th>
+                                                        <th class="col-md-3 col-xs-3 text-center">Domain</th>
+                                                        <th class="col-md-1 col-xs-1 text-center">
+                                                            <input type="checkbox" id="uniCheckAll" class="checkbox uniCheck uniCheckAll">
+                                                        </th>
+                                                    </tr>
+                                                    <tr class="warning no-result">
+                                                        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>National Technical University of Athens</td>
+                                                        <td>Greece</td>
+                                                        <td>ntua.gr</td>
+                                                        <td>
+                                                            <input checked="checked" type="checkbox" name="ntua" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>University of Athens</td>
+                                                        <td>Greece</td>
+                                                        <td>uoa.gr</td>
+                                                        <td>
+                                                            <input checked="checked" type="checkbox" name="uoa" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>London School of Economics and Political Science, University of London</td>
+                                                        <td>UK</td>
+                                                        <td>lse.ac.uk</td>
+                                                        <td>
+                                                            <input type="checkbox" name="lse" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>University of Edinburgh</td>
+                                                        <td>UK</td>
+                                                        <td>ed.ac.uk</td>
+                                                        <td>
+                                                            <input type="checkbox" name="edac" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Harvard</td>
+                                                        <td>USA</td>
+                                                        <td>harvard.edu</td>
+                                                        <td>
+                                                            <input type="checkbox" name="harvard" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Massachusetts Institute of Technology (MIT)</td>
+                                                        <td>USA</td>
+                                                        <td>mit.edu</td>
+                                                        <td>
+                                                            <input type="checkbox" name="mit" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Yale University</td>
+                                                        <td>USA</td>
+                                                        <td>yale.edu</td>
+                                                        <td>
+                                                            <input type="checkbox" name="yale" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>California Institute of Technology</td>
+                                                        <td>USA</td>
+                                                        <td>caltech.edu</td>
+                                                        <td>
+                                                            <input type="checkbox" name="caltech" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>University of California, Berkeley</td>
+                                                        <td>USA</td>
+                                                        <td>berkeley.edu</td>
+                                                        <td>
+                                                            <input type="checkbox" name="berkeley" id="uniCheckOne" class="uniCheck checkbox" value="1">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 text-center">
+                    <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#password-modal">Change password</button>
+                    <div id="password-modal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Change your password
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                                </div>
+                                <form class="form" role="change-password" action="#change-password">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="old-password" placeholder="Old Password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="new-password" placeholder="New Password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="new-password-verification"placeholder="Re-enter Password" />
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="#forgot-password" data-toggle="tooltip" data-placement="top" title="An email will be sent with a link to reset your password.">Forgot password?</a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row public-info">
+                <div class="col-lg-4 col-sm-4">
+                    <ul data-toggle="tooltip" data-placement="top" title="This information is visible when chatting.">
+                        <li class="list-group-item list-group-item-warning"><u><em>University</em></u><br>Massachusetts Institute of Technology (MIT)</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <ul data-toggle="tooltip" data-placement="top" title="This information is visible when chatting.">
+                        <li class="list-group-item list-group-item-warning"><u><em>Country</em></u><br>USA</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <ul data-toggle="tooltip" data-placement="top" title="This information is visible when chatting.">
+                        <li class="list-group-item list-group-item-warning"><u><em>I am</em></u><br>Undefined</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.account-setup-section -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-8">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="./contact.html">Contact</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#help">Help</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#security">Security</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="https://github.com/dimkarakostas/unichat">Source Code</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="copyright text-muted">© 2017 Unichat. MIT licensed, some rights reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
