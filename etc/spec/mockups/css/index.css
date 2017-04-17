@@ -1,0 +1,99 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.navbar-form .form-group {
+    vertical-align: top;
+}
+
+.forgot-password {
+    padding-top: 5px;
+}
+
+.intro-section {
+    padding-top: 70px;
+
+    background: url(../img/girl_boy_blurred.jpg) no-repeat fixed;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: #f8f8f8;
+    padding-bottom: 60px;
+}
+
+.hello-message {
+    position: relative;
+    padding-left: 20px;
+}
+
+.hello-message h1 {
+    font-size: 3.5em;
+    padding-top: 45px;
+    padding-bottom: 15px;
+}
+
+.hello-message h3 {
+    font-size: 1.5em;
+}
+
+.hello-message table {
+    font-size: 1.5em;
+}
+
+.hello-message td {
+    padding: 20px 0;
+}
+
+.hello-message i {
+    padding: 0 10px;
+}
+
+.signup-container {
+    color: #000000;
+    margin: 120px 0;
+    width: auto;
+    background-color: #f8f8f8;
+}
+
+.signup-container > h4 {
+    padding: 0;
+}
+
+.signup-form {
+    position: relative;
+}
+
+#btn-signup {
+    margin-top: 8px;
+}
+
+@media(max-width:767px) {
+    .hello-message h1 {
+        display: none;
+    }
+    .hello-message td {
+        padding: 10px 0;
+    }
+    .signup-container {
+        margin: 20px 0;
+    }
+    .signup-form {
+        position: relative;
+    }
+    #btn-signup {
+        margin-top: 0;
+    }
+}
+
+footer {
+    padding: 20px 0;
+    background-color: #ffffff;
+}

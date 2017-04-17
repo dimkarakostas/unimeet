@@ -2,3 +2,4 @@
 *.log
 node_modules/
 frontend/realtime_client/dist/
+frontend/registrar_client/dist/

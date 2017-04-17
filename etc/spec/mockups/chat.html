@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chat now · Unichat</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="css/chat.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.2.0.min.js"></script>
+
+    <!-- Tether JavaScript for tooltip positioning -->
+    <script src="js/tether.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript library for entire Unichat -->
+    <script src="js/unichat.js"></script>
+
+    <!-- Custom JavaScript library for chat page -->
+    <script src="js/chat.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <a class="navbar-brand" href="./index.html">Unichat</a>
+            <ul class="nav navbar-nav navbar-right dropdown-list">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">el10179@mail.ntua.gr <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#settings-modal" data-toggle="modal">Settings</a></li>
+                        <li><a href="#help-modal" data-toggle="modal">Help</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="./index.html">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Navigation Modals -->
+    <div id="settings-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Settings
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 modal-tab-menu">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active text-center">
+                                    Interested in
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    Personal info
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    Account
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.modal-tab-menu -->
+
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8 modal-tab">
+                            <div class="modal-tab-content active">
+                                <div class="interested-in-setting">
+                                    <h4>Interested in</h4><hr/>
+                                    <div class="form-group interested-sex">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <b>I want to talk to:</b>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="sex" id="interested-sex">
+                                                        <option value="undefined">Whatever</option>
+                                                        <option value="female">Men</option>
+                                                        <option value="male" selected>Women</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="form-group universities">
+                                        <table class="table table-hover table-bordered results">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-5 col-xs-5 text-center">University</th>
+                                                    <th class="col-md-3 col-xs-3 text-center">Country</th>
+                                                    <th class="col-md-3 col-xs-3 text-center">Domain</th>
+                                                    <th class="col-md-1 col-xs-1 text-center">
+                                                        <input type="checkbox" class="checkbox uniCheckAll">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="uniCheckOne">
+                                                    <td>National Technical University of Athens</td>
+                                                    <td>Greece</td>
+                                                    <td>ntua.gr</td>
+                                                    <td>
+                                                        <input checked="checked" type="checkbox" name="ntua" class="uniCheck checkbox" value="1">
+                                                    </td>
+                                                </tr>
+                                                <tr class="uniCheckOne">
+                                                    <td>University of Athens</td>
+                                                    <td>Greece</td>
+                                                    <td>uoa.gr</td>
+                                                    <td>
+                                                        <input type="checkbox" name="uoa" class="uniCheck checkbox" value="2">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group change-interested-in">
+                                        <button type="submit" class="btn btn-primary">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-tab-content">
+                                <div class="user-setting">
+                                    <h4>Personal information</h4><hr/>
+                                    <div class="form-group user-sex">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <b>I am a:</b>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="sex" id="user-sex">
+                                                        <option value="undefined" selected>Do not disclose</option>
+                                                        <option value="female">Man</option>
+                                                        <option value="male">Woman</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-tab-content">
+                                <div class="password-setting">
+                                    <h4>Change password</h4><hr/>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="old-password" placeholder="Old password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="new-password" placeholder="New password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="new-password-verification"placeholder="Confirm new password" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Update password</button>
+                                        <a href="#forgot-password" class="forgot-password text-right">Forgot password?</a>
+                                    </div>
+                                </div>
+                                <div class="delete-account-setting">
+                                    <h4>Delete Account</h4><hr/>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger">Delete account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal-tab -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.modal-body -->
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.settings-modal -->
+
+    <div id="help-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Help
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row help-modal-row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
+                            <a href="./faq.html" target="_blank" class="list-group-item text-center">
+                                F.A.Q.
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
+                            <a href="./contact.html" target="_blank" class="list-group-item text-center">
+                                Contact
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row help-modal-row">
+                        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 settings-modal-element">
+                            <a href="./security.html" target="_blank" class="list-group-item text-center">
+                                Security
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <hr/>
+                    <div class="copyright text-muted text-center">© 2017 Unichat. MIT licensed, some rights reserved.</div>
+                </div>
+                <!-- /.modal-body -->
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.help-modal -->
+
+    <div class="main-chat">
+
+        <!-- Chatbox -->
+        <div class="container panel-body" id="chatbox">
+            <ul class="chat" id="chatConversation">
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="Department of Informatics, University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="15 mins ago">
+                            Hi, how are you?
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="left" title="12 mins ago">
+                            I'm fine, you?
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="8 mins ago">
+                            I'm good. I'm a girl studying at the University of Athens in Greece. What about you? What university are you studying at?
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="auto left" title="5 mins ago">
+                            I study at the National Technical University of Athens. I am a male, although I have chosen not to disclose my gender here
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="3 mins ago">
+                            That's OK. Do you use Unichat regularly?
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="left" title="1 min ago">
+                            Yeah, I think it's awesome
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="left" title="1 min ago">
+                            You?
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="now">
+                            Yeah, I have met many people here
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="now">
+                            It's very nice
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="now">
+                            How old are you?
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="left" title="1 min ago">
+                            25, you?
+                        </p>
+                    </div>
+                </li>
+                <li class="left clearfix">
+                    <span class="chat-img pull-left">
+                        <h4 data-toggle="tooltip" data-placement="right" title="University of Athens, Greece"><i class="fa fa-venus" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="right" title="now">
+                            23
+                        </p>
+                    </div>
+                </li>
+                <li class="right clearfix">
+                    <span class="chat-img pull-right">
+                        <h4 data-toggle="tooltip" data-placement="left" title="National Technical University of Athens, Greece"><i class="fa fa-genderless" aria-hidden="true"></i></h4>
+                    </span>
+                    <div class="chat-body clearfix">
+                        <p class="chat-message" data-toggle="tooltip" data-placement="left" title="1 min ago">
+                            Perfect
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.panel-body -->
+
+        <!-- Chat control -->
+        <div class="panel-footer navbar-fixed-bottom" id="chat-footer">
+            <div class="container input-group">
+                <span class="input-group-btn">
+                    <a><button class="btn btn-danger btn-sm" id="btn-next">Next (Esc)</button></a>
+                </span>
+                <input id="text-input" type="text" class="form-control input-sm" autocomplete="off" placeholder="Say something..." autofocus />
+                <span class="input-group-btn">
+                    <a><button class="btn btn-success btn-sm" id="btn-send">Send (Enter)</button></a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
