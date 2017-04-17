@@ -1,0 +1,74 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+nav, #sidebar, footer {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.faq-section {
+    padding-top: 50px;
+}
+
+.affix-top, .affix {
+    position: static;
+}
+
+#sidebar.affix-top, #sidebar.affix {
+    position: fixed;
+    top: 70px;
+    width: 228px;
+}
+
+@media (max-width: 979px) {
+    #leftCol {
+        display: none;
+    }
+}
+
+#sidebar li.active {
+    border: 0 #eee solid;
+    border-right-width: 5px;
+}
+
+.faq-cat-content {
+    margin-top: 25px;
+}
+
+.faq-cat-tabs li a {
+    padding: 15px 10px 15px 10px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #777777;
+}
+
+.nav-tabs li a:focus,
+.panel-heading a:focus {
+    outline: none;
+}
+
+.panel-heading,
+.panel-heading a,
+.panel-heading a:hover,
+.panel-heading a:focus {
+    text-decoration: none;
+    color: #777777;
+    cursor: pointer;
+}
+
+.faq-cat-content .panel-heading:hover {
+    background-color: #efefef;
+}
+
+.panel-faq .panel-heading .panel-title span {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+footer {
+    padding: 20px 0;
+    background-color: #f8f8f8;
+}
