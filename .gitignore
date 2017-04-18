@@ -3,3 +3,8 @@
 node_modules/
 frontend/realtime_client/dist/
 frontend/registrar_client/dist/
+/build
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
