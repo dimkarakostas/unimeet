@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 
 class Intro extends Component {
@@ -38,6 +39,7 @@ class Intro extends Component {
                             <div className="container form-container well text-center">
                                 <h4>New to Unichat? Sign up!</h4>
                                 <hr/>
+                                <SignupForm />
                             </div>
                         </div>
                     </div>
