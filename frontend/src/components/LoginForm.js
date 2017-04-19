@@ -8,13 +8,18 @@ class LoginForm extends Component {
             username: '',
             password: '',
             isModalOpen: false,
-            emailPasswordReset: ''
+            emailPasswordReset: '',
+            isForgotPasswordButtonLoading: false,
+            isPasswordResetMailSent: false,
+            isLoginButtonLoading: false
         };
     }
 
     hideModal = () => {
         this.setState({
-            isModalOpen: false
+            isModalOpen: false,
+            isForgotPasswordButtonLoading: false,
+            isPasswordResetMailSent: false
         });
     }
 
@@ -38,12 +43,18 @@ class LoginForm extends Component {
     handleLogin = (event) => {
         event.preventDefault();
         console.log('username: ' + this.state.username + ' password: ' + this.state.password); //TODO: remove
+        this.setState({isLoginButtonLoading: true});
         //TODO: Login request to backend
     }
 
     handlePasswordReset = (event) => {
         event.preventDefault();
         console.log('password-reset-mail: ' + this.state.emailPasswordReset); //TODO: remove
+        this.setState({isForgotPasswordButtonLoading: true});
+        //TODO: Reset password request to backend
+        setTimeout(() => {
+            this.setState({isForgotPasswordButtonLoading: false, isPasswordResetMailSent: true});
+        }, 2000);
     }
 
     render() {
@@ -57,6 +68,7 @@ class LoginForm extends Component {
                             name="username"
                             autoFocus
                             autoComplete="off"
+                            disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
                         />
                     </FormGroup>
@@ -66,6 +78,7 @@ class LoginForm extends Component {
                             type="password"
                             placeholder="Password"
                             name="password"
+                            disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
                         />
                         <a onClick={this.showModal}><div className="forgot-password">Forgot password?</div></a>
@@ -74,8 +87,10 @@ class LoginForm extends Component {
                     <Button
                         type="submit"
                         bsStyle="primary"
+                        disabled={this.state.isLoginButtonLoading}
+                        onClick={!this.state.isLoginButtonLoading? this.handleLogin : null}
                     >
-                        Log in
+                        {this.state.isLoginButtonLoading? 'Logging in...' : 'Log in'}
                     </Button>
                 </Form>
                 <Modal show={this.state.isModalOpen} onHide={this.hideModal}>
@@ -83,25 +98,33 @@ class LoginForm extends Component {
                         <Modal.Title>Forgot password</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Enter your email address and we will send you a link to reset your password.</p>
-                        <Form onSubmit={this.handlePasswordReset}>
-                            <FormGroup>
-                                <FormControl
-                                    type="text"
-                                    placeholder="Enter your email address"
-                                    name="email-password-reset"
-                                    autoComplete="off"
-                                    onChange={this.handleInputChange}
-                                />
-                            </FormGroup>
-                            <Button
-                                className="center-block"
-                                type="submit"
-                                bsStyle="primary"
-                            >
-                                Send password reset email
-                            </Button>
-                        </Form>
+                        {this.state.isPasswordResetMailSent ?
+                            <p>Please check your email and follow the link we have sent you to reset your password.</p> :
+                            <div>
+                                <p>Enter your email address and we will send you a link to reset your password.</p>
+                                <Form onSubmit={this.handlePasswordReset}>
+                                    <FormGroup>
+                                        <FormControl
+                                            type="text"
+                                            placeholder="Enter your email address"
+                                            name="email-password-reset"
+                                            autoComplete="off"
+                                            disabled={this.state.isForgotPasswordButtonLoading}
+                                            onChange={this.handleInputChange}
+                                        />
+                                    </FormGroup>
+                                    <Button
+                                        className="center-block"
+                                        type="submit"
+                                        bsStyle="primary"
+                                        disabled={this.state.isForgotPasswordButtonLoading}
+                                        onClick={!this.state.isForgotPasswordButtonLoading? this.handlePasswordReset: null}
+                                    >
+                                        {this.state.isForgotPasswordButtonLoading? 'Sending mail...' : 'Send password reset email'}
+                                    </Button>
+                                </Form>
+                            </div>
+                        }
                     </Modal.Body>
                 </Modal>
             </div>
