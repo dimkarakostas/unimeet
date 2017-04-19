@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
+import LoginForm from './LoginForm';
 
 class Topbar extends Component {
     render() {
@@ -10,6 +11,9 @@ class Topbar extends Component {
                         <a href="/">Unichat</a>
                     </Navbar.Brand>
                 </Navbar.Header>
+                <Navbar.Collapse>
+                    <LoginForm />
+                </Navbar.Collapse>
             </Navbar>
         );
     }
