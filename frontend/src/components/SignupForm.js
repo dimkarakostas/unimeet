@@ -6,7 +6,8 @@ class SignupForm extends Component {
         super(props);
         this.state = {
             email: '',
-            isModalOpen: false
+            isModalOpen: false,
+            isSignupButtonLoading: false
         };
     }
 
@@ -21,9 +22,11 @@ class SignupForm extends Component {
     signupSubmit = (event) => {
         event.preventDefault();
         console.log('email: ' + this.state.email); //TODO: remove
+        this.setState({isSignupButtonLoading: true});
         //TODO: Signup request to backend
         setTimeout(() => {
             this.setState({
+                isSignupButtonLoading: false,
                 isModalOpen: true,
                 email: ''
             });
@@ -41,6 +44,7 @@ class SignupForm extends Component {
                             autoComplete="off"
                             placeholder="example@uoa.gr"
                             value={this.state.email}
+                            disabled={this.state.isSignupButtonLoading}
                             onChange={this.handleEmailChange}
                         />
                     </FormGroup>
@@ -48,8 +52,10 @@ class SignupForm extends Component {
                         type="submit"
                         bsStyle="primary"
                         id="btn-signup"
+                        disabled={this.state.isSignupButtonLoading}
+                        onClick={!this.state.isSignupButtonLoading? this.signupSubmit : null}
                     >
-                        Sign up
+                        {this.state.isSignupButtonLoading? 'Signing up...' : 'Sign up'}
                     </Button>
                 </Form>
                 <Modal show={this.state.isModalOpen} onHide={this.hideModal}>
