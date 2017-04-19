@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import {Modal, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 
 class SignupForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ''
+            email: '',
+            isModalOpen: false
         };
+    }
+
+    hideModal = () => {
+        this.setState({isModalOpen: false});
     }
 
     handleEmailChange = (event) => {
@@ -17,6 +22,12 @@ class SignupForm extends Component {
         event.preventDefault();
         console.log('email: ' + this.state.email); //TODO: remove
         //TODO: Signup request to backend
+        setTimeout(() => {
+            this.setState({
+                isModalOpen: true,
+                email: ''
+            });
+        }, 2000);
     }
 
     render() {
@@ -41,6 +52,14 @@ class SignupForm extends Component {
                         Sign up
                     </Button>
                 </Form>
+                <Modal show={this.state.isModalOpen} onHide={this.hideModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Signup complete</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Please check your email and follow the link we have sent you to start chatting.</p>
+                    </Modal.Body>
+                </Modal>
             </div>
         );
     }
