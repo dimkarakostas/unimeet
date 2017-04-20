@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Modal, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import SignupModal from './SignupModal';
 
 class SignupForm extends Component {
     constructor(props) {
@@ -58,14 +59,7 @@ class SignupForm extends Component {
                         {this.state.isSignupButtonLoading? 'Signing up...' : 'Sign up'}
                     </Button>
                 </Form>
-                <Modal show={this.state.isModalOpen} onHide={this.hideModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Signup complete</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>Please check your email and follow the link we have sent you to start chatting.</p>
-                    </Modal.Body>
-                </Modal>
+                <SignupModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
             </div>
         );
     }
