@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Form, FormControl, FormGroup, Button, Col, ControlLabel} from 'react-bootstrap';
+import ContactModal from './ContactModal';
 
 class ContactForm extends Component {
     constructor(props) {
@@ -8,8 +9,13 @@ class ContactForm extends Component {
             name: '',
             email: '',
             message: '',
+            isModalOpen: false,
             isContactButtonLoading: false
         };
+    }
+
+    hideModal = () => {
+        this.setState({isModalOpen: false});
     }
 
     handleInputChange = (event) => {
@@ -34,6 +40,7 @@ class ContactForm extends Component {
                 name: '',
                 email: '',
                 message: '',
+                isModalOpen: true,
                 isContactButtonLoading: false
             });
         }, 2000);
@@ -99,6 +106,7 @@ class ContactForm extends Component {
                         {this.state.isContactButtonLoading? 'Sending...' : 'Send'}
                     </Button>
                 </Form>
+                <ContactModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
             </div>
         );
     }
