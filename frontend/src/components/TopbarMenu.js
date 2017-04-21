@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
 import LoginForm from './LoginForm';
+import ChatDropdownMenu from './ChatDropdownMenu';
 
 class TopbarMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: 'el10179@mail.ntua.gr'
+        };
+    }
+
     render() {
         return (
             <div className="TopbarMenu">
@@ -12,6 +20,8 @@ class TopbarMenu extends Component {
                     </Navbar.Collapse> :
                 this.props.page === 'contact' ?
                     null :
+                this.props.page === 'chat' ?
+                    <ChatDropdownMenu username={this.state.username} /> :
                     null
                 }
             </div>
