@@ -11,10 +11,6 @@ class ForgotPasswordModal extends Component {
         };
     }
 
-    hideModal = () => {
-        this.props.hideModal();
-    }
-
     onModalEnter = () => {
         this.setState({
             isForgotPasswordButtonLoading: false,
@@ -41,7 +37,7 @@ class ForgotPasswordModal extends Component {
 
     render() {
         return (
-            <Modal show={this.props.isModalOpen} onHide={this.hideModal} onEnter={this.onModalEnter} >
+            <Modal show={this.props.isModalOpen} onHide={this.props.hideModal} onEnter={this.onModalEnter} >
                 <Modal.Header closeButton>
                     <Modal.Title>Forgot password</Modal.Title>
                 </Modal.Header>
