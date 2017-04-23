@@ -1,41 +1,27 @@
-body,
-html {
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-nav {
-    font-weight: 700;
-}
-
-.dropdown-list {
-    float: right;
-}
-
-.dropdown-menu {
+.Chat .TopbarMenu .dropdown-menu {
     margin-top: 1px;
     border: none;
 }
 
-.dropdown-menu>.divider {
+.Chat .TopbarMenu .dropdown-menu>.divider {
     margin-left: 9px;
     margin-right: 9px;
 }
 
-.navbar-default .navbar-nav>.open>a,
-.navbar-default .navbar-nav>.open>a:focus,
-.navbar-default .navbar-nav>.open>a:hover,
-.nav li a:focus,
-.nav li a:hover {
+.Chat .TopbarMenu .dropdown-menu>li>a:focus {
+    outline: none;
+}
+
+.Chat .navbar-default .navbar-nav>.open>a,
+.Chat .navbar-default .navbar-nav>.open>a:focus,
+.Chat .navbar-default .navbar-nav>.open>a:hover,
+.Chat .nav li a:focus,
+.Chat .nav li a:hover {
     background-color: #f8f8f8;
 }
 
 @media(min-width:767px) {
-    .dropdown-menu:after {
+    .Chat .TopbarMenu .dropdown-menu:after {
         content:"";
         position: absolute;
         right: 10px;
@@ -49,65 +35,66 @@ nav {
     }
 }
 
-.navbar-nav .open .dropdown-menu {
+.Chat .navbar-nav .open .dropdown-menu {
     background-color: #ffffff;
 }
 
-.modal-header {
+.chat-modal .modal-header {
     font-weight: 700;
     text-align: center;
 }
 
-.modal-body {
+.chat-modal .modal-body {
     padding-left: 20px;
     max-height: 300px;
     overflow-y: auto;
 }
 
 @media (min-height: 500px) {
-    .modal-body {
+    .chat-modal .modal-body {
         max-height: 450px;
     }
 }
 
 @media (min-height: 800px) {
-    .modal-body {
+    .chat-modal .modal-body {
         max-height: 650px;
     }
 }
 
-.modal-footer {
+.chat-modal .modal-footer {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 0px;
 }
 
-.modal-tab-menu {
+.chat-modal .modal-tab-menu {
     padding-right: 0;
     padding-left: 0;
     padding-bottom: 0;
 }
 
-.modal-tab-menu a {
+.chat-modal .modal-tab-menu a {
     margin-bottom: 0;
+    cursor: pointer;
 }
 
-.modal-tab-menu a:first-child {
+.chat-modal .modal-tab-menu a:first-child {
     border-top-right-radius: 0;
     -moz-border-top-right-radius: 0;
 }
 
-.modal-tab-menu a:last-child {
+.chat-modal .modal-tab-menu a:last-child {
     border-bottom-right-radius: 0;
     -moz-border-bottom-right-radius: 0;
 }
 
-.modal-tab-menu a.active {
+.chat-modal .modal-tab-menu a.active {
     background-color: #5cb85c;
     color: #f8f8f8;
 }
 
-.modal-tab-menu a.active:after {
+.chat-modal .modal-tab-menu a.active:after {
     content: "";
     position: absolute;
     left: 100%;
@@ -120,64 +107,66 @@ nav {
 
 /* Remove the bottom border from all children except last to
    avoid double border line between elements */
-.modal-tab-menu a:not(:last-child) {
+.chat-modal .modal-tab-menu a:not(:last-child) {
     border-bottom: 0px;
 }
 
-.modal-tab-menu a.active,
-.modal-tab-menu a.active:focus,
-.modal-tab-menu a.active:hover {
+.chat-modal .modal-tab-menu a.active,
+.chat-modal .modal-tab-menu a.active:focus,
+.chat-modal .modal-tab-menu a.active:hover {
     background-color: #5cb85c;
     border-color: #5cb85c;
 }
 
-.modal-tab-content {
+.chat-modal .modal-tab-content {
     background-color: #ffffff;
     padding-left: 20px;
     padding-top: 10px;
 }
 
-.modal-tab-content:not(.active) {
+.chat-modal .modal-tab-content:not(.active) {
     display: none;
 }
 
-.universities {
-    padding-top: 15px;
+.interested-universities {
+    padding: 0px 15px;
     text-align: center;
 }
 
-.uniCheck,
-.uniCheckOne,
-.uniCheckAll {
-    cursor: pointer;
+.interested-universities table {
+    margin-bottom: 0px;
 }
 
-.user-sex table tr td,
-.interested-sex table tr td {
-    padding: 0 5px;
+.interested-universities *:focus {
+    outline: none;
+}
+
+.user-sex td,
+.interested-sex td {
+    padding: 0px 0px 20px 10px;
 }
 
 .user-sex {
     padding-bottom: 40px;
 }
 
-.forgot-password {
+.password-setting .forgot-password {
     padding-left: 15px;
 }
 
 .delete-account-setting {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .delete-account-setting>h4 {
     color: #d9534f;
 }
 
-.help-modal-row .settings-modal-element {
+.chat-modal .help-modal-row .settings-modal-element {
     padding-bottom: 15px;
 }
 
-.help-modal-row a {
+.chat-modal .help-modal-row a {
     color: #ffffff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 
@@ -188,35 +177,35 @@ nav {
     background: linear-gradient(#2e88c4, #075698);
 }
 
-.help-modal-row a:focus {
+.chat-modal .help-modal-row a:focus {
     color: #ffffff;
 }
 
-.help-modal-row a:hover {
+.chat-modal .help-modal-row a:hover {
     color: #000000;
 }
 
-.chat {
+.ChatMessages ul {
     list-style: none;
     margin: 50px auto;
     padding: 0;
 }
 
-.chat li {
+.ChatMessages li {
     outline: none;
 }
 
-.chat li.left .chat-body {
+.ChatMessages li.left .chat-body {
     margin: 0 40px;
     text-align: left;
 }
 
-.chat li.right .chat-body {
+.ChatMessages li.right .chat-body {
     margin: 0 40px;
     text-align: right;
 }
 
-.chat li .chat-body .chat-message {
+.ChatMessages li .chat-body .chat-message {
     position: relative;
     padding: 5px 10px;
     display: inline-block;
@@ -226,7 +215,7 @@ nav {
     border-radius: 10px;
 }
 
-.chat li.right .chat-body .chat-message {
+.ChatMessages li.right .chat-body .chat-message {
     color: #ffffff;
 
     background: #075698; /* default background for browsers without gradient support */
@@ -236,12 +225,12 @@ nav {
     background: linear-gradient(#2e88c4, #075698);
 }
 
-.chat li.right .chat-body .chat-message::selection,
-.chat li.right .chat-body .chat-message::-moz-selection {
+.ChatMessages li.right .chat-body .chat-message::selection,
+.ChatMessages li.right .chat-body .chat-message::-moz-selection {
     background: #f8f8f8;
 }
 
-.chat li.left .chat-message {
+.ChatMessages li.left .chat-message {
     background: #eee;
 }
 
@@ -253,7 +242,37 @@ nav {
     margin-left: 5px;
 }
 
-#text-input {
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px ;
+#chat-message-input {
+    border-radius: 4px;
+}
+
+.react-bs-container-body tr,
+.react-bs-container-body input,
+.interested-sex select {
+    cursor: pointer;
+}
+
+.changes-saved-message {
+    padding-left: 10px;
+}
+
+.password-setting-input-field {
+    padding: 0px 15px;
+}
+
+#forgot-password-setting {
+    cursor: pointer;
+    padding-right: 15px;
+}
+
+#delete-account:focus {
+    outline: none;
+}
+
+.delete-account-confirmation {
+    padding-top: 10px;
+}
+
+.delete-account-confirmation a {
+    cursor: pointer;
 }

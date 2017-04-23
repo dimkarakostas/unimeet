@@ -4,6 +4,7 @@ import Welcome from './components/Welcome';
 import Contact from './components/Contact';
 import Chat from './components/Chat';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import './css/unichat.css';
 
 ReactDOM.render(
     <Router>

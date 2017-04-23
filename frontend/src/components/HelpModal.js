@@ -4,7 +4,7 @@ import {Modal} from 'react-bootstrap';
 class HelpModal extends Component {
     render() {
         return (
-            <Modal show={this.props.isModalOpen} onHide={() => {this.props.hideModal('help');}} >
+            <Modal className="chat-modal" show={this.props.isModalOpen} onHide={() => {this.props.hideModal('help');}} >
                 <Modal.Header closeButton>
                     <Modal.Title>Help</Modal.Title>
                 </Modal.Header>
