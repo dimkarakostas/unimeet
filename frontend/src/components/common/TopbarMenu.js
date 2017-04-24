@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {WelcomeTopMenu} from './welcome';
-import {ChatTopMenu} from './chat';
+import {WelcomeTopMenu} from '../welcome';
+import {ChatTopMenu} from '../chat';
 
 class TopbarMenu extends Component {
     render() {

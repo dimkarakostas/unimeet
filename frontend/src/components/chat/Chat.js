@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Topbar from '../Topbar';
+import {Topbar} from '../common';
 import Chatbody from './body/Chatbody';
 import './css/chat.css';
 
