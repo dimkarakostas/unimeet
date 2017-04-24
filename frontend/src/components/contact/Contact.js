@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Topbar, Footer} from '../common';
-import ContactForm from './ContactForm';
+import ContactForm from './body/ContactForm';
 import './styles.css';
 
 class Contact extends Component {
