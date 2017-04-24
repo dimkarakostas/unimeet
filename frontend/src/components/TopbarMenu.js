@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar} from 'react-bootstrap';
-import {LoginForm} from './welcome';
+import {WelcomeTopMenu} from './welcome';
 import {ChatDropdownMenu} from './chat';
 
 class TopbarMenu extends Component {
@@ -15,9 +14,7 @@ class TopbarMenu extends Component {
         return (
             <div className="TopbarMenu">
                 {this.props.page === 'welcome' ?
-                    <Navbar.Collapse>
-                        <LoginForm />
-                    </Navbar.Collapse> :
+                    <WelcomeTopMenu /> :
                 this.props.page === 'contact' ?
                     null :
                 this.props.page === 'chat' ?
