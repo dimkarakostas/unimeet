@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Topbar from './Topbar';
+import Chatbody from './Chatbody';
 import '../css/chat.css';
 
 class Chat extends Component {
@@ -7,6 +8,7 @@ class Chat extends Component {
         return (
             <div className="Chat">
                 <Topbar page={'chat'} />
+                <Chatbody />
             </div>
         );
     }
