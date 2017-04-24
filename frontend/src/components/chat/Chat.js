@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Topbar} from '../common';
 import Chatbody from './body/Chatbody';
-import './css/chat.css';
+import './styles.css';
 
 class Chat extends Component {
     render() {
