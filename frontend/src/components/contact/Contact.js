@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Topbar, Footer} from '../common';
 import ContactForm from './ContactForm';
-import './css/contact.css';
+import './styles.css';
 
 class Contact extends Component {
     render() {
