@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Topbar from '../Topbar';
-import Chatbody from './Chatbody';
+import Chatbody from './body/Chatbody';
 import '../../css/chat.css';
 
 class Chat extends Component {
