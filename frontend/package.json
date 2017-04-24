@@ -7,7 +7,9 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-bootstrap": "^0.30.9",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-bootstrap-table": "^3.2.1",
+    "react-scroll": "^1.5.2"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

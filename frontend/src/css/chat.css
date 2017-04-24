@@ -1,0 +1,278 @@
+.Chat .TopbarMenu .dropdown-menu {
+    margin-top: 1px;
+    border: none;
+}
+
+.Chat .TopbarMenu .dropdown-menu>.divider {
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+.Chat .TopbarMenu .dropdown-menu>li>a:focus {
+    outline: none;
+}
+
+.Chat .navbar-default .navbar-nav>.open>a,
+.Chat .navbar-default .navbar-nav>.open>a:focus,
+.Chat .navbar-default .navbar-nav>.open>a:hover,
+.Chat .nav li a:focus,
+.Chat .nav li a:hover {
+    background-color: #f8f8f8;
+}
+
+@media(min-width:767px) {
+    .Chat .TopbarMenu .dropdown-menu:after {
+        content:"";
+        position: absolute;
+        right: 10px;
+        top: -10px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 17px 17px 17px;
+        border-color: transparent transparent #ffffff transparent;
+        z-index:9998;
+    }
+}
+
+.Chat .navbar-nav .open .dropdown-menu {
+    background-color: #ffffff;
+}
+
+.chat-modal .modal-header {
+    font-weight: 700;
+    text-align: center;
+}
+
+.chat-modal .modal-body {
+    padding-left: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+@media (min-height: 500px) {
+    .chat-modal .modal-body {
+        max-height: 450px;
+    }
+}
+
+@media (min-height: 800px) {
+    .chat-modal .modal-body {
+        max-height: 650px;
+    }
+}
+
+.chat-modal .modal-footer {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+
+.chat-modal .modal-tab-menu {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+.chat-modal .modal-tab-menu a {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.chat-modal .modal-tab-menu a:first-child {
+    border-top-right-radius: 0;
+    -moz-border-top-right-radius: 0;
+}
+
+.chat-modal .modal-tab-menu a:last-child {
+    border-bottom-right-radius: 0;
+    -moz-border-bottom-right-radius: 0;
+}
+
+.chat-modal .modal-tab-menu a.active {
+    background-color: #5cb85c;
+    color: #f8f8f8;
+}
+
+.chat-modal .modal-tab-menu a.active:after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-top: -13px;
+    border-bottom: 13px solid transparent;
+    border-top: 13px solid transparent;
+    border-left: 10px solid #5cb85c;
+}
+
+/* Remove the bottom border from all children except last to
+   avoid double border line between elements */
+.chat-modal .modal-tab-menu a:not(:last-child) {
+    border-bottom: 0px;
+}
+
+.chat-modal .modal-tab-menu a.active,
+.chat-modal .modal-tab-menu a.active:focus,
+.chat-modal .modal-tab-menu a.active:hover {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.chat-modal .modal-tab-content {
+    background-color: #ffffff;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.chat-modal .modal-tab-content:not(.active) {
+    display: none;
+}
+
+.interested-universities {
+    padding: 0px 15px;
+    text-align: center;
+}
+
+.interested-universities table {
+    margin-bottom: 0px;
+}
+
+.interested-universities *:focus {
+    outline: none;
+}
+
+.user-sex td,
+.interested-sex td {
+    padding: 0px 0px 20px 10px;
+}
+
+.user-sex {
+    padding-bottom: 40px;
+}
+
+.password-setting .forgot-password {
+    padding-left: 15px;
+}
+
+.delete-account-setting {
+    padding-top: 20px;
+}
+
+.delete-account-setting>h4 {
+    color: #d9534f;
+}
+
+.chat-modal .help-modal-row .settings-modal-element {
+    padding-bottom: 15px;
+}
+
+.chat-modal .help-modal-row a {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+    background: #075698; /* default background for browsers without gradient support */
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#2e88c4), to(#075698));
+    background: -moz-linear-gradient(#2e88c4, #075698);
+    background: -o-linear-gradient(#2e88c4, #075698);
+    background: linear-gradient(#2e88c4, #075698);
+}
+
+.chat-modal .help-modal-row a:focus {
+    color: #ffffff;
+}
+
+.chat-modal .help-modal-row a:hover {
+    color: #000000;
+}
+
+.ChatMessages ul {
+    list-style: none;
+    margin: 50px auto;
+    padding: 0;
+}
+
+.ChatMessages li {
+    outline: none;
+}
+
+.ChatMessages li.left .chat-body {
+    margin: 0 40px;
+    text-align: left;
+}
+
+.ChatMessages li.right .chat-body {
+    margin: 0 40px;
+    text-align: right;
+}
+
+.ChatMessages li .chat-body .chat-message {
+    position: relative;
+    padding: 5px 10px;
+    display: inline-block;
+    max-width: 80%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.ChatMessages li.right .chat-body .chat-message {
+    color: #ffffff;
+
+    background: #075698; /* default background for browsers without gradient support */
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#2e88c4), to(#075698));
+    background: -moz-linear-gradient(#2e88c4, #075698);
+    background: -o-linear-gradient(#2e88c4, #075698);
+    background: linear-gradient(#2e88c4, #075698);
+}
+
+.ChatMessages li.right .chat-body .chat-message::selection,
+.ChatMessages li.right .chat-body .chat-message::-moz-selection {
+    background: #f8f8f8;
+}
+
+.ChatMessages li.left .chat-message {
+    background: #eee;
+}
+
+#btn-next {
+    margin-right: 5px;
+}
+
+#btn-send {
+    margin-left: 5px;
+}
+
+#chat-message-input {
+    border-radius: 4px;
+}
+
+.react-bs-container-body tr,
+.react-bs-container-body input,
+.interested-sex select {
+    cursor: pointer;
+}
+
+.changes-saved-message {
+    padding-left: 10px;
+}
+
+.password-setting-input-field {
+    padding: 0px 15px;
+}
+
+#forgot-password-setting {
+    cursor: pointer;
+    padding-right: 15px;
+}
+
+#delete-account:focus {
+    outline: none;
+}
+
+.delete-account-confirmation {
+    padding-top: 10px;
+}
+
+.delete-account-confirmation a {
+    cursor: pointer;
+}
