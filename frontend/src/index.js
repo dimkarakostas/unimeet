@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Welcome from './components/Welcome';
+import Welcome from './components/welcome/Welcome';
 import Contact from './components/Contact';
 import Chat from './components/Chat';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
