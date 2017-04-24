@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
 import {LoginForm} from './welcome';
-import ChatDropdownMenu from './chat/navigation/ChatDropdownMenu';
+import {ChatDropdownMenu} from './chat';
 
 class TopbarMenu extends Component {
     constructor(props) {
