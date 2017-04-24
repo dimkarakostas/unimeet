@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PasswordChangeForm from './PasswordChangeForm';
 
 class AccountSettingContent extends Component {
     isActive = () => {
@@ -10,6 +11,7 @@ class AccountSettingContent extends Component {
             <div className={this.isActive()}>
                 <div className="password-setting">
                     <h4>Change password</h4><hr/>
+                    <PasswordChangeForm />
                 </div>
                 <div className="delete-account-setting">
                     <h4>Delete Account</h4><hr/>
