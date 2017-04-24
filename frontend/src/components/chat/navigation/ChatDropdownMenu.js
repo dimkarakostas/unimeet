@@ -7,6 +7,7 @@ class ChatDropdownMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: 'el10179@mail.ntua.gr',
             isSettingsModalOpen: false,
             isHelpModalOpen: false
         };
@@ -34,7 +35,7 @@ class ChatDropdownMenu extends Component {
         return (
             <div>
                 <Nav pullRight>
-                    <NavDropdown eventKey={'chatMenu'} title={this.props.username} id="basic-nav-dropdown" onSelect={this.handleMenuItem} >
+                    <NavDropdown eventKey={'chatMenu'} title={this.state.username} id="basic-nav-dropdown" onSelect={this.handleMenuItem} >
                         <MenuItem eventKey={'settings'}>Settings</MenuItem>
                         <MenuItem eventKey={'help'}>Help</MenuItem>
                         <MenuItem divider />
