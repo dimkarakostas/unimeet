@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Topbar, Footer} from '../common';
-import Intro from './Intro';
+import Intro from './body/Intro';
 import './css/welcome.css';
 
 class Welcome extends Component {
