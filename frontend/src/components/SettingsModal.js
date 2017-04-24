@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {Modal} from 'react-bootstrap';
+import SettingsModalOptionsList from './SettingsModalOptionsList';
 
 class SettingsModal extends Component {
     constructor(props) {
         super(props);
-        let options = [];
+        let options = ['Interested in'];
         this.state = {
             optionsList: options,
             active: options[0]
@@ -23,6 +24,7 @@ class SettingsModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
+                        <SettingsModalOptionsList optionsList={this.state.optionsList} active={this.state.active} handleOptionSelection={this.handleOptionSelection} />
                     </div>
                 </Modal.Body>
             </Modal>
