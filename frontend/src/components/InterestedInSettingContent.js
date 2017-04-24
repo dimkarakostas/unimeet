@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import {Col, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 class InterestedInSettingContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            universities: [
+                {
+                    name: 'National Technical University of Athens',
+                    country: 'Greece',
+                    domain: 'ntua.gr'
+                },
+                {
+                    name: 'University of Athens',
+                    country: 'Greece',
+                    domain: 'uoa.gr'
+                },
+            ],
+            selectedUniversities: ['ntua.gr'],
             selectedSex: 'men',
             isApplyButtonLoading: false,
             displayChangesSavedMessage: false
@@ -17,6 +31,27 @@ class InterestedInSettingContent extends Component {
 
     handleSexChange = (event) => {
         this.setState({selectedSex: event.target.value});
+    }
+
+    onSelect = (row, isSelected, e) => {
+        var selectedUnis = this.state.selectedUniversities;
+        if (isSelected) {
+            selectedUnis.push(row.domain);
+        }
+        else {
+            selectedUnis = selectedUnis.filter(uniDomain => uniDomain !== row.domain)
+        }
+        this.setState({selectedUniversities: selectedUnis});
+    }
+
+    onSelectAll = (isSelected, rows) => {
+        var selectedUnis = [];
+        if (isSelected) {
+            for (var i=0; i<rows.length; i++) {
+                selectedUnis.push(rows[i].domain);
+            }
+        }
+        this.setState({selectedUniversities: selectedUnis});
     }
 
     handleSettingChange = (event) => {
@@ -37,6 +72,13 @@ class InterestedInSettingContent extends Component {
     }
 
     render() {
+        const selectRowProp = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            selected: this.state.selectedUniversities,
+            onSelect: this.onSelect,
+            onSelectAll: this.onSelectAll
+        };
         return (
             <div className={this.isActive()}>
                 <div className="interested-in-setting">
@@ -58,6 +100,15 @@ class InterestedInSettingContent extends Component {
                                     <option value="women">Women</option>
                                 </FormControl>
                             </Col>
+                        </FormGroup>
+
+                        <b>from:</b>
+                        <FormGroup className="interested-universities">
+                            <BootstrapTable data={this.state.universities} selectRow={selectRowProp} hover condensed>
+                                <TableHeaderColumn width='200' dataField='name'>University</TableHeaderColumn>
+                                <TableHeaderColumn dataField='country'>Country</TableHeaderColumn>
+                                <TableHeaderColumn width='70' dataField='domain' isKey>Domain</TableHeaderColumn>
+                            </BootstrapTable>
                         </FormGroup>
 
                         <Button
