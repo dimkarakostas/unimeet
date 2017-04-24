@@ -6,7 +6,7 @@ import SettingsModalContentList from './SettingsModalContentList';
 class SettingsModal extends Component {
     constructor(props) {
         super(props);
-        let options = ['Interested in', 'Personal info'];
+        let options = ['Interested in', 'Personal info', 'Account'];
         this.state = {
             optionsList: options,
             active: options[0]
