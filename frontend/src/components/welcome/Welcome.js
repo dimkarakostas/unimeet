@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Topbar from '../Topbar';
 import Intro from './Intro';
 import Footer from '../Footer';
-import '../../css/welcome.css';
+import './css/welcome.css';
 
 class Welcome extends Component {
     render() {
