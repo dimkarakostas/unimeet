@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
-import LoginForm from './LoginForm';
+import LoginForm from '../common/LoginForm';
 
 class WelcomeTopMenu extends Component {
     render() {

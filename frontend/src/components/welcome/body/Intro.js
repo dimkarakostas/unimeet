@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SignupForm from './SignupForm';
-import LoginForm from '../navigation/LoginForm';
+import LoginForm from '../common/LoginForm';
 
 class Intro extends Component {
     render() {
