@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 import HelpModal from './HelpModal';
+import SettingsModal from './SettingsModal';
 
 class ChatDropdownMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isSettingsModalOpen: false,
             isHelpModalOpen: false
         };
     }
@@ -14,11 +16,17 @@ class ChatDropdownMenu extends Component {
         if (eventKey === 'help') {
             this.setState({isHelpModalOpen: true});
         }
+        else if (eventKey === 'settings') {
+            this.setState({isSettingsModalOpen: true});
+        }
     }
 
     hideModal = (modalType) => {
         if (modalType === 'help') {
             this.setState({isHelpModalOpen: false});
+        }
+        else if (modalType === 'settings') {
+            this.setState({isSettingsModalOpen: false});
         }
     }
 
@@ -34,6 +42,7 @@ class ChatDropdownMenu extends Component {
                     </NavDropdown>
                 </Nav>
                 <HelpModal isModalOpen={this.state.isHelpModalOpen} hideModal={this.hideModal} />
+                <SettingsModal isModalOpen={this.state.isSettingsModalOpen} hideModal={this.hideModal} />
             </div>
         );
     }
