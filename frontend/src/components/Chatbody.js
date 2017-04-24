@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
+import ChatFooter from './ChatFooter';
 
 class Chatbody extends Component {
     constructor(props) {
@@ -20,10 +21,23 @@ class Chatbody extends Component {
         };
     }
 
+    handleNewMessage = (message) => {
+        let newMessages = this.state.messages;
+        let newMessage = {
+            content: message,
+            timestamp: new Date(),
+            from: 'me'
+        };
+        newMessages.push(newMessage);
+        this.setState({messages: newMessages});
+        //TODO: Message request to backend
+    }
+
     render() {
         return (
             <div className="Chatbox">
                 <ChatMessages messages={this.state.messages} partner={this.state.partner} me={this.state.me} />
+                <ChatFooter handleNewMessage={this.handleNewMessage} />
             </div>
         );
     }
