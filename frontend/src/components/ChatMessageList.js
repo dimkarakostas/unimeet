@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChatMessage from './ChatMessage';
+import Scroll from 'react-scroll';
 
 class ChatMessageList extends Component {
     getMessages = () => {
@@ -7,6 +8,20 @@ class ChatMessageList extends Component {
             return <ChatMessage key={index} message={message} person={message.from === 'me' ? this.props.me : this.props.partner} />;
         });
     }
+
+    scrollToBottom = () => {
+        var scroll = Scroll.animateScroll;
+        scroll.scrollToBottom();
+    }
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
 
     render() {
         return (
