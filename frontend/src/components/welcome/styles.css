@@ -10,7 +10,7 @@
 .intro-section {
     padding-top: 70px;
 
-    background: url(../img/girl_boy_blurred.jpg) no-repeat fixed;
+    background: url(./static/girl_boy_blurred.jpg) no-repeat fixed;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
