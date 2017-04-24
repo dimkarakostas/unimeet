@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {WelcomeTopMenu} from './welcome';
-import {ChatDropdownMenu} from './chat';
+import {ChatTopMenu} from './chat';
 
 class TopbarMenu extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class TopbarMenu extends Component {
                 this.props.page === 'contact' ?
                     null :
                 this.props.page === 'chat' ?
-                    <ChatDropdownMenu username={this.state.username} /> :
+                    <ChatTopMenu username={this.state.username} /> :
                     null
                 }
             </div>

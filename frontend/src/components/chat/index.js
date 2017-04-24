@@ -1,2 +1,2 @@
 export {default as Chat} from './Chat';
-export {default as ChatDropdownMenu} from './navigation/ChatDropdownMenu';
+export {default as ChatTopMenu} from './navigation/ChatDropdownMenu';
