@@ -1,14 +1,14 @@
-.Chat .TopbarMenu .dropdown-menu {
+.Chat .nav .dropdown-menu {
     margin-top: 1px;
     border: none;
 }
 
-.Chat .TopbarMenu .dropdown-menu>.divider {
+.Chat .nav .dropdown-menu>.divider {
     margin-left: 9px;
     margin-right: 9px;
 }
 
-.Chat .TopbarMenu .dropdown-menu>li>a:focus {
+.Chat .nav .dropdown-menu>li>a:focus {
     outline: none;
 }
 
@@ -21,7 +21,7 @@
 }
 
 @media(min-width:767px) {
-    .Chat .TopbarMenu .dropdown-menu:after {
+    .Chat .nav .dropdown-menu:after {
         content:"";
         position: absolute;
         right: 10px;
