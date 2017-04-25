@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Nav, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
 import HelpModal from './HelpModal';
 import SettingsModal from './SettingsModal';
 
@@ -33,7 +33,7 @@ class ChatDropdownMenu extends Component {
 
     render() {
         return (
-            <div>
+            <Navbar.Collapse>
                 <Nav pullRight>
                     <NavDropdown eventKey={'chatMenu'} title={this.state.username} id="basic-nav-dropdown" onSelect={this.handleMenuItem} >
                         <MenuItem eventKey={'settings'}>Settings</MenuItem>
@@ -44,7 +44,7 @@ class ChatDropdownMenu extends Component {
                 </Nav>
                 <HelpModal isModalOpen={this.state.isHelpModalOpen} hideModal={this.hideModal} />
                 <SettingsModal isModalOpen={this.state.isSettingsModalOpen} hideModal={this.hideModal} />
-            </div>
+            </Navbar.Collapse>
         );
     }
 }

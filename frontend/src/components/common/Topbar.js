@@ -11,6 +11,10 @@ class Topbar extends Component {
                     <Navbar.Brand>
                         <a href="/">Unichat</a>
                     </Navbar.Brand>
+                    {this.props.page === 'chat' ?
+                        <Navbar.Toggle /> :
+                        null
+                    }
                 </Navbar.Header>
                 {this.props.page === 'welcome' ?
                     <WelcomeTopMenu /> :
