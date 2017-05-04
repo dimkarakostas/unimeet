@@ -54,7 +54,6 @@ class ChatFooter extends Component {
                                 value={this.state.chatMessage}
                                 autoFocus
                                 autoComplete="off"
-                                disabled={this.props.isFooterDisabled}
                                 onChange={this.handleMessageInput}
                             />
                             <span className="input-group-btn">
