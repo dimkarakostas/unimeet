@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
 import realtimeConnector from '../connection/realtimeConnector';
+import hallConnector from '../connection/hallConnector';
 import * as config from '../connection/config';
 
 class Chatbody extends Component {
@@ -57,6 +58,7 @@ class Chatbody extends Component {
 
     componentDidMount() {
         this._realtimeConnector = new realtimeConnector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+        this._hallConnector = new hallConnector(config.hallUrl);
     }
 
     render() {
