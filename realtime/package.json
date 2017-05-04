@@ -2,11 +2,8 @@
   "name": "unichat-realtime",
   "version": "1.0.0",
   "description": "Unichat chat service realtime component",
-  "main": "index.js",
-  "scripts": {
-    "start": "node --harmony index.js"
-  },
-  "author": "",
+  "author": "Dimitris Karakostas",
+  "homepage": "https://unichat.eu",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
@@ -15,6 +12,10 @@
   },
   "devDependencies": {
     "socket.io-client": "^1.4.8"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony index.js"
   },
   "jshintConfig": {
     "esversion": 6

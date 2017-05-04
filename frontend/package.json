@@ -1,8 +1,10 @@
 {
   "name": "unichat-frontend",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Unichat chat service frontend component",
+  "author": "Dimitris Karakostas",
   "homepage": "https://unichat.eu",
+  "license": "MIT",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
