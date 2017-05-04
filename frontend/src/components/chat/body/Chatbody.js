@@ -25,6 +25,10 @@ class Chatbody extends Component {
         this.setState({isFooterDisabled: chatStatus});
     }
 
+    handleNext = () => {
+        this.disableChat(true);
+    }
+
     handleNewMessage = (message, from) => {
         if (message !== '') {
             if (from === undefined) {
@@ -52,7 +56,7 @@ class Chatbody extends Component {
         return (
             <div className="Chatbox">
                 <ChatMessages messages={this.state.messages} partner={this.state.partner} me={this.state.me} />
-                <ChatFooter handleNewMessage={this.handleNewMessage} isFooterDisabled={this.state.isFooterDisabled} />
+                <ChatFooter handleNext={this.handleNext} handleNewMessage={this.handleNewMessage} isFooterDisabled={this.state.isFooterDisabled} />
             </div>
         );
     }
