@@ -5,6 +5,9 @@ function hallConnector(hallUrl, joinRoomCallback) {
     this._socket.on('connect', () => {
         this._socket.emit('client-get-partner');
     });
+    this._socket.on('server-join-room', (roomId) => {
+        joinRoomCallback(roomId);
+    });
 };
 
 module.exports = hallConnector;
