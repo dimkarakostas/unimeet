@@ -26,7 +26,7 @@ class Chatbody extends Component {
     }
 
     handleNext = () => {
-        this.disableChat(true);
+        this._connector.broadcastNext();
     }
 
     handleNewMessage = (message, from) => {

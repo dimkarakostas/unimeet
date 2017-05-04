@@ -23,6 +23,9 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
             message: message
         });
     };
+    this.broadcastNext = function() {
+        disableChatCallback(true);
+    };
 };
 
 module.exports = connector;
