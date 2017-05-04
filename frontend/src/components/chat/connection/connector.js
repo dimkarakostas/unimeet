@@ -4,9 +4,6 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
     this._roomId = roomId;
     this._socket = io.connect(realtimeUrl, {'forceNew': true});
     this._socket.on('connect', () => {
-        this._socket.emit('client-hello');
-    });
-    this._socket.on('server-hello', (client_id) => {
         this._socket.emit('client-join-room', {
             roomId: roomId
         });

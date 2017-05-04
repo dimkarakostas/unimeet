@@ -24,11 +24,6 @@ socket.on('connection', (client) => {
     let _chatRoom = '';
     winston.debug('New connection from client ' + client.id);
 
-    client.on('client-hello', (data) => {
-        winston.debug('Client ' + client.id + ' sent client-hello.');
-        client.emit('server-hello', client.id);
-    });
-
     client.on('client-join-room', (data) => {
         // join-room is received after connection has been established with successful client-hello/server-hello messages
         let roomId;
