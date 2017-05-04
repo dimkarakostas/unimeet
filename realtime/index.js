@@ -60,7 +60,7 @@ socket.on('connection', (client) => {
         }
         winston.debug('Client ' + client.id + ' wished to leave room ' + roomId);
         client.leave(roomId);
-        socket.in(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
+        client.broadcast.to(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
     });
 
     client.on('send', (data) => {
@@ -74,7 +74,7 @@ socket.on('connection', (client) => {
             return;
         }
         winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
-        socket.in(roomId).emit('message', message);
+        client.broadcast.to(roomId).emit('message', message);
     });
 
     client.on('disconnect', () => {
@@ -82,7 +82,7 @@ socket.on('connection', (client) => {
         winston.debug('Client\'s rooms: ' + _rooms);
         for (let i=0; i < _rooms.length; i++) {
             winston.debug('Notifying room ' + _rooms[i] + ' for the disconnection');
-            socket.in(_rooms[i]).emit('message', 'Your partner ' + client.id + ' has left.');
+            client.broadcast.to(_rooms[i]).emit('message', 'Your partner ' + client.id + ' has left.');
         }
     });
 });
