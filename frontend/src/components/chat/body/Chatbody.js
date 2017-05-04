@@ -21,6 +21,10 @@ class Chatbody extends Component {
         };
     }
 
+    disableChat = (chatStatus) => {
+        this.setState({isFooterDisabled: chatStatus});
+    }
+
     handleNewMessage = (message, from) => {
         if (from === undefined) {
             from = 'me';
@@ -39,7 +43,7 @@ class Chatbody extends Component {
     }
 
     componentDidMount() {
-        this._connector = new connector(config.realtimeUrl, config.roomId, this.handleNewMessage);
+        this._connector = new connector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.disableChat);
     }
 
     render() {

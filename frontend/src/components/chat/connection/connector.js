@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-function connector(realtimeUrl, roomId, handleNewMessageCallback) {
+function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCallback) {
     this._roomId = roomId;
     this._socket = io.connect(realtimeUrl, {'forceNew': true});
     this._socket.on('connect', () => {
