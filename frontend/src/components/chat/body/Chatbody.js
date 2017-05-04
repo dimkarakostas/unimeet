@@ -21,8 +21,8 @@ class Chatbody extends Component {
         };
     }
 
-    disableChat = (chatStatus) => {
-        this.setState({isFooterDisabled: chatStatus});
+    disableChat = (disableOption) => {
+        this.setState({isFooterDisabled: disableOption});
     }
 
     handleNext = () => {
