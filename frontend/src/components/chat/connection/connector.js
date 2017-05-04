@@ -11,11 +11,14 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
             roomId: roomId
         });
     });
+    this._socket.on('server-join-room', (client_id) => {
+        disableChatCallback(false);
+    });
     this._socket.on('server-message', (message, from) => {
         handleNewMessageCallback(message, from);
     });
     this._socket.on('disconnect', () => {
-        return;
+        disableChatCallback(true);
     });
     this.broadcastMessage = function(message) {
         this._socket.emit('client-message', {
