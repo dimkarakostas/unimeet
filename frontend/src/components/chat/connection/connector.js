@@ -11,6 +11,9 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
     this._socket.on('server-message', (message, from) => {
         handleNewMessageCallback(message, from);
     });
+    this._socket.on('server-next', () => {
+        disableChatCallback(true);
+    });
     this._socket.on('disconnect', () => {
         disableChatCallback(true);
     });
@@ -18,6 +21,7 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
         this._socket.emit('client-message', message);
     };
     this.broadcastNext = function() {
+        this._socket.emit('client-next');
         disableChatCallback(true);
     };
 };
