@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
+import connector from '../connection/connector';
+import * as config from '../connection/config';
 
 class Chatbody extends Component {
     constructor(props) {
@@ -21,12 +23,15 @@ class Chatbody extends Component {
         };
     }
 
-    handleNewMessage = (message) => {
+    handleNewMessage = (message, from) => {
+        if (from === undefined) {
+            from = 'me';
+        }
         let newMessages = this.state.messages;
         let newMessage = {
             content: message,
             timestamp: new Date(),
-            from: 'me'
+            from: from
         };
         newMessages.push(newMessage);
         this.setState({messages: newMessages});
