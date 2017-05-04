@@ -30,4 +30,8 @@ socket.on('connection', (client) => {
         client.emit('server-join-room', ROOMID);
         winston.debug('Sending client ' + client.id + ' to room ' + ROOMID);
     });
+
+    client.on('disconnect', () => {
+        winston.debug('Client ' + client.id + ' disconnected');
+    });
 });
