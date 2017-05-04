@@ -16,7 +16,8 @@ class Chatbody extends Component {
                 gender: 'undefined',
                 university: 'National Technical University of Athens, Greece'
             },
-            messages: []
+            messages: [],
+            isFooterDisabled: true
         };
     }
 
@@ -45,7 +46,7 @@ class Chatbody extends Component {
         return (
             <div className="Chatbox">
                 <ChatMessages messages={this.state.messages} partner={this.state.partner} me={this.state.me} />
-                <ChatFooter handleNewMessage={this.handleNewMessage} />
+                <ChatFooter handleNewMessage={this.handleNewMessage} isFooterDisabled={this.state.isFooterDisabled} />
             </div>
         );
     }

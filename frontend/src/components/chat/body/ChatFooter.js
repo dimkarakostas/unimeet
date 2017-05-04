@@ -31,6 +31,7 @@ class ChatFooter extends Component {
                                     bsStyle="danger"
                                     bsSize="small"
                                     id="btn-next"
+                                    disabled={this.props.isFooterDisabled}
                                 >
                                     Next (Esc)
                                 </Button>
@@ -45,6 +46,7 @@ class ChatFooter extends Component {
                                 value={this.state.chatMessage}
                                 autoFocus
                                 autoComplete="off"
+                                disabled={this.props.isFooterDisabled}
                                 onChange={this.handleMessageInput}
                             />
                             <span className="input-group-btn">
@@ -54,6 +56,7 @@ class ChatFooter extends Component {
                                     bsStyle="success"
                                     bsSize="small"
                                     id="btn-send"
+                                    disabled={this.props.isFooterDisabled}
                                 >
                                     Send (Enter)
                                 </Button>
