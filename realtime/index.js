@@ -44,6 +44,7 @@ socket.on('connection', (client) => {
         client.join(roomId);
         _chatRoom = roomId;
         winston.debug('Client\'s room: ' + _chatRoom);
+        client.emit('server-join-room');
     });
 
     client.on('client-leave-room', (data) => {
