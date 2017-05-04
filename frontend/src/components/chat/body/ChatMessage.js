@@ -5,11 +5,11 @@ class ChatMessage extends Component {
     render() {
         let position = this.props.message.from === 'me' ? 'right' : 'left';
         let tooltipPosition = this.props.message.from === 'me' ? 'left' : 'right';
-        let icon = this.props.person.gender === 'undefined' ? 'genderless' : this.props.person.gender === 'female' ? 'venus' : 'mars';
-        let timeMins = Math.round((((this.props.message.timestamp - new Date()) % 86400000) % 3600000) / 60000);
-        let timeMessage = timeMins < 1 ? 'now' : timeMins + (timeMins === 1 ? 'min' : 'mins') + ' ago';
+        let icon = this.props.message.gender === 'undefined' ? 'genderless' : this.props.message.gender === 'female' ? 'venus' : 'mars';
+        let timeMins = Math.round((((new Date() - this.props.message.timestamp) % 86400000) % 3600000) / 60000);
+        let timeMessage = timeMins < 1 ? 'now' : timeMins + (timeMins === 1 ? ' min' : ' mins') + ' ago';
         const timeTooltip = (<Tooltip id="tooltip">{timeMessage}</Tooltip>);
-        const uniTooltip = (<Tooltip id="tooltip">{this.props.person.university}</Tooltip>);
+        const uniTooltip = (<Tooltip id="tooltip">{this.props.message.university}</Tooltip>);
 
         return (
             <li className={position + " clearfix"}>

@@ -21,68 +21,28 @@ winston.info('Listening on port ' + PORT);
 const socket = io.listen(PORT);
 
 socket.on('connection', (client) => {
-    let _rooms = [];
+    let _chatRoom = '';
     winston.debug('New connection from client ' + client.id);
 
-    client.on('client-hello', (data) => {
-        winston.debug('Client ' + client.id + ' sent client-hello.');
-        client.emit('server-hello', client.id);
-    });
-
-    client.on('join-room', (data) => {
-        // join-room is received after connection has been established with successful client-hello/server-hello messages
-        let roomId;
-
-        try {
-            ({roomId} = data);
-        }
-        catch (e) {
-            winston.error('Got invalid join-room message (data: ' + data + ') from client ' + client.id);
-            return;
-        }
+    client.on('client-join-room', (roomId) => {
         winston.debug('Client ' + client.id + ' wishes to join room ' + roomId);
         client.join(roomId);
-        _rooms.push(roomId);
-        winston.debug('Client\'s rooms: ' + _rooms);
+        _chatRoom = roomId;
+        client.emit('server-join-room');
     });
 
-    client.on('client-leave-room', (data) => {
-        // client-leave-room is received either because the client wants to leave the room
-        // or because the server notified it that it is the last one after a conversation
-        let roomId;
-
-        try {
-            ({roomId} = data);
-        }
-        catch (e) {
-            winston.error('Got invalid client-leave-room message (data: ' + data + ') from client ' + client.id);
-            return;
-        }
-        winston.debug('Client ' + client.id + ' wished to leave room ' + roomId);
-        client.leave(roomId);
-        socket.in(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
+    client.on('client-next', () => {
+        winston.debug('Client ' + client.id + ' wishes to leave room ' + _chatRoom);
+        client.leave(_chatRoom);
+        client.broadcast.to(_chatRoom).emit('server-next');
     });
 
-    client.on('send', (data) => {
-        let roomId, message;
-
-        try {
-            ({roomId, message} = data);
-        }
-        catch (e) {
-            winston.error('Got invalid client-leave-room message (data: ' + data + ') from client ' + client.id);
-            return;
-        }
-        winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
-        socket.in(roomId).emit('message', message);
+    client.on('client-message', (message) => {
+        winston.debug('Client ' + client.id + ' sent to room ' + _chatRoom + ' the message: ' + message);
+        client.broadcast.to(_chatRoom).emit('server-message', message, 'partner');
     });
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
-        winston.debug('Client\'s rooms: ' + _rooms);
-        for (let i=0; i < _rooms.length; i++) {
-            winston.debug('Notifying room ' + _rooms[i] + ' for the disconnection');
-            socket.in(_rooms[i]).emit('message', 'Your partner ' + client.id + ' has left.');
-        }
     });
 });

@@ -19,11 +19,18 @@ class ChatFooter extends Component {
         this.setState({chatMessage: ''});
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Escape') {
+            this.props.handleNext();
+            this.setState({chatMessage: ''});
+        }
+    }
+
     render() {
         return (
             <div className="panel-footer navbar-fixed-bottom" id="chat-footer">
                 <div className="container">
-                    <Form onSubmit={this.handleMessageSubmit}>
+                    <Form onSubmit={this.handleMessageSubmit} onKeyUp={this.handleKeyPress}>
                         <InputGroup>
                             <span className="input-group-btn">
                                 <a>
@@ -31,6 +38,8 @@ class ChatFooter extends Component {
                                     bsStyle="danger"
                                     bsSize="small"
                                     id="btn-next"
+                                    disabled={this.props.isFooterDisabled}
+                                    onClick={this.props.handleNext}
                                 >
                                     Next (Esc)
                                 </Button>
@@ -45,6 +54,7 @@ class ChatFooter extends Component {
                                 value={this.state.chatMessage}
                                 autoFocus
                                 autoComplete="off"
+                                disabled={this.props.isFooterDisabled}
                                 onChange={this.handleMessageInput}
                             />
                             <span className="input-group-btn">
@@ -54,6 +64,7 @@ class ChatFooter extends Component {
                                     bsStyle="success"
                                     bsSize="small"
                                     id="btn-send"
+                                    disabled={this.props.isFooterDisabled}
                                 >
                                     Send (Enter)
                                 </Button>

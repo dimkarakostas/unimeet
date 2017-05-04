@@ -5,13 +5,13 @@ import Scroll from 'react-scroll';
 class ChatMessageList extends Component {
     getMessages = () => {
         return this.props.messages.map((message, index) => {
-            return <ChatMessage key={index} message={message} person={message.from === 'me' ? this.props.me : this.props.partner} />;
+            return <ChatMessage key={index} message={message} />;
         });
     }
 
     scrollToBottom = () => {
         var scroll = Scroll.animateScroll;
-        scroll.scrollToBottom();
+        scroll.scrollToBottom({duration: 0});
     }
 
     componentDidMount() {
