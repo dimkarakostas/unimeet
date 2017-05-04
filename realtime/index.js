@@ -74,7 +74,7 @@ socket.on('connection', (client) => {
             return;
         }
         winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
-        client.broadcast.to(roomId).emit('server-message', message);
+        client.broadcast.to(roomId).emit('server-message', message, 'partner');
     });
 
     client.on('disconnect', () => {
