@@ -24,17 +24,8 @@ socket.on('connection', (client) => {
     let _chatRoom = '';
     winston.debug('New connection from client ' + client.id);
 
-    client.on('client-join-room', (data) => {
+    client.on('client-join-room', (roomId) => {
         // join-room is received after connection has been established with successful client-hello/server-hello messages
-        let roomId;
-
-        try {
-            ({roomId} = data);
-        }
-        catch (e) {
-            winston.error('Got invalid join-room message (data: ' + data + ') from client ' + client.id);
-            return;
-        }
         winston.debug('Client ' + client.id + ' wishes to join room ' + roomId);
         client.join(roomId);
         _chatRoom = roomId;
