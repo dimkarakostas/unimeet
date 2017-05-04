@@ -63,7 +63,7 @@ socket.on('connection', (client) => {
         client.broadcast.to(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
     });
 
-    client.on('send', (data) => {
+    client.on('client-message', (data) => {
         let roomId, message;
 
         try {
