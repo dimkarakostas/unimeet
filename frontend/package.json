@@ -9,7 +9,8 @@
     "react-bootstrap": "^0.30.9",
     "react-router-dom": "^4.1.1",
     "react-bootstrap-table": "^3.2.1",
-    "react-scroll": "^1.5.2"
+    "react-scroll": "^1.5.2",
+    "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
