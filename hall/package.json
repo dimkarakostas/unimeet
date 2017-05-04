@@ -1,7 +1,7 @@
 {
-  "name": "unichat-realtime",
+  "name": "unichat-hall",
   "version": "1.0.0",
-  "description": "Unichat chat service realtime component",
+  "description": "Unichat chat service hall component",
   "author": "Dimitris Karakostas",
   "homepage": "https://unichat.eu",
   "license": "MIT",

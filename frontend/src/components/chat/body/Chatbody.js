@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
-import connector from '../connection/connector';
+import realtimeConnector from '../connection/realtimeConnector';
+import hallConnector from '../connection/hallConnector';
 import * as config from '../connection/config';
 
 class Chatbody extends Component {
@@ -21,12 +22,14 @@ class Chatbody extends Component {
         };
     }
 
-    disableChat = (chatStatus) => {
-        this.setState({isFooterDisabled: chatStatus});
+    disableChat = (disableOption) => {
+        this.setState({isFooterDisabled: disableOption});
     }
 
     handleNext = () => {
-        this._connector.broadcastNext();
+        this._realtimeConnector.broadcastNext();
+        this._hallConnector.reconnect();
+        this._realtimeConnector.disconnect();
     }
 
     handleNewMessage = (message, from) => {
@@ -41,7 +44,7 @@ class Chatbody extends Component {
                 from: from
             };
             if (from === 'me') {
-                this._connector.broadcastMessage(message);
+                this._realtimeConnector.broadcastMessage(message);
                 newMessage.gender = this.state.me.gender;
                 newMessage.university = this.state.me.university;
             }
@@ -54,8 +57,18 @@ class Chatbody extends Component {
         }
     }
 
+    joinRoom = (roomId) => {
+        if (this._realtimeConnector === undefined) {
+            this._realtimeConnector = new realtimeConnector(config.realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+        }
+        else {
+            this._realtimeConnector.reconnect();
+        }
+        this._hallConnector.disconnect();
+    }
+
     componentDidMount() {
-        this._connector = new connector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.disableChat);
+        this._hallConnector = new hallConnector(config.hallUrl, this.joinRoom);
     }
 
     render() {

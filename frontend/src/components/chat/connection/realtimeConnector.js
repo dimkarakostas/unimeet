@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCallback) {
+function realtimeConnector(realtimeUrl, roomId, handleNewMessageCallback, handleNextCallback, disableChatCallback) {
     this._socket = io.connect(realtimeUrl, {'forceNew': true});
     this._socket.on('connect', () => {
         this._socket.emit('client-join-room', roomId);
@@ -12,7 +12,7 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
         handleNewMessageCallback(message, from);
     });
     this._socket.on('server-next', () => {
-        disableChatCallback(true);
+        handleNextCallback();
     });
     this._socket.on('disconnect', () => {
         disableChatCallback(true);
@@ -24,6 +24,12 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
         this._socket.emit('client-next');
         disableChatCallback(true);
     };
+    this.disconnect = function() {
+        this._socket.disconnect();
+    }
+    this.reconnect = function() {
+        this._socket.connect();
+    }
 };
 
-module.exports = connector;
+module.exports = realtimeConnector;
