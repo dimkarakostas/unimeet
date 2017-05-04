@@ -55,7 +55,7 @@ class Chatbody extends Component {
     }
 
     componentDidMount() {
-        this._realtimeConnector = new realtimeConnector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.disableChat);
+        this._realtimeConnector = new realtimeConnector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.handleNext, this.disableChat);
     }
 
     render() {
