@@ -27,6 +27,9 @@ function realtimeConnector(realtimeUrl, roomId, handleNewMessageCallback, handle
     this.disconnect = function() {
         this._socket.disconnect();
     }
+    this.reconnect = function() {
+        this._socket.connect();
+    }
 };
 
 module.exports = realtimeConnector;

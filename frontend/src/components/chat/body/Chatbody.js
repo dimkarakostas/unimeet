@@ -56,8 +56,16 @@ class Chatbody extends Component {
         }
     }
 
+    joinRoom = (roomId) => {
+        if (this._realtimeConnector === undefined) {
+            this._realtimeConnector = new realtimeConnector(config.realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+        }
+        else {
+            this._realtimeConnector.reconnect();
+        }
+    }
+
     componentDidMount() {
-        this._realtimeConnector = new realtimeConnector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.handleNext, this.disableChat);
         this._hallConnector = new hallConnector(config.hallUrl, this.joinRoom);
     }
 
