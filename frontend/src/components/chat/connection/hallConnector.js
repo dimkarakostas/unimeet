@@ -8,6 +8,9 @@ function hallConnector(hallUrl, joinRoomCallback) {
     this._socket.on('server-join-room', (roomId) => {
         joinRoomCallback(roomId);
     });
+    this.disconnect = function() {
+        this._socket.disconnect();
+    }
     this.reconnect = function() {
         this._socket.connect();
     }

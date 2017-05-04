@@ -64,6 +64,7 @@ class Chatbody extends Component {
         else {
             this._realtimeConnector.reconnect();
         }
+        this._hallConnector.disconnect();
     }
 
     componentDidMount() {
