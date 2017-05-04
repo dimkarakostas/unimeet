@@ -26,19 +26,21 @@ class Chatbody extends Component {
     }
 
     handleNewMessage = (message, from) => {
-        if (from === undefined) {
-            from = 'me';
-        }
-        let newMessages = this.state.messages;
-        let newMessage = {
-            content: message,
-            timestamp: new Date(),
-            from: from
-        };
-        newMessages.push(newMessage);
-        this.setState({messages: newMessages});
-        if (from === 'me') {
-            this._connector.broadcastMessage(message);
+        if (message !== '') {
+            if (from === undefined) {
+                from = 'me';
+            }
+            let newMessages = this.state.messages;
+            let newMessage = {
+                content: message,
+                timestamp: new Date(),
+                from: from
+            };
+            newMessages.push(newMessage);
+            this.setState({messages: newMessages});
+            if (from === 'me') {
+                this._connector.broadcastMessage(message);
+            }
         }
     }
 
