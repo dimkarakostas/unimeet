@@ -25,16 +25,14 @@ socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
     client.on('client-join-room', (roomId) => {
-        // join-room is received after connection has been established with successful client-hello/server-hello messages
         winston.debug('Client ' + client.id + ' wishes to join room ' + roomId);
         client.join(roomId);
         _chatRoom = roomId;
-        winston.debug('Client\'s room: ' + _chatRoom);
         client.emit('server-join-room');
     });
 
     client.on('client-next', () => {
-        winston.debug('Client ' + client.id + ' wished to leave room ' + _chatRoom);
+        winston.debug('Client ' + client.id + ' wishes to leave room ' + _chatRoom);
         client.leave(_chatRoom);
         client.broadcast.to(_chatRoom).emit('server-next');
     });
