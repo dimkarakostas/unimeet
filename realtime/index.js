@@ -21,7 +21,7 @@ winston.info('Listening on port ' + PORT);
 const socket = io.listen(PORT);
 
 socket.on('connection', (client) => {
-    let _rooms = [];
+    let _chatRoom = '';
     winston.debug('New connection from client ' + client.id);
 
     client.on('client-hello', (data) => {
@@ -42,8 +42,8 @@ socket.on('connection', (client) => {
         }
         winston.debug('Client ' + client.id + ' wishes to join room ' + roomId);
         client.join(roomId);
-        _rooms.push(roomId);
-        winston.debug('Client\'s rooms: ' + _rooms);
+        _chatRoom = roomId;
+        winston.debug('Client\'s room: ' + _chatRoom);
     });
 
     client.on('client-leave-room', (data) => {
@@ -79,10 +79,7 @@ socket.on('connection', (client) => {
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
-        winston.debug('Client\'s rooms: ' + _rooms);
-        for (let i=0; i < _rooms.length; i++) {
-            winston.debug('Notifying room ' + _rooms[i] + ' for the disconnection');
-            client.broadcast.to(_rooms[i]).emit('message', 'Your partner ' + client.id + ' has left.');
-        }
+        winston.debug('Notifying room ' + _chatRoom + ' for the disconnection');
+        client.broadcast.to(_chatRoom).emit('message', 'Your partner ' + client.id + ' has left.');
     });
 });
