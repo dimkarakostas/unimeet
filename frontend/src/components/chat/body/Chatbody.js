@@ -40,11 +40,17 @@ class Chatbody extends Component {
                 timestamp: new Date(),
                 from: from
             };
-            newMessages.push(newMessage);
-            this.setState({messages: newMessages});
             if (from === 'me') {
                 this._connector.broadcastMessage(message);
+                newMessage.gender = this.state.me.gender;
+                newMessage.university = this.state.me.university;
             }
+            else {
+                newMessage.gender = this.state.partner.gender;
+                newMessage.university = this.state.partner.university;
+            }
+            newMessages.push(newMessage);
+            this.setState({messages: newMessages});
         }
     }
 
