@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
-import connector from '../connection/connector';
+import realtimeConnector from '../connection/realtimeConnector';
 import * as config from '../connection/config';
 
 class Chatbody extends Component {
@@ -26,7 +26,7 @@ class Chatbody extends Component {
     }
 
     handleNext = () => {
-        this._connector.broadcastNext();
+        this._realtimeConnector.broadcastNext();
     }
 
     handleNewMessage = (message, from) => {
@@ -41,7 +41,7 @@ class Chatbody extends Component {
                 from: from
             };
             if (from === 'me') {
-                this._connector.broadcastMessage(message);
+                this._realtimeConnector.broadcastMessage(message);
                 newMessage.gender = this.state.me.gender;
                 newMessage.university = this.state.me.university;
             }
@@ -55,7 +55,7 @@ class Chatbody extends Component {
     }
 
     componentDidMount() {
-        this._connector = new connector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.disableChat);
+        this._realtimeConnector = new realtimeConnector(config.realtimeUrl, config.roomId, this.handleNewMessage, this.disableChat);
     }
 
     render() {
