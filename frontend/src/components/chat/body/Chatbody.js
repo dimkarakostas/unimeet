@@ -27,6 +27,7 @@ class Chatbody extends Component {
 
     handleNext = () => {
         this._realtimeConnector.broadcastNext();
+        this._realtimeConnector.disconnect();
     }
 
     handleNewMessage = (message, from) => {

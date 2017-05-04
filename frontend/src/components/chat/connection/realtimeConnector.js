@@ -24,6 +24,9 @@ function realtimeConnector(realtimeUrl, roomId, handleNewMessageCallback, handle
         this._socket.emit('client-next');
         disableChatCallback(true);
     };
+    this.disconnect = function() {
+        this._socket.disconnect();
+    }
 };
 
 module.exports = realtimeConnector;
