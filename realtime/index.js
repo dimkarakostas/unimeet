@@ -50,18 +50,9 @@ socket.on('connection', (client) => {
         client.broadcast.to(roomId).emit('message', 'Your partner ' + client.id + ' has left.');
     });
 
-    client.on('client-message', (data) => {
-        let roomId, message;
-
-        try {
-            ({roomId, message} = data);
-        }
-        catch (e) {
-            winston.error('Got invalid client-leave-room message (data: ' + data + ') from client ' + client.id);
-            return;
-        }
-        winston.debug('Client ' + client.id + ' sent to room ' + roomId + ' the message: ' + message);
-        client.broadcast.to(roomId).emit('server-message', message, 'partner');
+    client.on('client-message', (message) => {
+        winston.debug('Client ' + client.id + ' sent to room ' + _chatRoom + ' the message: ' + message);
+        client.broadcast.to(_chatRoom).emit('server-message', message, 'partner');
     });
 
     client.on('disconnect', () => {

@@ -15,10 +15,7 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback, disableChatCal
         disableChatCallback(true);
     });
     this.broadcastMessage = function(message) {
-        this._socket.emit('client-message', {
-            roomId: this._roomId,
-            message: message
-        });
+        this._socket.emit('client-message', message);
     };
     this.broadcastNext = function() {
         disableChatCallback(true);
