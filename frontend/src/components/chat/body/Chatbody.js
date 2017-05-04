@@ -32,7 +32,13 @@ class Chatbody extends Component {
         };
         newMessages.push(newMessage);
         this.setState({messages: newMessages});
-        //TODO: Message request to backend
+        if (from === 'me') {
+            this._connector.broadcastMessage(message);
+        }
+    }
+
+    componentDidMount() {
+        this._connector = new connector(config.realtimeUrl, config.roomId, this.handleNewMessage);
     }
 
     render() {
