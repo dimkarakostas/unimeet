@@ -20,6 +20,14 @@ winston.info('Listening on port ' + PORT);
 
 const socket = io.listen(PORT);
 
+const ROOMID = 'room1';
+
 socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
+
+    client.on('client-get-partner', () => {
+        winston.debug('Client ' + client.id + ' wants partner.');
+        client.emit('server-join-room', ROOMID);
+        winston.debug('Sending client ' + client.id + ' to room ' + ROOMID);
+    });
 });
