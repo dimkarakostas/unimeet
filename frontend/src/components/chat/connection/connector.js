@@ -7,7 +7,7 @@ function connector(realtimeUrl, roomId, handleNewMessageCallback) {
         this._socket.emit('client-hello');
     });
     this._socket.on('server-hello', (client_id) => {
-        this._socket.emit('join-room', {
+        this._socket.emit('client-join-room', {
             roomId: roomId
         });
     });

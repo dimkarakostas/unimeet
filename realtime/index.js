@@ -29,7 +29,7 @@ socket.on('connection', (client) => {
         client.emit('server-hello', client.id);
     });
 
-    client.on('join-room', (data) => {
+    client.on('client-join-room', (data) => {
         // join-room is received after connection has been established with successful client-hello/server-hello messages
         let roomId;
 
