@@ -11,7 +11,7 @@ class ChatMessageList extends Component {
 
     scrollToBottom = () => {
         var scroll = Scroll.animateScroll;
-        scroll.scrollToBottom();
+        scroll.scrollToBottom({duration: 0});
     }
 
     componentDidMount() {
