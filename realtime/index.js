@@ -46,7 +46,5 @@ socket.on('connection', (client) => {
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
-        winston.debug('Notifying room ' + _chatRoom + ' for the disconnection');
-        client.broadcast.to(_chatRoom).emit('message', 'Your partner ' + client.id + ' has left.');
     });
 });
