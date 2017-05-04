@@ -16,10 +16,7 @@ class Chatbody extends Component {
                 gender: 'undefined',
                 university: 'National Technical University of Athens, Greece'
             },
-            messages: [
-                {from: 'partner', timestamp: new Date(), content: 'hi, how are you?',},
-                {from: 'me', timestamp: new Date(), content: 'Fine, you?',},
-            ]
+            messages: []
         };
     }
 
