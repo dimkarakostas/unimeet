@@ -30,11 +30,20 @@ class LoginForm extends Component {
         }
     }
 
+    static get contextTypes() {
+        return {
+            router: React.PropTypes.object.isRequired,
+        };
+    }
+
     handleLogin = (event) => {
         event.preventDefault();
         console.log('username: ' + this.state.username + ' password: ' + this.state.password); //TODO: remove
         this.setState({isLoginButtonLoading: true});
         //TODO: Login request to backend
+        setTimeout(() => {
+            this.context.router.history.push('/chat');
+        }, 2000);
     }
 
     render() {
