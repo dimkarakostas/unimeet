@@ -6,6 +6,51 @@ Unichat is a service-based architecture system which contains multiple
 independent components. The main modules are the registrar, the hall, the
 realtime and the backend module.
 
+# Frontend
+
+The frontend client component is the code that runs on the user's browser. It is
+implemented with [React](https://facebook.github.io/react/).
+
+## Pages
+
+The frontend consists of two main dynamic pages and multiple static pages. The
+common component across all pages is the topbar that contains the Unichat logo
+and a navigation menu when necessary.
+
+See the [UX specification](UXSPECIFICATION.md) for more information.
+
+## Code structure
+
+The code is structured on directories based on the functionality in the context
+of the Unichat website. It is structured in the common React project structure,
+with a _public_ and a _src_ folder.
+
+The _public_ folder contains _index.html_. This file is the React HTML template
+and is used to include links to CSS libraries used across Unichat. These
+libraries are [__Bootstrap__](http://getbootstrap.com/),
+[__font-awesome__](http://fontawesome.io/) and
+[__react-bootstrap-table__](http://allenfang.github.io/react-bootstrap-table/).
+
+The base file is the _index.js_ that exists in the _src_ folder. This file
+contains the routes to the different pages of Unichat, imports the CSS
+code that is common across the website and serves as the root of the React code.
+
+The components are then structured in the _components_ folder inside _src_.
+Therefore there are the _welcome_, _chat_ etc folders for the different pages,
+as well as the _common_ folder for the React components that are used in more
+that one pages.
+
+A page's folder contains the _index.js_ file, that exports whatever is
+necessary, the root page JS file whose name is the capitalized name of the page
+(e.g. __Chat.js__ for the chat page, __Welcome.js__ for the welcome page etc),
+and the _styles.css_ file that contains the CSS code for the specific page. The
+rest of the page's code is structured in directories based on its functionality.
+Therefore there may exist a folder called _navigation_, that contains the React
+components that form the topbar navigation menu, a _body_ folder for the page's
+body components, a _communication_ folder for the libraries responsible for
+communication with the backend, or any other folder the developer deems
+necessary.
+
 # Hall
 
 This component is the stage after a user has logged in and while waiting to be
