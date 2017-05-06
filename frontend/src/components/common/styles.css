@@ -1,0 +1,15 @@
+.navbar-brand {
+    padding-top: 5px;
+    padding-left: 35px;
+}
+.navbar-brand>img {
+    float: left;
+    width: 62px;
+}
+.navbar-brand>h1 {
+    float: right;
+    margin-top: 0px;
+    margin-left: 6px;
+    color: steelblue;
+    font-family: serif;
+}
