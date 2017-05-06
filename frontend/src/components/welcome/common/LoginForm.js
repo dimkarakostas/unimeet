@@ -70,7 +70,10 @@ class LoginForm extends Component {
                             disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
                         />
-                        <a onClick={this.showModal}><div className="welcome-forgot-password">Forgot password?</div></a>
+                    </FormGroup>
+                    {' '}
+                    <FormGroup className="welcome-forgot-password">
+                        <a onClick={this.showModal}><div>Forgot?</div></a>
                     </FormGroup>
                     {' '}
                     <Button

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
 import {WelcomeTopMenu} from '../welcome';
 import {ChatTopMenu} from '../chat';
+import logo from './img/unichatLogo.png';
+import './styles.css';
 
 class Topbar extends Component {
     render() {
@@ -9,7 +11,10 @@ class Topbar extends Component {
             <Navbar fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">Unichat</a>
+                        <a href="/">
+                            <img src={logo} alt={"The Unichat logo"}/>
+                            <h1> Unichat</h1>
+                        </a>
                     </Navbar.Brand>
                     {this.props.page === 'chat' ?
                         <Navbar.Toggle /> :
