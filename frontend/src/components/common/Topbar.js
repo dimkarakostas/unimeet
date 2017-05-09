@@ -13,7 +13,6 @@ class Topbar extends Component {
                     <Navbar.Brand>
                         <a href="/">
                             <img src={logo} alt={"The Unichat logo"}/>
-                            <h1> Unichat</h1>
                         </a>
                     </Navbar.Brand>
                     {this.props.page === 'chat' ?
