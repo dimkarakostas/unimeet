@@ -281,3 +281,18 @@
     text-align: center;
     font-weight: bold;
 }
+
+.emoji-trigger {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.emoji-picker {
+    background-color: 'white';
+    width: '200px';
+    border-top: 'none';
+}
+
+.emoji-popover.top{
+    margin-top: -20px;
+}
