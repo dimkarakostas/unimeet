@@ -276,3 +276,8 @@
 .delete-account-confirmation a {
     cursor: pointer;
 }
+
+.chat-user-message {
+    text-align: center;
+    font-weight: bold;
+}
