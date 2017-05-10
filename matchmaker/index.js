@@ -29,6 +29,7 @@ for (var i=0; i < SERVICES.length; i++) {
 
     _socket.on('connect', () => {
         winston.debug('Connected to ' + _type + ' service at ' + _url);
+        _socket.emit('register-matchmaker');
     });
 
     serviceSockets.push(_socket);

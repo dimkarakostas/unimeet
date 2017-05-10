@@ -20,9 +20,17 @@ winston.info('Listening on port ' + PORT);
 
 const socket = io.listen(PORT);
 
+var matchmaker = '';
 socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
+    // Matchmaker communication
+    client.on('register-matchmaker', () => {
+        matchmaker = client.id;
+        winston.debug('Matchmaker service connected with id ' + client.id);
+    });
+
+    // Frontend communication
     client.on('client-join-room', (roomId) => {
         winston.debug('Client ' + client.id + ' joins room ' + roomId);
         client._chatRoom = roomId;

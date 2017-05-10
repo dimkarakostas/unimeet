@@ -22,9 +22,17 @@ const socket = io.listen(PORT);
 
 const ROOMID = 'room1';
 
+var matchmaker = '';
 socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
+    // Matchmaker communication
+    client.on('register-matchmaker', () => {
+        matchmaker = client.id;
+        winston.debug('Matchmaker service connected with id ' + client.id);
+    });
+
+    // Frontend communication
     client.on('client-get-partner', (clientId) => {
         client._cookieId = clientId;
         winston.debug('Client ' + client.id + ' is actually Unichat user ' + client._cookieId + ' and wants partner.');
