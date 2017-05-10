@@ -1,7 +1,7 @@
 # Overview
 
 Unichat is a service-based architecture system which contains multiple
-independent components. The main modules are the registrar, the hall, the
+independent components. The main modules are the registrar, the presence, the
 realtime and the backend module.
 
 # Frontend
@@ -49,27 +49,27 @@ body components, a _communication_ folder for the libraries responsible for
 communication with the backend, or any other folder the developer deems
 necessary.
 
-# Hall
+# Presence
 
 This component is the stage after a user has logged in and while waiting to be
 matched with a partner. It is responsible for keeping track of all non-chatting
 logged-in users and making matches when possible.
 
-## client <-> hall
+## client <-> presence
 
-The client / hall protocol is implemented using [socket.io](http://socket.io/)
+The client / presence protocol is implemented using [socket.io](http://socket.io/)
 websockets.
 
 ### connect
 
-The client initiates the connection with the hall server using a hardcoded URL
-address. Upon receiving the _connect_ message from the hall it proceeds to find
+The client initiates the connection with the presence server using a hardcoded URL
+address. Upon receiving the _connect_ message from the presence it proceeds to find
 a partner.
 
 ### client-get-partner / server-join-room
 
 When the client wishes to start chatting it emits a _client-get-partner_
-message. Upon receiving it, the hall tries to find a match for the user based on
+message. Upon receiving it, the presence tries to find a match for the user based on
 its interests and preferences. When a match has been found, it allocates a room
 for the matched pair and emits a _server-join-room_ that contains a single
 __string__ parameter, the __roomId__, which the client will use in order to
@@ -78,8 +78,8 @@ connect to the realtime as explained below.
 ### disconnect / reconnect
 
 After the client has been matched and received a _server-join-room_ it
-disconnects from the hall server in order to avoid unnecessary resource
-allocation. When the client leaves the chat room, it will reconnect to the hall
+disconnects from the presence server in order to avoid unnecessary resource
+allocation. When the client leaves the chat room, it will reconnect to the presence
 and start the process again from the beginning.
 
 # Realtime
@@ -130,7 +130,7 @@ clients.
 
 ### disconnect / reconnect
 
-After the client emits the _server-next_ it reconnects to the hall to find a new
+After the client emits the _server-next_ it reconnects to the presence to find a new
 partner and no longer needs to hold the connection to the realtime. Therefore it
 disconnects from the realtime to save resources and after having been matched
 with a new partner it reconnects to the realtime following the described

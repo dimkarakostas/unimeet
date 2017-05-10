@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
 import realtimeConnector from '../connection/realtimeConnector';
-import hallConnector from '../connection/hallConnector';
+import presenceConnector from '../connection/presenceConnector';
 import * as config from '../connection/config';
 
 class Chatbody extends Component {
@@ -28,7 +28,7 @@ class Chatbody extends Component {
 
     handleNext = () => {
         this._realtimeConnector.broadcastNext();
-        this._hallConnector.reconnect();
+        this._presenceConnector.reconnect();
         this._realtimeConnector.disconnect();
     }
 
@@ -64,11 +64,11 @@ class Chatbody extends Component {
         else {
             this._realtimeConnector.reconnect();
         }
-        this._hallConnector.disconnect();
+        this._presenceConnector.disconnect();
     }
 
     componentDidMount() {
-        this._hallConnector = new hallConnector(config.hallUrl, this.joinRoom);
+        this._presenceConnector = new presenceConnector(config.presenceUrl, this.joinRoom);
     }
 
     render() {

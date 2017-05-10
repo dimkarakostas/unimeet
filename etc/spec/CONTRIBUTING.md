@@ -31,18 +31,18 @@ unichat/frontend $ npm install
 unichat/frontend $ npm start
 ```
 
-### Hall
+### Presence
 
 - Install the dependencies by running:
 
 ```sh
-unichat/hall $ npm install
+unichat/presence $ npm install
 ```
 
 - Start the development server by running:
 
 ```sh
-unichat/hall $ npm start
+unichat/presence $ npm start
 ```
 
 ### Realtime

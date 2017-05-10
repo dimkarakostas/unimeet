@@ -1,4 +1,4 @@
 module.exports = {
     realtimeUrl: 'http://localhost:9871',
-    hallUrl: 'http://localhost:9870'
+    presenceUrl: 'http://localhost:9870'
 };

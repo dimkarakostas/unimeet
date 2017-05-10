@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
-function hallConnector(hallUrl, joinRoomCallback) {
-    this._socket = io.connect(hallUrl, {'forceNew': true});
+function presenceConnector(presenceUrl, joinRoomCallback) {
+    this._socket = io.connect(presenceUrl, {'forceNew': true});
     this._socket.on('connect', () => {
         this._socket.emit('client-get-partner', 'client');
     });
@@ -16,4 +16,4 @@ function hallConnector(hallUrl, joinRoomCallback) {
     }
 };
 
-module.exports = hallConnector;
+module.exports = presenceConnector;
