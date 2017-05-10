@@ -17,6 +17,8 @@ winston.add(winston.transports.Console, {'timestamp': true});
 const PORT = program.port;
 const SERVICES = config.services;
 
+const ROOMID = 'room1';
+
 winston.info('Unichat matchmaker service');
 winston.info('Listening on port ' + PORT);
 
@@ -30,6 +32,12 @@ for (var i=0; i < SERVICES.length; i++) {
     _socket.on('connect', () => {
         winston.debug('Connected to ' + _type + ' service at ' + _url);
         _socket.emit('register-matchmaker');
+    });
+
+    _socket.on('presence-find-partner', (cookieId) => {
+        winston.debug('Finding partner for client with cookie: ' + cookieId);
+        _socket.emit('matchmaker-send-to-room', cookieId, ROOMID);
+        winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + ROOMID);
     });
 
     serviceSockets.push(_socket);

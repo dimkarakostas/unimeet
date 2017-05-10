@@ -20,8 +20,7 @@ winston.info('Listening on port ' + PORT);
 
 const socket = io.listen(PORT);
 
-const ROOMID = 'room1';
-
+var cookieClients = {};
 var matchmaker = '';
 socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
@@ -32,12 +31,18 @@ socket.on('connection', (client) => {
         winston.debug('Matchmaker service connected with id ' + client.id);
     });
 
+    client.on('matchmaker-send-to-room', (cookieId, roomId) => {
+        let frontendClient = cookieClients[cookieId];
+        socket.to(frontendClient).emit('server-join-room', roomId);
+        winston.debug('Sending client ' + frontendClient + ' to room ' + roomId);
+    });
+
     // Frontend communication
-    client.on('client-get-partner', (clientId) => {
-        client._cookieId = clientId;
-        winston.debug('Client ' + client.id + ' is actually Unichat user ' + client._cookieId + ' and wants partner.');
-        client.emit('server-join-room', ROOMID);
-        winston.debug('Sending client ' + client.id + ' to room ' + ROOMID);
+    client.on('client-get-partner', (cookieId) => {
+        client._cookieId = cookieId;
+        cookieClients[cookieId] = client.id;
+        winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
+        socket.to(matchmaker).emit('presence-find-partner', client._cookieId);
     });
 
     client.on('disconnect', () => {
