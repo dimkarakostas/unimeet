@@ -21,30 +21,33 @@ winston.info('Listening on port ' + PORT);
 const socket = io.listen(PORT);
 
 socket.on('connection', (client) => {
-    let _chatRoom = '';
     winston.debug('New connection from client ' + client.id);
 
     client.on('client-join-room', (roomId) => {
         winston.debug('Client ' + client.id + ' joins room ' + roomId);
-        client.join(roomId);
-        _chatRoom = roomId;
-        if (socket.sockets.adapter.rooms[roomId].length > 1) {
-            socket.in(_chatRoom).emit('server-start-chatting');
+        client._chatRoom = roomId;
+        client.join(client._chatRoom);
+        if (socket.sockets.adapter.rooms[client._chatRoom].length > 1) {
+            socket.in(client._chatRoom).emit('server-start-chatting');
         }
     });
 
     client.on('client-next', () => {
-        winston.debug('Client ' + client.id + ' leaves room ' + _chatRoom);
-        client.leave(_chatRoom);
-        client.broadcast.to(_chatRoom).emit('server-next');
+        winston.debug('Client ' + client.id + ' leaves room ' + client._chatRoom);
+        client.leave(client._chatRoom);
+        client.broadcast.to(client._chatRoom).emit('server-next');
     });
 
     client.on('client-message', (message) => {
-        winston.debug('Client ' + client.id + ' sent to room ' + _chatRoom + ' the message: ' + message);
-        client.broadcast.to(_chatRoom).emit('server-message', message, 'partner');
+        winston.debug('Client ' + client.id + ' sent to room ' + client._chatRoom + ' the message: ' + message);
+        client.broadcast.to(client._chatRoom).emit('server-message', message, 'partner');
     });
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
+        let room = socket.sockets.adapter.rooms[client._chatRoom];
+        if (room !== undefined && room.length == 1) {
+            socket.in(client._chatRoom).emit('server-next');
+        }
     });
 });
