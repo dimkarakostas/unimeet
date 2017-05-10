@@ -26,6 +26,12 @@ class ChatFooter extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (!this.props.isFooterDisabled) {
+            this.chatMessageInput.focus();
+        }
+    }
+
     render() {
         return (
             <div className="panel-footer navbar-fixed-bottom" id="chat-footer">
@@ -56,6 +62,8 @@ class ChatFooter extends Component {
                                 autoFocus
                                 autoComplete="off"
                                 onChange={this.handleMessageInput}
+                                disabled={this.props.isFooterDisabled}
+                                inputRef={(input) => { this.chatMessageInput = input; }}
                             />
                             <span className="input-group-btn">
                                 <a>
