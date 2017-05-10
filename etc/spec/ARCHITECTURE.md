@@ -102,11 +102,17 @@ The client initiates the connection with the realtime server, using a hardcoded
 URL address. Upon receiving _connect_ from the realtime it proceeds to join a
 room.
 
-### client-join-room / server-join-room
+### client-join-room / server-start-chatting
 
-The client emits a _client-join-room_ that contains a single __string__ parameter,
-the __roomId__. When the realtime listens on this message it puts the client in
-the room identified by __roomId__ and emits a _server-join-room_.
+The client emits a _client-join-room_ that contains a single __string__
+parameter, the __roomId__. When the realtime listens on this message it puts the
+client in the room identified by __roomId__ and waits until its partner has also
+joined the room. When at least two clients coming from different people have
+joined the room the conversation can begin, so it emits a
+_server-start-chatting_ in the entire room in order to notify all clients that
+they can start sending messages. Each time a new client joins the room, the
+realtime will also emit a _server-start-chatting_ message in the room, which
+already chatting clients should ignore.
 
 ### client-message / server-message
 

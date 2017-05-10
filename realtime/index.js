@@ -28,7 +28,9 @@ socket.on('connection', (client) => {
         winston.debug('Client ' + client.id + ' joins room ' + roomId);
         client.join(roomId);
         _chatRoom = roomId;
-        client.emit('server-join-room');
+        if (socket.sockets.adapter.rooms[roomId].length > 1) {
+            socket.in(_chatRoom).emit('server-start-chatting');
+        }
     });
 
     client.on('client-next', () => {
