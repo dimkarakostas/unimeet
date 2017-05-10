@@ -24,11 +24,10 @@ const ROOMID = 'room1';
 
 socket.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
-    this.clientId = '';
 
     client.on('client-get-partner', (clientId) => {
-        this.clientId = clientId;
-        winston.debug('Client ' + client.id + ' is actually Unichat user ' + this.clientId + ' and wants partner.');
+        client._cookieId = clientId;
+        winston.debug('Client ' + client.id + ' is actually Unichat user ' + client._cookieId + ' and wants partner.');
         client.emit('server-join-room', ROOMID);
         winston.debug('Sending client ' + client.id + ' to room ' + ROOMID);
     });
