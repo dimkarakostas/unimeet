@@ -7,13 +7,15 @@ program
 
 
 const io = require('socket.io-client'),
-      winston = require('winston');
+      winston = require('winston'),
+      config = require('./config.js');
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {'timestamp': true});
 
 const PORT = program.port;
+const SERVICES = config.services;
 
 winston.info('Unichat matchmaker service');
 winston.info('Listening on port ' + PORT);
