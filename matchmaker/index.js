@@ -38,7 +38,7 @@ for (var i=0; i < SERVICES.length; i++) {
 
     _socket.on('presence-find-partner', (cookieId) => {
         winston.debug('Finding partner for client with cookie: ' + cookieId);
-        _socket.emit('matchmaker-send-to-room', cookieId, ROOMID);
+        _socket.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, ROOMID);
         winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + ROOMID);
     });
 

@@ -31,10 +31,10 @@ socket.on('connection', (client) => {
         winston.debug('Matchmaker service connected with id ' + client.id);
     });
 
-    client.on('matchmaker-send-to-room', (cookieId, roomId) => {
+    client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
         let frontendClient = cookieClients[cookieId];
-        socket.to(frontendClient).emit('server-join-room', roomId);
-        winston.debug('Sending client ' + frontendClient + ' to room ' + roomId);
+        socket.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
+        winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
     });
 
     // Frontend communication
