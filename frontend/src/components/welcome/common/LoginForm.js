@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+import {Form, FormGroup, FormControl, Button, Tooltip} from 'react-bootstrap';
 import ForgotPasswordModal from './ForgotPasswordModal';
 
 class LoginForm extends Component {
@@ -9,7 +9,8 @@ class LoginForm extends Component {
             username: '',
             password: '',
             isModalOpen: false,
-            isLoginButtonLoading: false
+            isLoginButtonLoading: false,
+            showCredentialsInvalid: false
         };
     }
 
@@ -39,11 +40,19 @@ class LoginForm extends Component {
     handleLogin = (event) => {
         event.preventDefault();
         console.log('username: ' + this.state.username + ' password: ' + this.state.password); //TODO: remove
-        this.setState({isLoginButtonLoading: true});
-        //TODO: Login request to backend
-        setTimeout(() => {
-            this.context.router.history.push('/chat');
-        }, 2000);
+        if (this.state.username === '' && this.state.password === '') {
+            this.setState({showCredentialsInvalid: true});
+            setTimeout(() => {
+                this.setState({showCredentialsInvalid: false});
+            }, 3000);
+        }
+        else {
+            this.setState({isLoginButtonLoading: true});
+            //TODO: Login request to backend
+            setTimeout(() => {
+                this.context.router.history.push('/chat');
+            }, 2000);
+        }
     }
 
     render() {
@@ -60,6 +69,7 @@ class LoginForm extends Component {
                             disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
                         />
+                        {this.state.showCredentialsInvalid ? <Tooltip id="tooltip" placement="bottom" className="in">Your credentials are invalid!</Tooltip> : ''}
                     </FormGroup>
                     {' '}
                     <FormGroup>

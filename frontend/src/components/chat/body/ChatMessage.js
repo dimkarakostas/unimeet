@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
+import ReactEmoji from 'react-emoji';
 
 class ChatMessage extends Component {
     render() {
@@ -21,7 +22,7 @@ class ChatMessage extends Component {
                 <div className="chat-body clearfix">
                     <OverlayTrigger placement={tooltipPosition} overlay={timeTooltip}>
                         <p className="chat-message">
-                            {this.props.message.content}
+                            {ReactEmoji.emojify(this.props.message.content)}
                         </p>
                     </OverlayTrigger>
                 </div>

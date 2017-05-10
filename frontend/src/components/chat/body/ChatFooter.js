@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Form, InputGroup, FormControl, Button} from 'react-bootstrap';
+import {Form, InputGroup, FormControl, Button, Popover, OverlayTrigger} from 'react-bootstrap';
+import EmojiInput from './EmojiInput';
+import ReactEmoji from 'react-emoji';
 
 class ChatFooter extends Component {
     constructor(props) {
@@ -13,6 +15,15 @@ class ChatFooter extends Component {
         this.setState({chatMessage: event.target.value});
     }
 
+    handleEmoji = (emoji) => {
+        if (!this.props.isFooterDisabled) {
+            let newMessage = this.state.chatMessage;
+            newMessage += emoji;
+            this.setState({chatMessage: newMessage});
+            this.chatMessageInput.focus();
+        }
+    }
+
     handleMessageSubmit = (event) => {
         event.preventDefault();
         this.props.handleNewMessage(this.state.chatMessage);
@@ -20,9 +31,15 @@ class ChatFooter extends Component {
     }
 
     handleKeyPress = (event) => {
-        if (event.key === 'Escape') {
+        if (!this.props.isFooterDisabled && event.key === 'Escape') {
             this.props.handleNext();
             this.setState({chatMessage: ''});
+        }
+    }
+
+    componentDidUpdate() {
+        if (!this.props.isFooterDisabled) {
+            this.chatMessageInput.focus();
         }
     }
 
@@ -30,6 +47,7 @@ class ChatFooter extends Component {
         return (
             <div className="panel-footer navbar-fixed-bottom" id="chat-footer">
                 <div className="container">
+                    {this.props.isFooterDisabled? <div className="chat-user-message">You are in queue, please wait...</div> : ''}
                     <Form onSubmit={this.handleMessageSubmit} onKeyUp={this.handleKeyPress}>
                         <InputGroup>
                             <span className="input-group-btn">
@@ -55,8 +73,13 @@ class ChatFooter extends Component {
                                 autoFocus
                                 autoComplete="off"
                                 onChange={this.handleMessageInput}
+                                disabled={this.props.isFooterDisabled}
+                                inputRef={(input) => { this.chatMessageInput = input; }}
                             />
                             <span className="input-group-btn">
+                                <OverlayTrigger trigger="click" rootClose placement="top" overlay={<Popover id="popover-trigger-click-root-close" className="emoji-popover"><EmojiInput handleEmoji={this.handleEmoji}/></Popover>}>
+                                    <span className="emoji-trigger">{ReactEmoji.emojify(':)')}</span>
+                                </OverlayTrigger>
                                 <a>
                                 <Button
                                     type="submit"

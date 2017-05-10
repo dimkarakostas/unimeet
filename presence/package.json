@@ -1,7 +1,7 @@
 {
-  "name": "unichat-hall",
+  "name": "unichat-presence",
   "version": "1.0.0",
-  "description": "Unichat chat service hall component",
+  "description": "Unichat chat service presence component",
   "author": "Dimitris Karakostas",
   "homepage": "https://unichat.eu",
   "license": "MIT",
