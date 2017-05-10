@@ -19,3 +19,17 @@ const SERVICES = config.services;
 
 winston.info('Unichat matchmaker service');
 winston.info('Listening on port ' + PORT);
+
+let serviceSockets = [];
+for (var i=0; i < SERVICES.length; i++) {
+    let _url = SERVICES[i].url;
+    let _type = SERVICES[i].type;
+
+    let _socket = io.connect(_url, {'forceNew': true});
+
+    _socket.on('connect', () => {
+        winston.debug('Connected to ' + _type + ' service at ' + _url);
+    });
+
+    serviceSockets.push(_socket);
+}
