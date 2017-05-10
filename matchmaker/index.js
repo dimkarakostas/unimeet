@@ -23,6 +23,8 @@ winston.info('Unichat matchmaker service');
 winston.info('Listening on port ' + PORT);
 
 let serviceSockets = [];
+let presenceToUse = '';
+let realtimeToUse = '';
 for (var i=0; i < SERVICES.length; i++) {
     let _url = SERVICES[i].url;
     let _type = SERVICES[i].type;
@@ -41,4 +43,14 @@ for (var i=0; i < SERVICES.length; i++) {
     });
 
     serviceSockets.push(_socket);
+
+    // Define the primary presence/realtime service that traffic is directed at
+    if (_type == 'presence') {
+        presenceToUse = {'socket': _socket, 'url': _url};
+        winston.debug('Presence to use: ' + presenceToUse.url);
+    }
+    else {
+        realtimeToUse = {'socket': _socket, 'url': _url};
+        winston.debug('Realtime to use: ' + realtimeToUse.url);
+    }
 }
