@@ -14,5 +14,6 @@ terminate() {
 echo "[*] Starting Unichat..."
 ~/.nvm/v6.3.1/bin/npm start --prefix realtime &
 ~/.nvm/v6.3.1/bin/npm start --prefix presence &
+~/.nvm/v6.3.1/bin/npm start --prefix matchmaker &
 ~/.nvm/v6.3.1/bin/npm start --prefix frontend &>/dev/null &
 wait
