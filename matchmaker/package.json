@@ -1,0 +1,20 @@
+{
+  "name": "unichat-matchmaker",
+  "version": "1.0.0",
+  "description": "Unichat chat service matchmaker component",
+  "author": "Dimitris Karakostas",
+  "homepage": "https://unichat.eu",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "socket.io-client": "^1.7.3",
+    "winston": "^2.2.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony index.js"
+  },
+  "jshintConfig": {
+    "esversion": 6
+  }
+}
