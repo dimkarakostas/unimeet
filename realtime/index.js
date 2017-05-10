@@ -31,8 +31,8 @@ socket.on('connection', (client) => {
     });
 
     // Frontend communication
-    client.on('client-join-room', (roomId) => {
-        winston.debug('Client ' + client.id + ' joins room ' + roomId);
+    client.on('client-join-room', (roomId, cookieId) => {
+        winston.debug('Client ' + client.id + ' with cookie (' + cookieId + ') joins room ' + roomId);
         client._chatRoom = roomId;
         client.join(client._chatRoom);
         if (socket.sockets.adapter.rooms[client._chatRoom].length > 1) {
