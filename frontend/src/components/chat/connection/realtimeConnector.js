@@ -1,11 +1,10 @@
 import io from 'socket.io-client';
 
-function realtimeConnector(realtimeUrl, roomId, handleNewMessageCallback, handleNextCallback, disableChatCallback) {
-    this._cookieId = 'cookie';
+function realtimeConnector(cookie, realtimeUrl, roomId, handleNewMessageCallback, handleNextCallback, disableChatCallback) {
     this._chatting = false;
     this._socket = io.connect(realtimeUrl, {'forceNew': true});
     this._socket.on('connect', () => {
-        this._socket.emit('client-join-room', roomId, this._cookieId);
+        this._socket.emit('client-join-room', roomId, cookie);
     });
     this._socket.on('server-start-chatting', () => {
         if (!this._chatting) {

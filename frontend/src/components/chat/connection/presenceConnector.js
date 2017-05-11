@@ -1,10 +1,9 @@
 import io from 'socket.io-client';
 
-function presenceConnector(presenceUrl, joinRoomCallback) {
-    this._cookieId = 'cookie';
+function presenceConnector(cookie, presenceUrl, joinRoomCallback) {
     this._socket = io.connect(presenceUrl, {'forceNew': true});
     this._socket.on('connect', () => {
-        this._socket.emit('client-get-partner', this._cookieId);
+        this._socket.emit('client-get-partner', cookie);
     });
     this._socket.on('server-join-room', (realtimeUrl, roomId) => {
         joinRoomCallback(realtimeUrl, roomId);
