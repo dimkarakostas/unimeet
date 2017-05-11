@@ -7,6 +7,7 @@ function realtimeConnector(cookie, realtimeUrl, roomId, handleNewMessageCallback
         this._socket.emit('client-join-room', roomId, cookie);
     });
     this._socket.on('server-start-chatting', () => {
+        // If already chatting, ignore this message
         if (!this._chatting) {
             disableChatCallback(false);
             this._chatting = true;
