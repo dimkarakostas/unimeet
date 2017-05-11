@@ -18,10 +18,10 @@ const PORT = program.port;
 winston.info('Unichat realtime service');
 winston.info('Listening on port ' + PORT);
 
-const socket = io.listen(PORT);
+const socketIOServer = io.listen(PORT);
 
 var matchmaker = '';
-socket.on('connection', (client) => {
+socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
     // Matchmaker communication
@@ -35,8 +35,8 @@ socket.on('connection', (client) => {
         winston.debug('Client ' + client.id + ' with cookie (' + cookieId + ') joins room ' + roomId);
         client._chatRoom = roomId;
         client.join(client._chatRoom);
-        if (socket.sockets.adapter.rooms[client._chatRoom].length > 1) {
-            socket.in(client._chatRoom).emit('server-start-chatting');
+        if (socketIOServer.sockets.adapter.rooms[client._chatRoom].length > 1) {
+            socketIOServer.in(client._chatRoom).emit('server-start-chatting');
         }
     });
 
@@ -53,9 +53,9 @@ socket.on('connection', (client) => {
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
-        let room = socket.sockets.adapter.rooms[client._chatRoom];
+        let room = socketIOServer.sockets.adapter.rooms[client._chatRoom];
         if (room !== undefined && room.length == 1) {
-            socket.in(client._chatRoom).emit('server-next');
+            socketIOServer.in(client._chatRoom).emit('server-next');
         }
     });
 });

@@ -29,28 +29,28 @@ for (var i=0; i < SERVICES.length; i++) {
     let _url = SERVICES[i].url;
     let _type = SERVICES[i].type;
 
-    let _socket = io.connect(_url, {'forceNew': true});
+    let _socketIOServer = io.connect(_url, {'forceNew': true});
 
-    _socket.on('connect', () => {
+    _socketIOServer.on('connect', () => {
         winston.debug('Connected to ' + _type + ' service at ' + _url);
-        _socket.emit('register-matchmaker');
+        _socketIOServer.emit('register-matchmaker');
     });
 
-    _socket.on('presence-find-partner', (cookieId) => {
+    _socketIOServer.on('presence-find-partner', (cookieId) => {
         winston.debug('Finding partner for client with cookie: ' + cookieId);
-        _socket.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, ROOMID);
+        _socketIOServer.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, ROOMID);
         winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + ROOMID);
     });
 
-    serviceSockets.push(_socket);
+    serviceSockets.push(_socketIOServer);
 
     // Define the primary presence/realtime service that traffic is directed at
     if (_type == 'presence') {
-        presenceToUse = {'socket': _socket, 'url': _url};
+        presenceToUse = {'socketIOServer': _socketIOServer, 'url': _url};
         winston.debug('Presence to use: ' + presenceToUse.url);
     }
     else {
-        realtimeToUse = {'socket': _socket, 'url': _url};
+        realtimeToUse = {'socketIOServer': _socketIOServer, 'url': _url};
         winston.debug('Realtime to use: ' + realtimeToUse.url);
     }
 }

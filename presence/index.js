@@ -18,11 +18,11 @@ const PORT = program.port;
 winston.info('Unichat presence service');
 winston.info('Listening on port ' + PORT);
 
-const socket = io.listen(PORT);
+const socketIOServer = io.listen(PORT);
 
 var cookieClients = {};
 var matchmaker = '';
-socket.on('connection', (client) => {
+socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
     // Matchmaker communication
@@ -33,7 +33,7 @@ socket.on('connection', (client) => {
 
     client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
         let frontendClient = cookieClients[cookieId];
-        socket.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
+        socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
         winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
     });
 
@@ -42,7 +42,7 @@ socket.on('connection', (client) => {
         client._cookieId = cookieId;
         cookieClients[cookieId] = client.id;
         winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
-        socket.to(matchmaker).emit('presence-find-partner', client._cookieId);
+        socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
     });
 
     client.on('disconnect', () => {
