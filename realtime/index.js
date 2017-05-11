@@ -11,7 +11,7 @@ const io = require('socket.io'),
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {'timestamp': true});
+winston.add(winston.transports.Console, {'timestamp': true, 'label': 'realtime'});
 
 const PORT = program.port;
 

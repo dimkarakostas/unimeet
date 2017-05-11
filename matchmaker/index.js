@@ -12,7 +12,7 @@ const io = require('socket.io-client'),
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {'timestamp': true});
+winston.add(winston.transports.Console, {'timestamp': true, 'label': 'matchmaker'});
 
 const PORT = program.port;
 const SERVICES = config.services;
