@@ -32,9 +32,12 @@ socketIOServer.on('connection', (client) => {
     });
 
     client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
-        let frontendClient = cookieClients[cookieId];
-        socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
-        winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+        // Verify if the message actually came from the matchmaker client
+        if (client.id === matchmaker) {
+            let frontendClient = cookieClients[cookieId];
+            socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
+            winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+        }
     });
 
     // Frontend communication
