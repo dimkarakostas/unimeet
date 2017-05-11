@@ -39,8 +39,20 @@ socketIOServer.on('connection', (client) => {
         winston.debug('Client ' + client.id + ' with cookie (' + cookieId + ') joins room ' + roomId);
         client._chatRoom = roomId;
         client.join(client._chatRoom);
-        if (socketIOServer.sockets.adapter.rooms[client._chatRoom].length > 1) {
+        if (getRoomUsercount(client._chatRoom) > 1) {
             socketIOServer.in(client._chatRoom).emit('server-start-chatting');
+        }
+        else {
+            // If partner doesn't join room within 30secs something went wrong,
+            // so try finding a new one
+            setTimeout(() => {
+                // Conversation could have started and then either changed partner,
+                // so room might not exist although client does
+                room = socketIOServer.sockets.adapter.rooms[client._chatRoom];
+                if (room !== undefined && getRoomUsercount(client._chatRoom) === 1) {
+                    socketIOServer.in(client._chatRoom).emit('server-next');
+                }
+            }, 30000);
         }
     });
 
