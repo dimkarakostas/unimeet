@@ -53,6 +53,8 @@ socketIOServer.on('connection', (client) => {
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
+        // If a user disconnects by closing the browser and its partner is still in the room,
+        // notify it to search for a new one
         let room = socketIOServer.sockets.adapter.rooms[client._chatRoom];
         if (room !== undefined && room.length == 1) {
             socketIOServer.in(client._chatRoom).emit('server-next');
