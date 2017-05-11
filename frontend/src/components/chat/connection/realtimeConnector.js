@@ -20,8 +20,7 @@ function realtimeConnector(cookie, realtimeUrl, roomId, handleNewMessageCallback
         handleNextCallback();
     });
     this._socket.on('disconnect', () => {
-        disableChatCallback(true);
-        this._chatting = false;
+        handleNextCallback();
     });
     this.broadcastMessage = function(message) {
         this._socket.emit('client-message', message);
