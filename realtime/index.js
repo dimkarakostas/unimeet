@@ -20,6 +20,10 @@ winston.info('Listening on port ' + PORT);
 
 const socketIOServer = io.listen(PORT);
 
+function getRoomUsercount(room) {
+    return socketIOServer.sockets.adapter.rooms[room].length;
+}
+
 var matchmaker = '';
 socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
@@ -56,7 +60,7 @@ socketIOServer.on('connection', (client) => {
         // If a user disconnects by closing the browser and its partner is still in the room,
         // notify it to search for a new one
         let room = socketIOServer.sockets.adapter.rooms[client._chatRoom];
-        if (room !== undefined && room.length == 1) {
+        if (room !== undefined && getRoomUsercount(client._chatRoom) == 1) {
             socketIOServer.in(client._chatRoom).emit('server-next');
         }
     });
