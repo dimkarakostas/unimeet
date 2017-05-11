@@ -18,7 +18,8 @@ class Chatbody extends Component {
                 university: 'National Technical University of Athens, Greece'
             },
             messages: [],
-            isFooterDisabled: true
+            isFooterDisabled: true,
+            cookie: 'cookie'
         };
     }
 
@@ -57,9 +58,9 @@ class Chatbody extends Component {
         }
     }
 
-    joinRoom = (roomId) => {
+    joinRoom = (realtimeUrl, roomId) => {
         if (this._realtimeConnector === undefined) {
-            this._realtimeConnector = new realtimeConnector(config.realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
         }
         else {
             this._realtimeConnector.reconnect();
@@ -68,7 +69,7 @@ class Chatbody extends Component {
     }
 
     componentDidMount() {
-        this._presenceConnector = new presenceConnector(config.presenceUrl, this.joinRoom);
+        this._presenceConnector = new presenceConnector(this.state.cookie, config.presenceUrl, this.joinRoom);
     }
 
     render() {

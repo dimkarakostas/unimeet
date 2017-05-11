@@ -49,16 +49,58 @@ body components, a _communication_ folder for the libraries responsible for
 communication with the backend, or any other folder the developer deems
 necessary.
 
+# Matchmaker
+
+This component is responsible for making the matches between users. It
+communicates with the presence services to have an accurate state of the
+connected clients, it keeps track of the state of all presence/realtime
+services and communicates with the backend to get user information.
+
+## presence/realtime <-> matchmaker
+
+The matchmaker communicates with all presence and realtime services over a
+websocket established using [socket.io](http://socket.io/), the matchmaker
+being the client side of the communication.
+
+### register-matchmaker
+
+When the matchmaker establishes a connection with a presence/realtime service,
+it emits a _register-matchmaker_ message, in order for the service to know which
+socket.io client corresponds to the matchmaker service.
+
+### presence-find-partner / matchmaker-send-to-room
+
+The matchmaker receives a _presence-find-partner_ message from a presence
+service in order to start searching for a match for the given user, who is
+identified by the cookie that is included in the message request. The matchmaker
+then searches for a match based on the user's preferences and interests. When
+such a match is found, it emits a _matchmaker-send-to-room_ message to the
+presence service that originally sent the _presence-find-partner_ message,
+which includes the cookie of the user, the realtime URL and the room Id that the
+user should connect to.
+
 # Presence
 
 This component is the stage after a user has logged in and while waiting to be
 matched with a partner. It is responsible for keeping track of all non-chatting
-logged-in users and making matches when possible.
+logged-in users and communicating with the matchmaker service to make matches.
 
-## client <-> presence
+## Structure
 
-The client / presence protocol is implemented using [socket.io](http://socket.io/)
-websockets.
+The presence implements a single server for websocket connections. Both the
+matchmaker service and the frontend clients connect to the presence using the
+same client object, therefore the websocket exposed to the matchmaker and the
+frontend is the same.
+
+It is important to **always** check that a message corresponding to a matchmaker
+communication, i.e. a message that normally comes only from the matchmaker
+service, actually came from the registered matchmaker, otherwise a malicious
+frontend client might impersonate the matchmaker.
+
+## frontend/matchmaker <-> presence
+
+The frontend client and the matchmaker service connect with the presence using
+[socket.io](http://socket.io/) websockets.
 
 ### connect
 
@@ -66,21 +108,28 @@ The client initiates the connection with the presence server using a hardcoded U
 address. Upon receiving the _connect_ message from the presence it proceeds to find
 a partner.
 
-### client-get-partner / server-join-room
+### client-get-partner / presence-find-partner
 
 When the client wishes to start chatting it emits a _client-get-partner_
-message. Upon receiving it, the presence tries to find a match for the user based on
-its interests and preferences. When a match has been found, it allocates a room
-for the matched pair and emits a _server-join-room_ that contains a single
-__string__ parameter, the __roomId__, which the client will use in order to
-connect to the realtime as explained below.
+message. Upon receiving it, the presence sends a _presence-find-partner_ to the
+matchmaker service to try and find a match for the user based on its interests
+and preferences. Both message requests include the client's cookie, in order to
+identify the user that made the request.
+
+### matchmaker-send-to-room / server-join-room
+
+When a match has been found, the matchmaker has sent a _matchmaker-send-to-room_
+message with the realtime, roomId and cookie parameters to the presence. When
+the presence receives it, it emits a _server-join-room_ to the client identified
+by the cookie that contains the realtime URL that the client should connect to
+and the room id that it should join.
 
 ### disconnect / reconnect
 
 After the client has been matched and received a _server-join-room_ it
 disconnects from the presence server in order to avoid unnecessary resource
-allocation. When the client leaves the chat room, it will reconnect to the presence
-and start the process again from the beginning.
+allocation. When the client leaves the chat room, it will reconnect to the
+presence and start the process again from the beginning.
 
 # Realtime
 
@@ -88,12 +137,14 @@ This component is the intermediary in the communication of two frontend clients.
 It consists of multiple chat rooms and is responsible for forwarding chat
 messages from one client to all other members in the chat room.
 
-It is implemented in [Node.js](https://nodejs.org/en/).  The websocket API
-exposed by the realtime service is explained below.
+## Structure
+
+The realtime's structure is similar to the presence's described above. Please
+look at that description for important notes
 
 ## client <-> realtime
 
-The client / realtime protocol is implemented using
+The frontend client and the matchmaker service connect with the realtime using
 [socket.io](http://socket.io/) websockets.
 
 ### connect
@@ -136,11 +187,14 @@ clients.
 
 ### disconnect / reconnect
 
-After the client emits the _server-next_ it reconnects to the presence to find a new
-partner and no longer needs to hold the connection to the realtime. Therefore it
-disconnects from the realtime to save resources and after having been matched
-with a new partner it reconnects to the realtime following the described
-protocol.
+After the client emits the _server-next_ it reconnects to the presence to find a
+new partner and no longer needs to hold the connection to the realtime.
+Therefore it disconnects from the realtime to save resources and after having
+been matched with a new partner it reconnects to the realtime following the
+described protocol. If the client disconnects due to a connection crash or if
+the user closes the browser, the realtime checks if the only client in the room
+is the user's partner, in which case it emits a _server-next_ message to the
+entire room to notify the user's partner to search for a new partner.
 
 # Registrar
 

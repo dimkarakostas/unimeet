@@ -6,7 +6,8 @@ students.
 
 ## Got a question?
 
-Please ask us anything at [https://unichat.eu](https://unichat.eu).
+Please ask us anything at
+[https://unichat.eu/contact](https://unichat.eu/contact).
 
 ## Found a bug?
 

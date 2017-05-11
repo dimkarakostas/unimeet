@@ -11,26 +11,41 @@ const io = require('socket.io'),
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {'timestamp': true});
+winston.add(winston.transports.Console, {'timestamp': true, 'label': 'presence'});
 
 const PORT = program.port;
 
 winston.info('Unichat presence service');
 winston.info('Listening on port ' + PORT);
 
-const socket = io.listen(PORT);
+const socketIOServer = io.listen(PORT);
 
-const ROOMID = 'room1';
-
-socket.on('connection', (client) => {
+var cookieClients = {};
+var matchmaker = '';
+socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
-    this.clientId = '';
 
-    client.on('client-get-partner', (clientId) => {
-        this.clientId = clientId;
-        winston.debug('Client ' + client.id + ' is actually Unichat user ' + this.clientId + ' and wants partner.');
-        client.emit('server-join-room', ROOMID);
-        winston.debug('Sending client ' + client.id + ' to room ' + ROOMID);
+    // Matchmaker communication
+    client.on('register-matchmaker', () => {
+        matchmaker = client.id;
+        winston.debug('Matchmaker service connected with id ' + client.id);
+    });
+
+    client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
+        // Verify if the message actually came from the matchmaker client
+        if (client.id === matchmaker) {
+            let frontendClient = cookieClients[cookieId];
+            socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
+            winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+        }
+    });
+
+    // Frontend communication
+    client.on('client-get-partner', (cookieId) => {
+        client._cookieId = cookieId;
+        cookieClients[cookieId] = client.id;
+        winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
+        socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
     });
 
     client.on('disconnect', () => {
