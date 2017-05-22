@@ -11,9 +11,11 @@ terminate() {
     echo "[*] Shut down complete."
 }
 
+NODE=~/.nvm/versions/node/v6.3.1
+
 echo "[*] Starting Unichat..."
-~/.nvm/v6.3.1/bin/npm start --prefix realtime &
-~/.nvm/v6.3.1/bin/npm start --prefix presence &
-~/.nvm/v6.3.1/bin/npm start --prefix matchmaker &
-~/.nvm/v6.3.1/bin/npm start --prefix frontend &>/dev/null &
+$NODE/bin/npm start --prefix realtime &
+$NODE/bin/npm start --prefix presence &
+$NODE/bin/npm start --prefix matchmaker &
+$NODE/bin/npm start --prefix frontend &>/dev/null &
 wait
