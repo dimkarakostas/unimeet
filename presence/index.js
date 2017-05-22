@@ -21,7 +21,8 @@ winston.info('Listening on port ' + PORT);
 const socketIOServer = io.listen(PORT);
 
 var cookieClients = {};
-var matchmaker = '';
+var matchmaker = null;
+var waitingClients = [];
 socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
 
@@ -29,6 +30,9 @@ socketIOServer.on('connection', (client) => {
     client.on('register-matchmaker', () => {
         matchmaker = client.id;
         winston.debug('Matchmaker service connected with id ' + client.id);
+        for (var i=0; i < waitingClients.length; i++) {
+            socketIOServer.to(matchmaker).emit('presence-find-partner', waitingClients[i]);
+        }
     });
 
     client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
@@ -45,10 +49,19 @@ socketIOServer.on('connection', (client) => {
         client._cookieId = cookieId;
         cookieClients[cookieId] = client.id;
         winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
-        socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
+        if (matchmaker === null) {
+            waitingClients.push(client._cookieId);
+        }
+        else {
+            socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
+        }
     });
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
+        var waitingIndex = waitingClients.indexOf(client._cookieId);
+        if (waitingIndex > -1) {
+            waitingClients.splice(waitingIndex, 1);
+        }
     });
 });
