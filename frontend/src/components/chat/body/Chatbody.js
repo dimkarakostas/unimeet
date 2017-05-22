@@ -27,10 +27,12 @@ class Chatbody extends Component {
         this.setState({isFooterDisabled: disableOption});
     }
 
-    handleNext = () => {
-        this._realtimeConnector.broadcastNext();
-        this._presenceConnector.reconnect();
+    handleNext = (origin) => {
+        if (origin === 'me') {
+            this._realtimeConnector.broadcastNext();
+        }
         this._realtimeConnector.disconnect();
+        this._presenceConnector.reconnect();
     }
 
     handleNewMessage = (message, from) => {

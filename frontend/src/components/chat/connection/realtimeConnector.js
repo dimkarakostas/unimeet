@@ -17,19 +17,24 @@ function realtimeConnector(cookie, realtimeUrl, roomId, handleNewMessageCallback
         handleNewMessageCallback(message, from);
     });
     this._socket.on('server-next', () => {
-        handleNextCallback();
+        handleNextCallback('server');
+        this.disableChat();
     });
     this._socket.on('disconnect', () => {
-        handleNextCallback();
+        handleNextCallback('server');
+        this.disableChat();
     });
     this.broadcastMessage = function(message) {
         this._socket.emit('client-message', message);
     };
     this.broadcastNext = function() {
         this._socket.emit('client-next');
+        this.disableChat();
+    };
+    this.disableChat = function() {
         disableChatCallback(true);
         this._chatting = false;
-    };
+    }
     this.disconnect = function() {
         this._socket.disconnect();
     }
