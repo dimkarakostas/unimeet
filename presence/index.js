@@ -41,6 +41,12 @@ socketIOServer.on('connection', (client) => {
             let frontendClient = cookieClients[cookieId];
             socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
             winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+
+            var waitingIndex = waitingClients.indexOf(cookieId);
+            if (waitingIndex > -1) {
+                waitingClients.splice(waitingIndex, 1);
+            }
+            winston.debug('Deleted client with cookie (' + cookieId + ') from waiting queue.');
         }
     });
 
