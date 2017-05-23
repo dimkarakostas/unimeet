@@ -19,7 +19,7 @@ class Chatbody extends Component {
             },
             messages: [],
             isFooterDisabled: true,
-            cookie: 'cookie'
+            cookie: Math.random().toString(36).substr(2, 5)
         };
     }
 
