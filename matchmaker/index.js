@@ -25,6 +25,7 @@ winston.info('Listening on port ' + PORT);
 let serviceSockets = [];
 let presenceToUse = '';
 let realtimeToUse = '';
+let waitingClient = null;
 for (var i=0; i < SERVICES.length; i++) {
     let _url = SERVICES[i].url;
     let _type = SERVICES[i].type;
@@ -38,8 +39,19 @@ for (var i=0; i < SERVICES.length; i++) {
 
     _socketIOServer.on('presence-find-partner', (cookieId) => {
         winston.debug('Finding partner for client with cookie: ' + cookieId);
-        _socketIOServer.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, ROOMID);
-        winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + ROOMID);
+        if (waitingClient === null) {
+            waitingClient = {'cookie': cookieId, 'presenceSocket': _socketIOServer};
+        }
+        else {
+            let roomId = Math.random().toString(36).substr(2, 5);
+
+            _socketIOServer.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, roomId);
+            winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + roomId);
+            waitingClient.presenceSocket.emit('matchmaker-send-to-room', waitingClient.cookie, realtimeToUse.url, roomId);
+            winston.debug('Sent client with cookie (' + waitingClient.cookie + ') to room: ' + roomId);
+
+            waitingClient = null;
+        }
     });
 
     serviceSockets.push(_socketIOServer);
