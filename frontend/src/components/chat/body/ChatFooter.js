@@ -32,7 +32,7 @@ class ChatFooter extends Component {
 
     handleKeyPress = (event) => {
         if (!this.props.isFooterDisabled && event.key === 'Escape') {
-            this.props.handleNext();
+            this.props.handleNext('me');
             this.setState({chatMessage: ''});
         }
     }

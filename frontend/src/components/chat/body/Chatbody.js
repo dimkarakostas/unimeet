@@ -19,7 +19,7 @@ class Chatbody extends Component {
             },
             messages: [],
             isFooterDisabled: true,
-            cookie: 'cookie'
+            cookie: Math.random().toString(36).substr(2, 5)
         };
     }
 
@@ -27,10 +27,12 @@ class Chatbody extends Component {
         this.setState({isFooterDisabled: disableOption});
     }
 
-    handleNext = () => {
-        this._realtimeConnector.broadcastNext();
-        this._presenceConnector.reconnect();
+    handleNext = (origin) => {
+        if (origin === 'me') {
+            this._realtimeConnector.broadcastNext();
+        }
         this._realtimeConnector.disconnect();
+        this._presenceConnector.reconnect();
     }
 
     handleNewMessage = (message, from) => {
@@ -60,11 +62,12 @@ class Chatbody extends Component {
 
     joinRoom = (realtimeUrl, roomId) => {
         if (this._realtimeConnector === undefined) {
-            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
         }
         else {
             this._realtimeConnector.reconnect();
         }
+        this._realtimeConnector.joinRoom(roomId);
         this._presenceConnector.disconnect();
     }
 

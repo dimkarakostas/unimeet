@@ -116,6 +116,11 @@ matchmaker service to try and find a match for the user based on its interests
 and preferences. Both message requests include the client's cookie, in order to
 identify the user that made the request.
 
+The presence keeps a list of the cookies all clients that have not been matched
+yet. If the matchmaker connection drops, upon reconnection it reissues the
+_presence-find-partner_ message for all clients so that the matchmaker can start
+its process again.
+
 ### matchmaker-send-to-room / server-join-room
 
 When a match has been found, the matchmaker has sent a _matchmaker-send-to-room_
@@ -150,8 +155,7 @@ The frontend client and the matchmaker service connect with the realtime using
 ### connect
 
 The client initiates the connection with the realtime server, using a hardcoded
-URL address. Upon receiving _connect_ from the realtime it proceeds to join a
-room.
+URL address. The React code then to join a realtime room.
 
 ### client-join-room / server-start-chatting
 
