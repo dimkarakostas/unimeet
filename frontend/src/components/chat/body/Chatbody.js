@@ -62,11 +62,12 @@ class Chatbody extends Component {
 
     joinRoom = (realtimeUrl, roomId) => {
         if (this._realtimeConnector === undefined) {
-            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, roomId, this.handleNewMessage, this.handleNext, this.disableChat);
+            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
         }
         else {
             this._realtimeConnector.reconnect();
         }
+        this._realtimeConnector.joinRoom(roomId);
         this._presenceConnector.disconnect();
     }
 
