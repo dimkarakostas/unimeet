@@ -1,0 +1,82 @@
+{
+    "countries": [
+        {
+            "name": "Greece",
+            "code": "gr",
+            "cities": [
+                {
+                    "name": "Athens",
+                    "universities": [
+                        {
+                            "name": "University of Athens",
+                            "site": "http://www.uoa.gr",
+                            "schools": [
+                                {
+                                    "name": "Department of Informatics and Telecommunications",
+                                    "site": "http://www.di.uoa.gr",
+                                    "mailRegex": "sdi(\\d*)@(di\\.)?uoa\\.gr"
+                                },
+                                {
+                                    "name": "Department of Physics",
+                                    "site": "http://www.phys.uoa.gr/",
+                                    "mailRegex": "sph(\\d*)@(phys\\.)?uoa\\.gr"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "National Technical University of Athens",
+                            "site": "https://www.ntua.gr/",
+                            "schools": [
+                                {
+                                    "name": "School of Electrical and Computer Engineering",
+                                    "site": "https://www.ece.ntua.gr",
+                                    "mailRegex": "el(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Mechanical Engineering",
+                                    "site": "http://www.mech.ntua.gr",
+                                    "mailRegex": "mc(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Civil Engineering",
+                                    "site": "http://www.civil.ntua.gr",
+                                    "mailRegex": "cv(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Architecture",
+                                    "site": "http://www.arch.ntua.gr",
+                                    "mailRegex": "ar(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Chemical Engineering",
+                                    "site": "http://www.chemeng.ntua.gr",
+                                    "mailRegex": "ch(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Rural and Surveying Engineering",
+                                    "site": "http://www.survey.ntua.gr",
+                                    "mailRegex": "rs(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Naval Architecture and Marine Engineering",
+                                    "site": "http://www.naval.ntua.gr",
+                                    "mailRegex": "nm(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Mining and Metallurgical Engineering",
+                                    "site": "http://www.metal.ntua.gr",
+                                    "mailRegex": "mm(\\d*)@(central|mail)\\.ntua\\.gr"
+                                },
+                                {
+                                    "name": "School of Applied Mathematical and Physical Studies",
+                                    "site": "http://www.semfe.ntua.gr",
+                                    "mailRegex": "ge(\\d*)@(central|mail)\\.ntua\\.gr"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
