@@ -1,3 +1,4 @@
-__all__ = ['location', 'academic']
+__all__ = ['user', 'location', 'academic']
+from .user import User
 from .location import City, Country
 from .academic import School, University
