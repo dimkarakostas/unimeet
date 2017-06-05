@@ -6,19 +6,19 @@ class InterestedInSettingContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            universities: [
+            schools: [
                 {
-                    name: 'National Technical University of Athens',
-                    country: 'Greece',
-                    domain: 'ntua.gr'
+                    name: 'Department of Informatics',
+                    university: 'National Technical University of Athens, Athens, Greece',
+                    id: 1
                 },
                 {
-                    name: 'University of Athens',
-                    country: 'Greece',
-                    domain: 'uoa.gr'
+                    name: 'Department of Physics',
+                    university: 'National Technical University of Athens, Athens, Greece',
+                    id: 2
                 },
             ],
-            selectedUniversities: ['ntua.gr'],
+            selectedSchools: [],
             selectedSex: 'men',
             isApplyButtonLoading: false,
             displayChangesSavedMessage: false
@@ -34,24 +34,24 @@ class InterestedInSettingContent extends Component {
     }
 
     onSelect = (row, isSelected, e) => {
-        var selectedUnis = this.state.selectedUniversities;
+        var selectedSchools = this.state.selectedSchools;
         if (isSelected) {
-            selectedUnis.push(row.domain);
+            selectedSchools.push(row.id);
         }
         else {
-            selectedUnis = selectedUnis.filter(uniDomain => uniDomain !== row.domain)
+            selectedSchools = selectedSchools.filter(uniId => uniId !== row.id)
         }
-        this.setState({selectedUniversities: selectedUnis});
+        this.setState({selectedSchools: selectedSchools});
     }
 
     onSelectAll = (isSelected, rows) => {
-        var selectedUnis = [];
+        var selectedSchools = [];
         if (isSelected) {
             for (var i=0; i<rows.length; i++) {
-                selectedUnis.push(rows[i].domain);
+                selectedSchools.push(rows[i].id);
             }
         }
-        this.setState({selectedUniversities: selectedUnis});
+        this.setState({selectedSchools: selectedSchools});
     }
 
     handleSettingChange = (event) => {
@@ -75,7 +75,7 @@ class InterestedInSettingContent extends Component {
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: true,
-            selected: this.state.selectedUniversities,
+            selected: this.state.selectedSchools,
             onSelect: this.onSelect,
             onSelectAll: this.onSelectAll
         };
@@ -104,10 +104,10 @@ class InterestedInSettingContent extends Component {
 
                         <b>from:</b>
                         <FormGroup className="interested-universities">
-                            <BootstrapTable data={this.state.universities} selectRow={selectRowProp} hover condensed>
-                                <TableHeaderColumn width='200' dataField='name'>University</TableHeaderColumn>
-                                <TableHeaderColumn dataField='country'>Country</TableHeaderColumn>
-                                <TableHeaderColumn width='70' dataField='domain' isKey>Domain</TableHeaderColumn>
+                            <BootstrapTable data={this.state.schools} selectRow={selectRowProp} hover condensed>
+                                <TableHeaderColumn dataField='id' isKey hidden>Id</TableHeaderColumn>
+                                <TableHeaderColumn width='200' dataField='name'>School</TableHeaderColumn>
+                                <TableHeaderColumn dataField='university'>University</TableHeaderColumn>
                             </BootstrapTable>
                         </FormGroup>
 
