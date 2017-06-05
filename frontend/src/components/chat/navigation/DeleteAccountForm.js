@@ -17,6 +17,10 @@ class DeleteAccountForm extends Component {
         console.log('Account deleted');
     }
 
+    handleDeleteAccountChangemind = () => {
+        this.setState({displayDeleteAccountMessage: false});
+    }
+
     render() {
         return (
             <div>
@@ -28,7 +32,7 @@ class DeleteAccountForm extends Component {
                 >
                     Delete account
                 </Button>
-                {this.state.displayDeleteAccountMessage ? <div className="delete-account-confirmation"><b>We hate to see you leaving. Are you sure?&nbsp;&nbsp;&nbsp;<a onClick={this.handleDeleteAccountConfirmation}>Yes</a></b></div> : null}
+                {this.state.displayDeleteAccountMessage ? <div className="delete-account-confirmation"><b>We hate to see you leaving. Are you sure?&nbsp;&nbsp;&nbsp;<a onClick={this.handleDeleteAccountConfirmation}>Yes</a> <a onClick={this.handleDeleteAccountChangemind}>No</a></b></div> : null}
             </div>
         );
     }

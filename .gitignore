@@ -8,3 +8,6 @@ frontend/registrar_client/dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.pyc
+backend/db.sqlite3
+backend/env
