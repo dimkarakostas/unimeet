@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 trap 'terminate' INT TERM QUIT
 
@@ -11,11 +11,14 @@ terminate() {
     echo "[*] Shut down complete."
 }
 
-NODE=~/.nvm/versions/node/v6.3.1
+export NVM_DIR=$HOME/.nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+nvm use 6.3
 
 echo "[*] Starting Unichat..."
-$NODE/bin/npm start --prefix realtime &
-$NODE/bin/npm start --prefix presence &
-$NODE/bin/npm start --prefix matchmaker &
-$NODE/bin/npm start --prefix frontend &>/dev/null &
+npm start --prefix realtime &
+npm start --prefix presence &
+npm start --prefix matchmaker &
+npm start --prefix frontend &>/dev/null &
 wait
