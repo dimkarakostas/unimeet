@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import {Col, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import axios from 'axios';
+import * as config from '../connection/config';
 
 class InterestedInSettingContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            schools: [
-                {
-                    name: 'Department of Informatics',
-                    university: 'National Technical University of Athens, Athens, Greece',
-                    id: 1
-                },
-                {
-                    name: 'Department of Physics',
-                    university: 'National Technical University of Athens, Athens, Greece',
-                    id: 2
-                },
-            ],
+            schools: [],
             selectedSchools: [],
             selectedSex: 'men',
             isApplyButtonLoading: false,
@@ -69,6 +60,26 @@ class InterestedInSettingContent extends Component {
                 displayChangesSavedMessage: false
             });
         }, 5000);
+    }
+
+    componentDidMount() {
+        axios.get(config.backendUrl + '/get_schools')
+        .then(res => {
+            var schools = [];
+            var school = null;
+            for (var i=0; i < res.data.schools.length; i++) {
+                school = res.data.schools[i];
+                schools.push({
+                    'id': school.id,
+                    'name': school.name,
+                    'university': school.university + ', ' + school.country
+                });
+            }
+            this.setState({schools: schools});
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
