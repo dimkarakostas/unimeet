@@ -17,6 +17,10 @@ export NVM_DIR=$HOME/.nvm
 nvm use 6.3
 
 echo "[*] Starting Unichat..."
+rm backend/db.sqlite3
+backend/env/bin/python backend/manage.py migrate
+backend/env/bin/python backend/initialize_database.py
+backend/env/bin/python backend/manage.py runserver &
 npm start --prefix realtime &
 npm start --prefix presence &
 npm start --prefix matchmaker &
