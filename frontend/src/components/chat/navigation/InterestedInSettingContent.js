@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Col, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import axios from 'axios';
-import * as config from '../connection/config';
+import * as config from '../../config';
 
 class InterestedInSettingContent extends Component {
     constructor(props) {

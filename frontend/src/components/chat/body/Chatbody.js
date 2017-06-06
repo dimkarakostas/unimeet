@@ -3,7 +3,7 @@ import ChatMessages from './ChatMessages';
 import ChatFooter from './ChatFooter';
 import realtimeConnector from '../connection/realtimeConnector';
 import presenceConnector from '../connection/presenceConnector';
-import * as config from '../connection/config';
+import * as config from '../../config';
 
 class Chatbody extends Component {
     constructor(props) {
