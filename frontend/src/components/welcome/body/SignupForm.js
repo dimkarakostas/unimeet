@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import SignupModal from './SignupModal';
+import axios from 'axios';
+import * as config from '../../config';
 
 class SignupForm extends Component {
     constructor(props) {
@@ -22,16 +24,21 @@ class SignupForm extends Component {
 
     signupSubmit = (event) => {
         event.preventDefault();
-        console.log('email: ' + this.state.email); //TODO: remove
         this.setState({isSignupButtonLoading: true});
-        //TODO: Signup request to backend
-        setTimeout(() => {
-            this.setState({
-                isSignupButtonLoading: false,
-                isModalOpen: true,
-                email: ''
-            });
-        }, 2000);
+
+        axios.post(config.backendUrl + '/signup', {email: this.state.email})
+        .then(res => {
+            if (res.status === 200 && res.data === 'Signup OK') {
+                this.setState({
+                    isSignupButtonLoading: false,
+                    isModalOpen: true,
+                    email: ''
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
