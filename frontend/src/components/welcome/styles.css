@@ -61,6 +61,10 @@
     position: relative;
 }
 
+.signup-form .popover.bottom {
+    margin-top: 43px;
+}
+
 #btn-signup {
     margin-top: 8px;
 }
