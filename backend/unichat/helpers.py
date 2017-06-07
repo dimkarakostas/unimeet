@@ -1,5 +1,7 @@
-from .models import School
+from .models import School, User
 import re
+from django.contrib.auth.models import User as Django_User
+from django.contrib.auth.hashers import make_password
 
 
 def get_school_list():
@@ -22,3 +24,12 @@ def get_school_by_email(email):
         if re.match(school.mailRegex, email):
             return school
     return None
+
+
+def create_user(email, school):
+    password = Django_User.objects.make_random_password()
+    db_password = make_password(password)
+    user_obj = User(email=email, school=school, password=db_password)
+    user_obj.save()
+    user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
+    # TODO: Send signup mail to user

@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 import json
-from helpers import get_school_list, get_school_by_email
+from helpers import get_school_list, get_school_by_email, create_user
 
 
 def get_schools(request):
@@ -17,6 +17,7 @@ def signup(request):
         email = signup_parameters['email']
         school = get_school_by_email(email)
         if school is not None:
+            create_user(email, school)
             resp = HttpResponse('Signup OK')
         else:
             resp = HttpResponseBadRequest('Invalid univesity email')
