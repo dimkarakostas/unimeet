@@ -20,6 +20,11 @@ class User(models.Model):
         help_text=("The user's academic email.")
     )
 
+    password = models.CharField(
+        max_length=100,
+        help_text=("The user's password.")
+    )
+
     gender = models.IntegerField(
         default=0,
         choices=GENDER_CHOICES,
