@@ -17,8 +17,8 @@ def get_school_list():
     return school_list
 
 
-def check_signup_email(email):
-    for regex in School.objects.all().values_list('mailRegex', flat=True):
-        if re.match(regex, email):
-            return True
-    return False
+def get_school_by_email(email):
+    for school in School.objects.all():
+        if re.match(school.mailRegex, email):
+            return school
+    return None
