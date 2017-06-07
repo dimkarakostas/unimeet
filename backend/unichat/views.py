@@ -22,6 +22,6 @@ def signup(request):
         resp = HttpResponse('')
         resp['Access-Control-Allow-Headers'] = 'Content-Type'
     else:
-        resp = HttpResponseBadRequest('')
+        resp = HttpResponseBadRequest('Invalid request method')
     resp['Access-Control-Allow-Origin'] = 'http://localhost:3000'
     return resp
