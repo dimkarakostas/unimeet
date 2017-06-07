@@ -43,7 +43,7 @@ class User(models.Model):
 
     cookie = models.CharField(
         default='',
-        max_length=255,
+        max_length=100,
         db_index=True,
         help_text=("The user's active cookie.")
     )
