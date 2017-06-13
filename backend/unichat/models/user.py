@@ -1,9 +1,36 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+from .managers import UserManager
 
 
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(
+        unique=True,
+        help_text=("The user's academic email.")
+    )
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
+    date_joined = models.DateTimeField(
+        auto_now_add=True,
+        help_text=("The date the user joined")
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        help_text=("The user active state")
+    )
+
     MALE = -1
     UNDEFINED = 0
     FEMALE = 1
@@ -14,16 +41,6 @@ class User(models.Model):
     )
 
     school = models.ForeignKey('unichat.School')
-
-    email = models.EmailField(
-        unique=True,
-        help_text=("The user's academic email.")
-    )
-
-    password = models.CharField(
-        max_length=100,
-        help_text=("The user's password.")
-    )
 
     gender = models.IntegerField(
         default=0,
@@ -40,10 +57,3 @@ class User(models.Model):
     )
 
     interestedInSchools = models.ManyToManyField('unichat.School', related_name='user_interested_schools')
-
-    cookie = models.CharField(
-        default='',
-        max_length=100,
-        db_index=True,
-        help_text=("The user's active cookie.")
-    )
