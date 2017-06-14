@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, FormGroup, FormControl, Button, Tooltip} from 'react-bootstrap';
 import ForgotPasswordModal from './ForgotPasswordModal';
+import axios from 'axios';
+import * as config from '../../config';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -39,20 +41,28 @@ class LoginForm extends Component {
 
     handleLogin = (event) => {
         event.preventDefault();
-        console.log('username: ' + this.state.username + ' password: ' + this.state.password); //TODO: remove
-        if (this.state.username === '' && this.state.password === '') {
-            this.setState({showCredentialsInvalid: true});
-            setTimeout(() => {
-                this.setState({showCredentialsInvalid: false});
-            }, 3000);
-        }
-        else {
-            this.setState({isLoginButtonLoading: true});
-            //TODO: Login request to backend
-            setTimeout(() => {
+        this.setState({isLoginButtonLoading: true});
+
+        axios.post(config.backendUrl + '/login', {email: this.state.username, password: this.state.password})
+        .then(res => {
+            if (res.status === 200 && res.data === 'Login OK') {
                 this.context.router.history.push('/chat');
-            }, 2000);
-        }
+            }
+        })
+        .catch(error => {
+            if (error.response.status === 400 && error.response.data === 'Bad credentials') {
+                this.setState({
+                    showCredentialsInvalid: true,
+                    isLoginButtonLoading: false
+                });
+                setTimeout(() => {
+                    this.setState({showCredentialsInvalid: false});
+                }, 3000);
+            }
+            else {
+                console.log(error);
+            }
+        })
     }
 
     render() {

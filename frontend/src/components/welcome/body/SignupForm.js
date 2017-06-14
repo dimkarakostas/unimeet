@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import {Form, FormControl, FormGroup, Button, Overlay, Popover} from 'react-bootstrap';
 import SignupModal from './SignupModal';
+import axios from 'axios';
+import * as config from '../../config';
+import {Link} from 'react-router-dom';
 
 class SignupForm extends Component {
     constructor(props) {
@@ -8,7 +11,8 @@ class SignupForm extends Component {
         this.state = {
             email: '',
             isModalOpen: false,
-            isSignupButtonLoading: false
+            isSignupButtonLoading: false,
+            invalidEmail: false
         };
     }
 
@@ -18,27 +22,47 @@ class SignupForm extends Component {
 
     handleEmailChange = (event) => {
         this.setState({email: event.target.value});
+        if (this.state.invalidEmail) {
+            this.setState({invalidEmail: false});
+        }
     }
 
     signupSubmit = (event) => {
         event.preventDefault();
-        console.log('email: ' + this.state.email); //TODO: remove
         this.setState({isSignupButtonLoading: true});
-        //TODO: Signup request to backend
-        setTimeout(() => {
-            this.setState({
-                isSignupButtonLoading: false,
-                isModalOpen: true,
-                email: ''
-            });
-        }, 2000);
+
+        axios.post(config.backendUrl + '/signup', {email: this.state.email})
+        .then(res => {
+            if (res.status === 200 && res.data === 'Signup OK') {
+                this.setState({
+                    isSignupButtonLoading: false,
+                    isModalOpen: true,
+                    email: ''
+                });
+            }
+        })
+        .catch(error => {
+            if (error.response.status === 400 && error.response.data === 'Invalid univesity email') {
+                console.log('Invalid mail');
+                this.setState({
+                    isSignupButtonLoading: false,
+                    invalidEmail: true
+                });
+            }
+            else {
+                console.log(error);
+            }
+        })
     }
 
     render() {
         return (
             <div>
                 <Form className="navbar-form signup-form" onSubmit={this.signupSubmit}>
-                    <FormGroup>
+                    <FormGroup
+                        validationState={this.state.invalidEmail ? "warning" : null}
+                        ref={(input) => { this.signupForm = input; }}
+                    >
                         <FormControl
                             type="text"
                             name="email"
@@ -60,6 +84,15 @@ class SignupForm extends Component {
                     </Button>
                 </Form>
                 <SignupModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
+                <Overlay
+                    show={this.state.invalidEmail}
+                    placement="bottom"
+                    container={this.signupForm}
+                >
+                    <Popover id="popover-contained">
+                        There was a problem! Did you use a <Link to="/faq" target="_blank">valid academic email</Link> address?
+                    </Popover>
+                </Overlay>
             </div>
         );
     }
