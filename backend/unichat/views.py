@@ -4,10 +4,12 @@ import json
 from helpers import get_school_list, get_school_by_email, create_user
 from django.contrib.auth import authenticate, login as Django_login
 
+FRONTEND_URL = 'http://unichat.eu'
+
 
 def get_schools(request):
     resp = JsonResponse({'schools': get_school_list()})
-    resp['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    resp['Access-Control-Allow-Origin'] = FRONTEND_URL
     return resp
 
 
@@ -27,7 +29,7 @@ def signup(request):
         resp['Access-Control-Allow-Headers'] = 'Content-Type'
     else:
         resp = HttpResponseBadRequest('Invalid request method')
-    resp['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    resp['Access-Control-Allow-Origin'] = FRONTEND_URL
     return resp
 
 
@@ -49,5 +51,5 @@ def login(request):
         resp['Access-Control-Allow-Headers'] = 'Content-Type'
     else:
         resp = HttpResponseBadRequest('Invalid request method')
-    resp['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    resp['Access-Control-Allow-Origin'] = FRONTEND_URL
     return resp
