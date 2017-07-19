@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Modal} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 class HelpModal extends Component {
     render() {
@@ -11,21 +12,21 @@ class HelpModal extends Component {
                 <Modal.Body>
                     <div className="row help-modal-row">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
-                            <a href="/faq" target="_blank" className="list-group-item text-center">
+                            <Link to="/faq" target="_blank" className="list-group-item text-center">
                                 F.A.Q.
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
-                            <a href="/contact" target="_blank" className="list-group-item text-center">
+                            <Link to="/contact" target="_blank" className="list-group-item text-center">
                                 Contact
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="row help-modal-row">
                         <div className="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 settings-modal-element">
-                            <a href="/security" target="_blank" className="list-group-item text-center">
+                            <Link to="/security" target="_blank" className="list-group-item text-center">
                                 Security
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <hr/>
