@@ -1,4 +1,4 @@
 module.exports = {
-    presenceUrl: 'http://localhost:9870',
+    presenceUrl: 'http://presence.unichat.eu',
     backendUrl: 'http://backend.unichat.eu/api',
 };
