@@ -14,11 +14,11 @@ class Footer extends Component {
                                 </li>
                                 <li className="footer-menu-divider">&sdot;</li>
                                 <li>
-                                    <a href="./contact">Contact</a>
+                                    <Link to="/contact">Contact</Link>
                                 </li>
                                 <li className="footer-menu-divider">&sdot;</li>
                                 <li>
-                                    <a href="./security">Security</a>
+                                    <Link to="./security">Security</Link>
                                 </li>
                             </ul>
                         </div>

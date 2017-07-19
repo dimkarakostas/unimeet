@@ -25,7 +25,7 @@ SECRET_KEY = ')cgk!kr7s)f^cw&0a6g^mpkfh^qy#-jolr!qk9h2=v8mgss_$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unichat.eu']
 
 
 # Application definition

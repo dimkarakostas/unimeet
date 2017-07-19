@@ -1,11 +1,11 @@
 module.exports = {
     services: [
         {
-            url: 'http://localhost:9870',
+            url: 'http://presence.unichat.eu',
             type: 'presence'
         },
         {
-            url: 'http://localhost:9871',
+            url: 'http://realtime.unichat.eu',
             type: 'realtime'
         },
     ]
