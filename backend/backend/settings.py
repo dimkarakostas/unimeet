@@ -135,5 +135,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'unichat.User'
 
+SESSION_COOKIE_DOMAIN = '.unichat.eu'
+
 CORS_ORIGIN_REGEX_WHITELIST = (r'^(http?://)?(\w+\.)?unichat\.eu$', )
 CORS_ALLOW_CREDENTIALS = True
