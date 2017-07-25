@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {Form, FormControl, FormGroup, Button, Overlay, Popover} from 'react-bootstrap';
 import SignupModal from './SignupModal';
-import axios from 'axios';
 import * as config from '../../config';
 import {Link} from 'react-router-dom';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class SignupForm extends Component {
     constructor(props) {
