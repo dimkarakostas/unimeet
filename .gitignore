@@ -3,6 +3,7 @@
 node_modules/
 frontend/realtime_client/dist/
 frontend/registrar_client/dist/
+frontend/build
 /build
 .env
 npm-debug.log*
