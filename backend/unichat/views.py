@@ -37,3 +37,14 @@ def login(request):
     else:
         resp = HttpResponseBadRequest('Bad credentials')
     return resp
+
+
+@csrf_exempt
+def check(request):
+    if request.session.test_cookie_worked():
+        message = 'worked'
+    else:
+        message = 'not working'
+        request.session.set_test_cookie()
+    resp = HttpResponse(message)
+    return resp
