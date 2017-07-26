@@ -1,4 +1,4 @@
-from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import json
 from helpers import get_school_list, get_school_by_email, create_user
@@ -46,6 +46,15 @@ def logout(request):
         resp = HttpResponse('Logout OK')
     else:
         resp = HttpResponseBadRequest('Bad credentials')
+    return resp
+
+
+@csrf_exempt
+def is_user_logged_in(request):
+    if request.user.is_authenticated():
+        resp = JsonResponse({'email': request.user.email, 'token': request.user.token})
+    else:
+        resp = HttpResponseRedirect(FRONTEND_URL)
     return resp
 
 
