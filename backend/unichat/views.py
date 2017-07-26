@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 import json
 from helpers import get_school_list, get_school_by_email, create_user
-from django.contrib.auth import authenticate, login as Django_login
+from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout
 
 FRONTEND_URL = 'http://unichat.eu'
 
@@ -34,6 +34,16 @@ def login(request):
     if user is not None:
         Django_login(request, user)
         resp = HttpResponse('Login OK')
+    else:
+        resp = HttpResponseBadRequest('Bad credentials')
+    return resp
+
+
+@csrf_exempt
+def logout(request):
+    if request.user.is_authenticated():
+        Django_logout(request)
+        resp = HttpResponse('Logout OK')
     else:
         resp = HttpResponseBadRequest('Bad credentials')
     return resp
