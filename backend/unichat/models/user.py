@@ -57,3 +57,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     interestedInSchools = models.ManyToManyField('unichat.School', related_name='user_interested_schools')
+
+    token = models.CharField(
+        default='',
+        max_length=40,
+        db_index=True,
+        help_text=("The user's authentication token for unichat")
+    )
