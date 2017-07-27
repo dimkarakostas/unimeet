@@ -5,7 +5,7 @@ class PersonalInformationSettingContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSex: 'undefined',
+            selectedSex: '0',
             isApplyButtonLoading: false,
             displayChangesSavedMessage: false
         };
@@ -53,9 +53,9 @@ class PersonalInformationSettingContent extends Component {
                                     defaultValue={this.state.selectedSex}
                                     onChange={this.handleSexChange}
                                 >
-                                    <option value="undefined">Undefined</option>
-                                    <option value="man">Man</option>
-                                    <option value="woman">Woman</option>
+                                    <option value="0">Undefined</option>
+                                    <option value="-1">Man</option>
+                                    <option value="1">Woman</option>
                                 </FormControl>
                             </Col>
                         </FormGroup>
