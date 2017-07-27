@@ -11,7 +11,7 @@ class ChatDropdownMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'el10179@mail.ntua.gr',
+            username: this.props.email,
             isSettingsModalOpen: false,
             isHelpModalOpen: false
         };

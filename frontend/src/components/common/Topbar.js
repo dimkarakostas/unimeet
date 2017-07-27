@@ -25,7 +25,7 @@ class Topbar extends Component {
                 this.props.page === 'contact' ?
                     null :
                 this.props.page === 'chat' ?
-                    <ChatTopMenu /> :
+                    <ChatTopMenu email={this.props.email} /> :
                     null
                 }
             </Navbar>

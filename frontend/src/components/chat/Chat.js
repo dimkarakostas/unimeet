@@ -42,7 +42,7 @@ class Chat extends Component {
             <div className="Chat">
                 {this.state.isLoggedIn ?
                     <div>
-                        <Topbar page={'chat'} />
+                        <Topbar page={'chat'} email={this.state.email} />
                         <Chatbody />
                     </div>
                 : ''}
