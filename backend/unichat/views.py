@@ -59,6 +59,26 @@ def is_user_logged_in(request):
 
 
 @csrf_exempt
+def user_info(request):
+    if request.user.is_authenticated():
+        gender = request.user.gender
+        school = request.user.school.name
+        university = request.user.school.university.name
+        city = request.user.school.university.city.name
+        country = request.user.school.university.city.country.name
+        resp = JsonResponse({
+            'gender': gender,
+            'school': school,
+            'university': university,
+            'city': city,
+            'country': country
+        })
+    else:
+        resp = HttpResponseBadRequest('Bad credentials')
+    return resp
+
+
+@csrf_exempt
 def check(request):
     if request.session.test_cookie_worked():
         message = 'worked'
