@@ -61,18 +61,25 @@ def is_user_logged_in(request):
 @csrf_exempt
 def user_info(request):
     if request.user.is_authenticated():
-        gender = request.user.gender
-        school = request.user.school.name
-        university = request.user.school.university.name
-        city = request.user.school.university.city.name
-        country = request.user.school.university.city.country.name
-        resp = JsonResponse({
-            'gender': gender,
-            'school': school,
-            'university': university,
-            'city': city,
-            'country': country
-        })
+        if request.method == 'GET':
+            gender = str(request.user.gender)
+            school = request.user.school.name
+            university = request.user.school.university.name
+            city = request.user.school.university.city.name
+            country = request.user.school.university.city.country.name
+            resp = JsonResponse({
+                'gender': gender,
+                'school': school,
+                'university': university,
+                'city': city,
+                'country': country
+            })
+        elif request.method == 'POST':
+            personal_params = json.loads(request.body.decode('utf-8'))
+            gender = personal_params['gender']
+            request.user.gender = gender
+            request.user.save(update_fields=['gender'])
+            resp = HttpResponse('OK')
     else:
         resp = HttpResponseBadRequest('Bad credentials')
     return resp
