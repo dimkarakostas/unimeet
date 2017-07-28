@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class DeleteAccountForm extends Component {
     constructor(props) {
@@ -13,8 +17,20 @@ class DeleteAccountForm extends Component {
         this.setState({displayDeleteAccountMessage: true});
     }
 
+    static get contextTypes() {
+        return {
+            router: React.PropTypes.object.isRequired,
+        };
+    }
+
     handleDeleteAccountConfirmation = () => {
-        console.log('Account deleted');
+        axios.delete(config.backendUrl + '/delete_user')
+        .then(res => {
+            this.context.router.history.push('/');
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     handleDeleteAccountChangemind = () => {
