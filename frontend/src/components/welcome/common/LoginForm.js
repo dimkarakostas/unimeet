@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Form, FormGroup, FormControl, Button, Tooltip} from 'react-bootstrap';
 import ForgotPasswordModal from './ForgotPasswordModal';
-import axios from 'axios';
 import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class LoginForm extends Component {
     constructor(props) {

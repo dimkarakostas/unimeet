@@ -2,14 +2,24 @@ import React, { Component } from 'react';
 import {Nav, Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
 import HelpModal from './HelpModal';
 import SettingsModal from './SettingsModal';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class ChatDropdownMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'el10179@mail.ntua.gr',
+            username: this.props.email,
             isSettingsModalOpen: false,
             isHelpModalOpen: false
+        };
+    }
+
+    static get contextTypes() {
+        return {
+            router: React.PropTypes.object.isRequired,
         };
     }
 
@@ -20,6 +30,21 @@ class ChatDropdownMenu extends Component {
         else if (eventKey === 'settings') {
             this.setState({isSettingsModalOpen: true});
         }
+        else if (eventKey === 'logout') {
+            this.logout();
+        }
+    }
+
+    logout = () => {
+        axios.get(config.backendUrl + '/logout')
+        .then(res => {
+            if (res.status === 200 && res.data === 'Logout OK') {
+                this.context.router.history.push('/');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     hideModal = (modalType) => {

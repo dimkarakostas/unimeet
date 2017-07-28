@@ -9,8 +9,8 @@ class InterestedInSettingContent extends Component {
         super(props);
         this.state = {
             schools: [],
-            selectedSchools: [],
-            selectedSex: 'men',
+            interestedInSchools: this.props.interestedInSchools,
+            interestedInGender: this.props.interestedInGender,
             isApplyButtonLoading: false,
             displayChangesSavedMessage: false
         };
@@ -21,45 +21,51 @@ class InterestedInSettingContent extends Component {
     }
 
     handleSexChange = (event) => {
-        this.setState({selectedSex: event.target.value});
+        this.setState({interestedInGender: event.target.value});
     }
 
     onSelect = (row, isSelected, e) => {
-        var selectedSchools = this.state.selectedSchools;
+        var interestedInSchools = this.state.interestedInSchools;
         if (isSelected) {
-            selectedSchools.push(row.id);
+            interestedInSchools.push(row.id);
         }
         else {
-            selectedSchools = selectedSchools.filter(uniId => uniId !== row.id)
+            interestedInSchools = interestedInSchools.filter(uniId => uniId !== row.id)
         }
-        this.setState({selectedSchools: selectedSchools});
+        this.setState({interestedInSchools: interestedInSchools});
     }
 
     onSelectAll = (isSelected, rows) => {
-        var selectedSchools = [];
+        var interestedInSchools = [];
         if (isSelected) {
             for (var i=0; i<rows.length; i++) {
-                selectedSchools.push(rows[i].id);
+                interestedInSchools.push(rows[i].id);
             }
         }
-        this.setState({selectedSchools: selectedSchools});
+        this.setState({interestedInSchools: interestedInSchools});
     }
 
     handleSettingChange = (event) => {
         event.preventDefault();
         this.setState({isApplyButtonLoading: true, displayChangesSavedMessage: false});
-        setTimeout(() => {
+        axios.post(config.backendUrl + '/user_interests', {
+            interestedInGender: this.state.interestedInGender,
+            interestedInSchools: this.state.interestedInSchools
+        })
+        .then(res => {
             this.setState({
                 isApplyButtonLoading: false,
                 displayChangesSavedMessage: true
             });
-        }, 2000);
-        //TODO: Setting change request to backend IF NECESSARY
-        setTimeout(() => {
-            this.setState({
-                displayChangesSavedMessage: false
-            });
-        }, 5000);
+            setTimeout(() => {
+                this.setState({
+                    displayChangesSavedMessage: false
+                });
+            }, 5000);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     componentDidMount() {
@@ -86,7 +92,7 @@ class InterestedInSettingContent extends Component {
         const selectRowProp = {
             mode: 'checkbox',
             clickToSelect: true,
-            selected: this.state.selectedSchools,
+            selected: this.state.interestedInSchools,
             onSelect: this.onSelect,
             onSelectAll: this.onSelectAll
         };
@@ -103,12 +109,12 @@ class InterestedInSettingContent extends Component {
                                     placeholder="select"
                                     name="sex"
                                     id="interested-sex"
-                                    defaultValue={this.state.selectedSex}
+                                    defaultValue={this.state.interestedInGender}
                                     onChange={this.handleSexChange}
                                 >
-                                    <option value="whatever">Whatever</option>
-                                    <option value="men">Men</option>
-                                    <option value="women">Women</option>
+                                    <option value="0">Whatever</option>
+                                    <option value="-1">Men</option>
+                                    <option value="1">Women</option>
                                 </FormControl>
                             </Col>
                         </FormGroup>

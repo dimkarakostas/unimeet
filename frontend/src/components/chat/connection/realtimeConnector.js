@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-function realtimeConnector(cookie, realtimeUrl, handleNewMessageCallback, handleNextCallback, disableChatCallback) {
+function realtimeConnector(token, realtimeUrl, handleNewMessageCallback, handleNextCallback, disableChatCallback) {
     this._chatting = false;
     this._socket = io.connect(realtimeUrl, {'forceNew': true});
     this._socket.on('server-start-chatting', () => {
@@ -22,7 +22,7 @@ function realtimeConnector(cookie, realtimeUrl, handleNewMessageCallback, handle
         this.disableChat();
     });
     this.joinRoom = function(roomId) {
-        this._socket.emit('client-join-room', roomId, cookie);
+        this._socket.emit('client-join-room', roomId, token);
     }
     this.broadcastMessage = function(message) {
         this._socket.emit('client-message', message);

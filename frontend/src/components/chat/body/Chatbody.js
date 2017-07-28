@@ -5,21 +5,20 @@ import realtimeConnector from '../connection/realtimeConnector';
 import presenceConnector from '../connection/presenceConnector';
 import * as config from '../../config';
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 class Chatbody extends Component {
     constructor(props) {
         super(props);
         this.state = {
             partner: {
                 gender: 'female',
-                university: 'University of Athens, Greece'
+                school: 'University of Athens, Greece'
             },
-            me: {
-                gender: 'undefined',
-                university: 'National Technical University of Athens, Greece'
-            },
+            me: {},
             messages: [],
-            isFooterDisabled: true,
-            cookie: Math.random().toString(36).substr(2, 5)
+            isFooterDisabled: true
         };
     }
 
@@ -49,11 +48,11 @@ class Chatbody extends Component {
             if (from === 'me') {
                 this._realtimeConnector.broadcastMessage(message);
                 newMessage.gender = this.state.me.gender;
-                newMessage.university = this.state.me.university;
+                newMessage.school = this.state.me.school;
             }
             else {
                 newMessage.gender = this.state.partner.gender;
-                newMessage.university = this.state.partner.university;
+                newMessage.school = this.state.partner.school;
             }
             newMessages.push(newMessage);
             this.setState({messages: newMessages});
@@ -62,7 +61,7 @@ class Chatbody extends Component {
 
     joinRoom = (realtimeUrl, roomId) => {
         if (this._realtimeConnector === undefined) {
-            this._realtimeConnector = new realtimeConnector(this.state.cookie, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
+            this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
         }
         else {
             this._realtimeConnector.reconnect();
@@ -71,8 +70,26 @@ class Chatbody extends Component {
         this._presenceConnector.disconnect();
     }
 
+    static get contextTypes() {
+        return {
+            router: React.PropTypes.object.isRequired,
+        };
+    }
+
     componentDidMount() {
-        this._presenceConnector = new presenceConnector(this.state.cookie, config.presenceUrl, this.joinRoom);
+        axios.get(config.backendUrl + '/user_info')
+        .then(res => {
+            this.setState({
+                me: {
+                    gender: res.data.gender,
+                    school: res.data.school + ', ' + res.data.university + ', ' + res.data.country
+                }
+            });
+            this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom);
+        })
+        .catch(error => {
+            this.context.router.history.push('/');
+        })
     }
 
     render() {

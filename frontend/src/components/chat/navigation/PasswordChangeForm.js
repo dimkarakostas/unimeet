@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class PasswordChangeForm extends Component {
     constructor(props) {
@@ -30,18 +34,25 @@ class PasswordChangeForm extends Component {
     handleSettingChange = (event) => {
         event.preventDefault();
         this.setState({isApplyButtonLoading: true, displayChangesSavedMessage: false});
-        setTimeout(() => {
+        axios.post(config.backendUrl + '/change_password', {
+            oldPassword: this.state.oldPassword,
+            newPassword: this.state.newPassword,
+            newPasswordVerification: this.state.newPasswordVerification
+        })
+        .then(res => {
             this.setState({
                 isApplyButtonLoading: false,
                 displayChangesSavedMessage: true
             });
-        }, 2000);
-        //TODO: Setting change request to backend IF NECESSARY
-        setTimeout(() => {
-            this.setState({
-                displayChangesSavedMessage: false
-            });
-        }, 5000);
+            setTimeout(() => {
+                this.setState({
+                    displayChangesSavedMessage: false
+                });
+            }, 5000);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     handleForgotPassword = () => {

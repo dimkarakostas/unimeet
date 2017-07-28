@@ -2,7 +2,7 @@ from subprocess import call
 import os
 
 modules = [
-    'backend.unichat.eu',
+    'backend.unichat.eu/api/check',
     'realtime.unichat.eu',
     'presence.unichat.eu',
     'matchmaker.unichat.eu',

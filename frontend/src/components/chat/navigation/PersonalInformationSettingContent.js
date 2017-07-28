@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {Col, Form, FormControl, FormGroup, Button} from 'react-bootstrap';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class PersonalInformationSettingContent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSex: 'undefined',
+            selectedSex: this.props.gender,
             isApplyButtonLoading: false,
             displayChangesSavedMessage: false
         };
@@ -22,18 +26,23 @@ class PersonalInformationSettingContent extends Component {
     handleSettingChange = (event) => {
         event.preventDefault();
         this.setState({isApplyButtonLoading: true, displayChangesSavedMessage: false});
-        setTimeout(() => {
-            this.setState({
-                isApplyButtonLoading: false,
-                displayChangesSavedMessage: true
-            });
-        }, 2000);
-        //TODO: Setting change request to backend IF NECESSARY
-        setTimeout(() => {
-            this.setState({
-                displayChangesSavedMessage: false
-            });
-        }, 5000);
+        axios.post(config.backendUrl + '/user_info', {gender: this.state.selectedSex})
+        .then(res => {
+            if (res.status === 200 && res.data === 'OK') {
+                this.setState({
+                    isApplyButtonLoading: false,
+                    displayChangesSavedMessage: true
+                });
+                setTimeout(() => {
+                    this.setState({
+                        displayChangesSavedMessage: false
+                    });
+                }, 5000);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
@@ -53,9 +62,9 @@ class PersonalInformationSettingContent extends Component {
                                     defaultValue={this.state.selectedSex}
                                     onChange={this.handleSexChange}
                                 >
-                                    <option value="undefined">Undefined</option>
-                                    <option value="man">Man</option>
-                                    <option value="woman">Woman</option>
+                                    <option value="0">Undefined</option>
+                                    <option value="-1">Man</option>
+                                    <option value="1">Woman</option>
                                 </FormControl>
                             </Col>
                         </FormGroup>
