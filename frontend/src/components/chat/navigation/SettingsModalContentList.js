@@ -11,14 +11,28 @@ class SettingsModalContentList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            gender: ''
+            gender: '',
+            interestedInGender: '',
+            interestedInSchools: []
         };
     }
 
     componentDidMount() {
         axios.get(config.backendUrl + '/user_info')
         .then(res => {
-            this.setState({gender: res.data.gender});
+            this.setState({
+                gender: res.data.gender
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        axios.get(config.backendUrl + '/user_interests')
+        .then(res => {
+            this.setState({
+                interestedInGender: res.data.interestedInGender,
+                interestedInSchools: res.data.interestedInSchools
+            });
         })
         .catch(error => {
             console.log(error);
@@ -28,7 +42,14 @@ class SettingsModalContentList extends Component {
     render() {
         return (
             <div className="col-lg-9 col-md-9 col-sm-9 col-xs-8 modal-tab">
-                <InterestedInSettingContent active={this.props.active} option={this.props.options[0]}/>
+                {this.state.interestedInGender !== '' ?
+                    <InterestedInSettingContent
+                        active={this.props.active}
+                        option={this.props.options[0]}
+                        interestedInGender={this.state.interestedInGender}
+                        interestedInSchools={this.state.interestedInSchools}
+                    />
+                : ''}
                 {this.state.gender !== '' ?
                     <PersonalInformationSettingContent active={this.props.active} option={this.props.options[1]} gender={this.state.gender} />
                 : ''}
