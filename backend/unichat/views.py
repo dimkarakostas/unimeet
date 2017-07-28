@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, Http
 from django.views.decorators.csrf import csrf_exempt
 import json
 from helpers import get_school_list, get_school_by_email, create_user
-from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout
+from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 
 FRONTEND_URL = 'http://unichat.eu'
 
@@ -83,6 +83,24 @@ def user_info(request):
     else:
         resp = HttpResponseBadRequest('Bad credentials')
     return resp
+
+
+@csrf_exempt
+def change_password(request):
+    if request.user.is_authenticated():
+        email = request.user.email
+        password_params = json.loads(request.body.decode('utf-8'))
+        old = str(password_params['oldPassword'])
+        new = str(password_params['newPassword'])
+        verification = str(password_params['newPasswordVerification'])
+        user = authenticate(request, email=email, password=old)
+        if user is not None:
+            if new == verification:
+                user.set_password(new)
+                user.save()
+                update_session_auth_hash(request, user)
+                return HttpResponse('OK')
+    return HttpResponseBadRequest('Bad credentials')
 
 
 @csrf_exempt

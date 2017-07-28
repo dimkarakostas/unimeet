@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^logout$', views.logout, name='logout'),
     url(r'^is_user_logged_in$', views.is_user_logged_in, name='is_user_logged_in'),
     url(r'^user_info$', views.user_info, name='user_info'),
+    url(r'^change_password$', views.change_password, name='change_password'),
     url(r'^check$', views.check, name='check'),
 ]
