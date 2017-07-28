@@ -127,6 +127,15 @@ def change_password(request):
 
 
 @csrf_exempt
+def delete_user(request):
+    if request.user.is_authenticated():
+        if request.method == 'DELETE':
+            request.user.delete()
+            return HttpResponse('OK')
+    return HttpResponseBadRequest('Bad credentials')
+
+
+@csrf_exempt
 def check(request):
     if request.session.test_cookie_worked():
         message = 'worked'

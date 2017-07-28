@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^user_info$', views.user_info, name='user_info'),
     url(r'^user_interests$', views.user_interests, name='user_interests'),
     url(r'^change_password$', views.change_password, name='change_password'),
+    url(r'^delete_user$', views.delete_user, name='delete_user'),
     url(r'^check$', views.check, name='check'),
 ]
