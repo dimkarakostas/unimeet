@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom';
 import {Welcome} from './components/welcome';
 import {Contact} from './components/contact';
 import {Chat} from './components/chat';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import './styles.css';
 
 ReactDOM.render(
     <Router>
-        <div>
+        <Switch>
             <Route exact path='/' component={Welcome} />
             <Route exact path='/contact' component={Contact} />
             <Route exact path='/chat' component={Chat} />
-        </div>
+            <Redirect from='*' to='/' />
+        </Switch>
     </Router>,
     document.getElementById('root')
 );
