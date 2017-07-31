@@ -49,10 +49,4 @@ if [ ! -d "matchmaker/node_modules" ]; then
 fi
 npm start --prefix matchmaker &
 
-if [ ! -d "frontend/node_modules" ]; then
-    (cd frontend
-    npm install)
-fi
-npm start --prefix frontend &>/dev/null &
-
 wait
