@@ -47,7 +47,7 @@ class ChatFooter extends Component {
         return (
             <div className="panel-footer navbar-fixed-bottom" id="chat-footer">
                 <div className="container">
-                    {this.props.isFooterDisabled? <div className="chat-user-message">You are in queue, please wait...</div> : ''}
+                    <div className="chat-user-message">{this.props.footerInfoMessage}</div>
                     <Form onSubmit={this.handleMessageSubmit} onKeyUp={this.handleKeyPress}>
                         <InputGroup>
                             <span className="input-group-btn">
