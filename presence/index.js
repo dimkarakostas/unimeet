@@ -74,5 +74,6 @@ socketIOServer.on('connection', (client) => {
         if (waitingIndex > -1) {
             waitingClients.splice(waitingIndex, 1);
         }
+        delete cookieClients[client._cookieId];
     });
 });
