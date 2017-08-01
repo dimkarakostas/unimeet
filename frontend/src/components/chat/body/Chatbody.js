@@ -8,6 +8,11 @@ import * as config from '../../config';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
+const INFO_MESSAGES = {
+    queued: 'You are in queue, please wait...',
+    alreadyConnected: 'You have already connected in another device!'
+}
+
 class Chatbody extends Component {
     constructor(props) {
         super(props);
@@ -18,12 +23,22 @@ class Chatbody extends Component {
             },
             me: {},
             messages: [],
-            isFooterDisabled: true
+            isFooterDisabled: true,
+            footerInfoMessage: INFO_MESSAGES.queued
         };
     }
 
     disableChat = (disableOption) => {
-        this.setState({isFooterDisabled: disableOption});
+        if (disableOption) {
+            this.setState({isFooterDisabled: disableOption, footerInfoMessage: INFO_MESSAGES.queued});
+        }
+        else {
+            this.setState({isFooterDisabled: disableOption, footerInfoMessage: ''});
+        }
+    }
+
+    alreadyConnected = () => {
+        this.setState({footerInfoMessage: INFO_MESSAGES.alreadyConnected});
     }
 
     handleNext = (origin) => {
@@ -85,7 +100,7 @@ class Chatbody extends Component {
                     school: res.data.school + ', ' + res.data.university + ', ' + res.data.country
                 }
             });
-            this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom);
+            this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
         })
         .catch(error => {
             this.context.router.history.push('/');
@@ -96,7 +111,12 @@ class Chatbody extends Component {
         return (
             <div className="Chatbox">
                 <ChatMessages messages={this.state.messages} partner={this.state.partner} me={this.state.me} />
-                <ChatFooter handleNext={this.handleNext} handleNewMessage={this.handleNewMessage} isFooterDisabled={this.state.isFooterDisabled} />
+                <ChatFooter
+                    handleNext={this.handleNext}
+                    handleNewMessage={this.handleNewMessage}
+                    isFooterDisabled={this.state.isFooterDisabled}
+                    footerInfoMessage={this.state.footerInfoMessage}
+                />
             </div>
         );
     }
