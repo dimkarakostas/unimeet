@@ -1,0 +1,55 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name unichat.eu www.unichat.eu;
+
+    root /path/to/frontend;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
+server {
+    listen 80;
+    server_name backend.unichat.eu www.backend.unichat.eu;
+
+    location / {
+        include         uwsgi_params;
+        uwsgi_pass      unix:/path/to/backend.sock;
+    }
+}
+
+server {
+    server_name presence.unichat.eu www.presence.unichat.eu;
+
+    location / {
+        proxy_pass http://localhost:9870;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+
+server {
+    server_name realtime.unichat.eu www.realtime.unichat.eu;
+
+    location / {
+        proxy_pass http://localhost:9871;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+
+server {
+    server_name matchmaker.unichat.eu www.matchmaker.unichat.eu;
+
+    location / {
+        proxy_pass http://localhost:9872;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}

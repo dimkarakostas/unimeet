@@ -18,15 +18,17 @@ nvm use 6.3
 
 echo "[*] Starting Unichat..."
 
-rm backend/db.sqlite3
 cd backend
 if [ ! -d "env" ]; then
     virtualenv env
     env/bin/pip install -r requirements.txt
+    if [ ! -e "db.sqlite3" ]; then
+        rm backend/db.sqlite3
+        env/bin/python manage.py migrate
+        env/bin/python initialize_database.py
+    fi
 fi
-env/bin/python manage.py migrate
-env/bin/python initialize_database.py
-env/bin/python manage.py runserver &
+env/bin/uwsgi --ini uwsgi.ini &
 cd ..
 
 if [ ! -d "realtime/node_modules" ]; then
@@ -46,11 +48,5 @@ if [ ! -d "matchmaker/node_modules" ]; then
     npm install)
 fi
 npm start --prefix matchmaker &
-
-if [ ! -d "frontend/node_modules" ]; then
-    (cd frontend
-    npm install)
-fi
-npm start --prefix frontend &>/dev/null &
 
 wait
