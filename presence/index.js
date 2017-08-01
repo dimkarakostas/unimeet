@@ -53,13 +53,18 @@ socketIOServer.on('connection', (client) => {
     // Frontend communication
     client.on('client-get-partner', (cookieId) => {
         client._cookieId = cookieId;
-        cookieClients[cookieId] = client.id;
-        winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
-        if (matchmaker === null) {
-            waitingClients.push(client._cookieId);
+        if (cookieId in cookieClients) {
+            client.emit('server-already-connected');
         }
         else {
-            socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
+            cookieClients[cookieId] = client.id;
+            winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
+            if (matchmaker === null) {
+                waitingClients.push(client._cookieId);
+            }
+            else {
+                socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
+            }
         }
     });
 

@@ -8,6 +8,11 @@ function presenceConnector(token, presenceUrl, joinRoomCallback) {
     this._socket.on('server-join-room', (realtimeUrl, roomId) => {
         joinRoomCallback(realtimeUrl, roomId);
     });
+    this._socket.on('server-already-connected', () => {
+        setTimeout(() => {
+           this._socket.emit('client-get-partner', token);
+        }, 10000);
+    });
     this.disconnect = function() {
         this._socket.disconnect();
     }
