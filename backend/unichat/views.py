@@ -64,29 +64,35 @@ def is_user_logged_in(request):
 
 @csrf_exempt
 def user_info(request):
-    if request.user.is_authenticated():
-        if request.method == 'GET':
-            gender = str(request.user.gender)
-            school = request.user.school.name
-            university = request.user.school.university.name
-            city = request.user.school.university.city.name
-            country = request.user.school.university.city.country.name
-            resp = JsonResponse({
-                'gender': gender,
-                'school': school,
-                'university': university,
-                'city': city,
-                'country': country
-            })
-        elif request.method == 'POST':
-            personal_params = json.loads(request.body.decode('utf-8'))
-            gender = personal_params['gender']
-            request.user.gender = gender
-            request.user.save(update_fields=['gender'])
-            resp = HttpResponse('OK')
-    else:
-        resp = HttpResponseBadRequest('Bad credentials')
-    return resp
+    if request.method == 'GET':
+        if request.user.is_authenticated():
+            user = request.user
+        elif all(x in request.GET for x in ['auth', 'service', 'token']):
+            if service_data[request.GET['service']]['auth'] == request.GET['auth']:
+                user = User.objects.get(token=request.GET['token'])
+            else:
+                return HttpResponseBadRequest('Bad credentials')
+        else:
+            return HttpResponseBadRequest('Bad credentials')
+        gender = str(user.gender)
+        school = user.school.name
+        university = user.school.university.name
+        city = user.school.university.city.name
+        country = user.school.university.city.country.name
+        return JsonResponse({
+            'gender': gender,
+            'school': school,
+            'university': university,
+            'city': city,
+            'country': country
+        })
+    elif request.method == 'POST' and request.user.is_authenticated():
+        personal_params = json.loads(request.body.decode('utf-8'))
+        gender = personal_params['gender']
+        request.user.gender = gender
+        request.user.save(update_fields=['gender'])
+        return HttpResponse('OK')
+    return HttpResponseBadRequest('Bad credentials')
 
 
 @csrf_exempt
