@@ -54,6 +54,13 @@ for (var i=0; i < SERVICES.length; i++) {
         }
     });
 
+    _socketIOServer.on('presence-client-disconnected', (cookieId) => {
+        if (waitingClient !== null) {
+            winston.debug('Removing from wait line client: ' + cookieId);
+            waitingClient = null;
+        }
+    });
+
     serviceSockets.push(_socketIOServer);
 
     // Define the primary presence/realtime service that traffic is directed at

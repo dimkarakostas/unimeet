@@ -75,5 +75,8 @@ socketIOServer.on('connection', (client) => {
             waitingClients.splice(waitingIndex, 1);
         }
         delete cookieClients[client._cookieId];
+        if (matchmaker !== null) {
+            socketIOServer.to(matchmaker).emit('presence-client-disconnected', client._cookieId);
+        }
     });
 });
