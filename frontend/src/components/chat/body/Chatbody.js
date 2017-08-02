@@ -17,10 +17,7 @@ class Chatbody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            partner: {
-                gender: 'female',
-                school: 'University of Athens, Greece'
-            },
+            partner: {},
             me: {},
             messages: [],
             isFooterDisabled: true,
@@ -74,7 +71,13 @@ class Chatbody extends Component {
         }
     }
 
-    joinRoom = (realtimeUrl, roomId) => {
+    joinRoom = (realtimeUrl, roomId, partnerInfo) => {
+        this.setState({
+            partner: {
+                gender: partnerInfo.gender,
+                school: partnerInfo.school + ', ' + partnerInfo.university + ', ' + partnerInfo.country
+            }
+        });
         if (this._realtimeConnector === undefined) {
             this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
         }

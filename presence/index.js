@@ -54,14 +54,14 @@ socketIOServer.on('connection', (client) => {
                     university: res.data.university,
                     country: res.data.country
                 }
+
+                let frontendClient = cookieClients[cookieId];
+                socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId, partnerInfo);
+                winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
             })
             .catch(error => {
                 winston.error(error);
             })
-
-            let frontendClient = cookieClients[cookieId];
-            socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
-            winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
 
             var waitingIndex = waitingClients.indexOf(cookieId);
             if (waitingIndex > -1) {
