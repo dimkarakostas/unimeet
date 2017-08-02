@@ -41,12 +41,14 @@ for (var i=0; i < SERVICES.length; i++) {
             waitingClient = {'token': token, 'presenceSocket': _socketIOServer};
         }
         else {
+            let client1 = waitingClient;
+            let client2 = {'token': token, 'presenceSocket': _socketIOServer};
             let roomId = Math.random().toString(36).substr(2, 5);
 
-            _socketIOServer.emit('matchmaker-send-to-room', token, realtimeToUse.url, roomId);
-            winston.debug('Sent client with token (' + token + ') to room: ' + roomId);
-            waitingClient.presenceSocket.emit('matchmaker-send-to-room', waitingClient.token, realtimeToUse.url, roomId);
-            winston.debug('Sent client with token (' + waitingClient.token + ') to room: ' + roomId);
+            _socketIOServer.emit('matchmaker-send-to-room', client1.token, realtimeToUse.url, roomId, client2.token);
+            winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
+            waitingClient.presenceSocket.emit('matchmaker-send-to-room', client2.token, realtimeToUse.url, roomId, client1.token);
+            winston.debug('Sent client with token (' + client2.token + ') to room: ' + roomId);
 
             waitingClient = null;
         }
