@@ -1,13 +1,13 @@
 Unimeet
 =======
 
-[Unimeet](https://unimeet.eu) is an anonymous chat service for university
+[Unimeet](https://unimeet.gr) is an anonymous chat service for university
 students.
 
 ## Got a question?
 
 Please ask us anything at
-[https://unimeet.eu/contact](https://unimeet.eu/contact).
+[https://unimeet.gr/contact](https://unimeet.gr/contact).
 
 ## Found a bug?
 

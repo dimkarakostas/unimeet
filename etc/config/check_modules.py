@@ -2,10 +2,10 @@ from subprocess import call
 import os
 
 modules = [
-    'backend.unimeet.eu/api/check',
-    'realtime.unimeet.eu',
-    'presence.unimeet.eu',
-    'matchmaker.unimeet.eu',
+    'backend.unimeet.gr/api/check',
+    'realtime.unimeet.gr',
+    'presence.unimeet.gr',
+    'matchmaker.unimeet.gr',
 ]
 
 for m in modules:

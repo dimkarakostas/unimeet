@@ -25,7 +25,7 @@ SECRET_KEY = ')cgk!kr7s)f^cw&0a6g^mpkfh^qy#-jolr!qk9h2=v8mgss_$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unimeet.eu']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unimeet.gr']
 
 
 # Application definition
@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'unimeet.User'
 
-SESSION_COOKIE_DOMAIN = '.unimeet.eu'
+SESSION_COOKIE_DOMAIN = '.unimeet.gr'
 
 CORS_ORIGIN_REGEX_WHITELIST = (r'^(http?://)?(\w+\.)?unimeet\.eu$', )
 CORS_ALLOW_CREDENTIALS = True

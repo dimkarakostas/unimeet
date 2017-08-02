@@ -1,20 +1,20 @@
 {
     "presence": {
-        "url": "http://presence.unimeet.eu",
+        "url": "http://presence.unimeet.gr",
         "auth": "presence"
     },
     "realtime": {
-        "url": "http://realtime.unimeet.eu",
+        "url": "http://realtime.unimeet.gr",
         "auth": "realtime"
     },
     "matchmaker": {
-        "url": "http://matchmaker.unimeet.eu",
+        "url": "http://matchmaker.unimeet.gr",
         "auth": "matchmaker"
     },
     "backend": {
-        "url": "http://backend.unimeet.eu/api"
+        "url": "http://backend.unimeet.gr/api"
     },
     "frontend": {
-        "url": "http://unimeet.eu"
+        "url": "http://unimeet.gr"
     }
 }

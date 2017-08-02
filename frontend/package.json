@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Unimeet chat service frontend component",
   "author": "Dimitris Karakostas",
-  "homepage": "https://unimeet.eu",
+  "homepage": "https://unimeet.gr",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
