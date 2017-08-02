@@ -1,0 +1,20 @@
+{
+    "presence": {
+        "url": "http://presence.unichat.eu",
+        "auth": "presence"
+    },
+    "realtime": {
+        "url": "http://realtime.unichat.eu",
+        "auth": "realtime"
+    },
+    "matchmaker": {
+        "url": "http://matchmaker.unichat.eu",
+        "auth": "matchmaker"
+    },
+    "backend": {
+        "url": "http://backend.unichat.eu/api"
+    },
+    "frontend": {
+        "url": "http://unichat.eu"
+    }
+}
