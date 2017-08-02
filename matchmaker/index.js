@@ -35,26 +35,26 @@ for (var i=0; i < SERVICES.length; i++) {
         _socketIOServer.emit('register-matchmaker');
     });
 
-    _socketIOServer.on('presence-find-partner', (cookieId) => {
-        winston.debug('Finding partner for client with cookie: ' + cookieId);
+    _socketIOServer.on('presence-find-partner', (token) => {
+        winston.debug('Finding partner for client with token: ' + token);
         if (waitingClient === null) {
-            waitingClient = {'cookie': cookieId, 'presenceSocket': _socketIOServer};
+            waitingClient = {'token': token, 'presenceSocket': _socketIOServer};
         }
         else {
             let roomId = Math.random().toString(36).substr(2, 5);
 
-            _socketIOServer.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, roomId);
-            winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + roomId);
-            waitingClient.presenceSocket.emit('matchmaker-send-to-room', waitingClient.cookie, realtimeToUse.url, roomId);
-            winston.debug('Sent client with cookie (' + waitingClient.cookie + ') to room: ' + roomId);
+            _socketIOServer.emit('matchmaker-send-to-room', token, realtimeToUse.url, roomId);
+            winston.debug('Sent client with token (' + token + ') to room: ' + roomId);
+            waitingClient.presenceSocket.emit('matchmaker-send-to-room', waitingClient.token, realtimeToUse.url, roomId);
+            winston.debug('Sent client with token (' + waitingClient.token + ') to room: ' + roomId);
 
             waitingClient = null;
         }
     });
 
-    _socketIOServer.on('presence-client-disconnected', (cookieId) => {
+    _socketIOServer.on('presence-client-disconnected', (token) => {
         if (waitingClient !== null) {
-            winston.debug('Removing from wait line client: ' + cookieId);
+            winston.debug('Removing from wait line client: ' + token);
             waitingClient = null;
         }
     });
