@@ -1,4 +1,6 @@
-const program = require('commander');
+const program = require('commander'),
+      axios = require('axios'),
+      serviceConfig = require('../config/services.json');
 
 program
     .version('1.0.0')
@@ -35,9 +37,28 @@ socketIOServer.on('connection', (client) => {
         }
     });
 
-    client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
+    client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId, partnerToken) => {
         // Verify if the message actually came from the matchmaker client
         if (client.id === matchmaker) {
+            axios.get(serviceConfig.backend.url + '/user_info', {
+                params: {
+                    auth: serviceConfig.presence.auth,
+                    service: 'presence',
+                    token: partnerToken
+                }
+            })
+            .then(res => {
+                var partnerInfo = {
+                    gender: res.data.gender,
+                    school: res.data.school,
+                    university: res.data.university,
+                    country: res.data.country
+                }
+            })
+            .catch(error => {
+                winston.error(error);
+            })
+
             let frontendClient = cookieClients[cookieId];
             socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
             winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
