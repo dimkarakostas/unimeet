@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class UnichatConfig(AppConfig):
-    name = 'unichat'
+class UnimeetConfig(AppConfig):
+    name = 'unimeet'

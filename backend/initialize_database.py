@@ -6,7 +6,7 @@ import logging
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 django.setup()
 
-from unichat.models import Country, City, University, School
+from unimeet.models import Country, City, University, School
 
 level = logging.DEBUG
 logger = logging.getLogger(__name__)

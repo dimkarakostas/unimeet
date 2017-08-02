@@ -16,7 +16,7 @@ export NVM_DIR=$HOME/.nvm
 
 nvm use 6.3
 
-echo "[*] Starting Unichat..."
+echo "[*] Starting Unimeet..."
 
 cd backend
 if [ ! -d "env" ]; then

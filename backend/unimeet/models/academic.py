@@ -4,7 +4,7 @@ from django.db import models
 
 
 class School(models.Model):
-    university = models.ForeignKey('unichat.University')
+    university = models.ForeignKey('unimeet.University')
 
     name = models.CharField(
         default='',
@@ -27,7 +27,7 @@ class School(models.Model):
 
 
 class University(models.Model):
-    city = models.ForeignKey('unichat.City')
+    city = models.ForeignKey('unimeet.City')
 
     name = models.CharField(
         default='',

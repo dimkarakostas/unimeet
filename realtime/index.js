@@ -15,7 +15,7 @@ winston.add(winston.transports.Console, {'timestamp': true, 'label': 'realtime'}
 
 const PORT = program.port;
 
-winston.info('Unichat realtime service');
+winston.info('Unimeet realtime service');
 winston.info('Listening on port ' + PORT);
 
 const socketIOServer = io.listen(PORT);

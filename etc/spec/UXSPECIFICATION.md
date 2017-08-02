@@ -1,14 +1,14 @@
-# Unichat User Experience
+# Unimeet User Experience
 
 ## Pages
 
 The frontend consists of two main dynamic pages and multiple static pages. The
-common component across all pages is the topbar that contains the Unichat logo
+common component across all pages is the topbar that contains the Unimeet logo
 on the left and a navigation menu on the right when necessary.
 
 ### Welcome
 
-![Unichat plain welcome page](ux_img/1.png)
+![Unimeet plain welcome page](ux_img/1.png)
 
 The welcome page is the default home page for a logged-out user. It contains
 forms for logging-in and signing-up, as well as links for the static pages. It
@@ -27,7 +27,7 @@ should be disabled while the request is processed and, when complete, both the
 input fields and the message will be replaced by a different message that
 explains the next necessary steps.
 
-![Unichat forgot password modal](ux_img/2.png)
+![Unimeet forgot password modal](ux_img/2.png)
 
 When the user clicks on the login button the input fields and the button become
 disabled until either the user is logged in and redirected to the chat page or
@@ -37,32 +37,32 @@ informing the user that its credentials were not accepted.
 The page's main body is separated in two columns with a common background. The
 background is an image of a man and a woman sitting together looking at their
 devices. The left column contains an introduction welcome message and a few
-bullets that briefly explain what Unichat is. The right column contains a form
+bullets that briefly explain what Unimeet is. The right column contains a form
 for signing up which consists of a header message, under which is an input field
 for the user's email and a button under that. When the user clicks on the
 sign up button, both the button and the input field become disabled until his
 request has been processed, at which point a modal is displayed with an
 informational message as below.
 
-![Unichat signup modal](ux_img/3.png)
+![Unimeet signup modal](ux_img/3.png)
 
 The page's footer has bullet-separated links to the static pages on its left and
 the brandname/license information to the right.
 
 ### Chat
 
-The chat page is the core page of Unichat. It is the default page for a
+The chat page is the core page of Unimeet. It is the default page for a
 logged-in user where he is able to chat, wait while searching for a match, or
 change his preferences and account settings.
 
-![Unichat empty chat page](ux_img/4.png)
+![Unimeet empty chat page](ux_img/4.png)
 
 The navigation menu is a dropdown menu that has the user's email address as the
 header. When the user clicks on the dropdown the menu appears, which has the
 settings and help fields separated by a separator from the logout field that is
 at the bottom, as displayed below.
 
-![Unichat dropdown menu](ux_img/5.png)
+![Unimeet dropdown menu](ux_img/5.png)
 
 When the user clicks on the settings field, a modal is displayed. The modal
 contains a navigation menu on the left for the different settings areas, the
@@ -71,14 +71,14 @@ area on the right. The selected area is distinguished from the inactive ones by
 a different color. The setting for the "Interested in" options can be seen
 below.
 
-![Unichat settings modal](ux_img/6.png)
+![Unimeet settings modal](ux_img/6.png)
 
 When the user clicks on the help field of the dropdown menu, a modal is
 displayed. The modal contains buttons in its body that are arranged in a grid,
 each button linking to one of the static pages. The modal's footer contains the
 brand/license information.
 
-![Unichat help modal](ux_img/7.png)
+![Unimeet help modal](ux_img/7.png)
 
 The body of the chat page contains the messages that have been exchanged. The
 user's messages are positioned on the right, while the partner's are positioned
@@ -87,7 +87,7 @@ having different background color than the user's. Next to the message's box, on
 the outer side, is an icon that represents each user's gender (the venus symbol
 for women, the mars symbol for men, and a simple circle for undefined).
 
-![Unichat main body with chat messages](ux_img/8.png)
+![Unimeet main body with chat messages](ux_img/8.png)
 
 The footer of the page contains an inline form for communicating. The form
 contains a button for changing partner, an input text field for writing a
@@ -102,21 +102,21 @@ disabled. The input text field is autofocused when the page is loaded.
 ### F.A.Q.
 
 The F.A.Q. page is a static page that contains useful information as to what is,
-how somebody can use or sign to, and what options a user has when using Unichat.
+how somebody can use or sign to, and what options a user has when using Unimeet.
 
 ### Security
 
 The security page is a static page focused on explaining the security model of
-Unichat. It should describe the security of the communication protocols between
+Unimeet. It should describe the security of the communication protocols between
 all modules, both backend and frontend, and the operations security of the
 backend in terms of privacy, anonymity, and personal information security.
 
 ### Contact
 
-The contact page is a page that allows anybody, either being a user of Unichat
-or not, to submit a message to the Unichat dev team.
+The contact page is a page that allows anybody, either being a user of Unimeet
+or not, to submit a message to the Unimeet dev team.
 
-![Unichat contact page](ux_img/9.png)
+![Unimeet contact page](ux_img/9.png)
 
 There is no navigation menu in the contact page. The body of the page contains a
 form with fields for Name, Email and message. The footer is the same as the

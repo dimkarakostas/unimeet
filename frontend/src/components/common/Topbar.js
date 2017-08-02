@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Navbar} from 'react-bootstrap';
 import {WelcomeTopMenu} from '../welcome';
 import {ChatTopMenu} from '../chat';
-import logo from './img/unichatLogo.png';
+import logo from './img/unimeetLogo.png';
 import './styles.css';
 
 class Topbar extends Component {
@@ -12,7 +12,7 @@ class Topbar extends Component {
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href="/">
-                            <img src={logo} alt={"The Unichat logo"}/>
+                            <img src={logo} alt={"The Unimeet logo"}/>
                         </a>
                     </Navbar.Brand>
                     {this.props.page === 'chat' ?

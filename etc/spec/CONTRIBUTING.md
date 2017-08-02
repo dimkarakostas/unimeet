@@ -1,11 +1,11 @@
 # Contributor Guidelines
 
-In order to set up Unichat locally see [Installation](#installation) below.
+In order to set up Unimeet locally see [Installation](#installation) below.
 
 Before contributing code, read the [Architecture
 specification](ARCHITECTURE.md).
 
-In order to understand the design choices and structure of Unichat read the [UX
+In order to understand the design choices and structure of Unimeet read the [UX
 specification](UXSPECIFICATION.md).
 
 ## Installation
@@ -13,7 +13,7 @@ specification](UXSPECIFICATION.md).
 - Clone the repo
 - Set up the development environment for each module
 
-Unichat is developed in [Python 2.7](https://www.python.org/) and [Node.js
+Unimeet is developed in [Python 2.7](https://www.python.org/) and [Node.js
 6.3](https://nodejs.org/). Make sure you have installed these packages to your
 system before proceeding.
 
@@ -22,13 +22,13 @@ system before proceeding.
 - Install the dependencies by running:
 
 ```sh
-unichat/frontend $ npm install
+unimeet/frontend $ npm install
 ```
 
 - Start the development server by running:
 
 ```sh
-unichat/frontend $ npm start
+unimeet/frontend $ npm start
 ```
 
 ### Presence
@@ -36,13 +36,13 @@ unichat/frontend $ npm start
 - Install the dependencies by running:
 
 ```sh
-unichat/presence $ npm install
+unimeet/presence $ npm install
 ```
 
 - Start the development server by running:
 
 ```sh
-unichat/presence $ npm start
+unimeet/presence $ npm start
 ```
 
 ### Realtime
@@ -50,13 +50,13 @@ unichat/presence $ npm start
 - Install the dependencies by running:
 
 ```sh
-unichat/realtime $ npm install
+unimeet/realtime $ npm install
 ```
 
 - Start the development server by running:
 
 ```sh
-unichat/realtime $ npm start
+unimeet/realtime $ npm start
 ```
 
 ## Tests
@@ -66,5 +66,5 @@ master.
 
 ## Contributing code
 
-In order to contribute code open a Pull Request at [Unichat's Github
-repo](https://github.com/dimkarakostas/unichat).
+In order to contribute code open a Pull Request at [Unimeet's Github
+repo](https://github.com/dimkarakostas/unimeet).

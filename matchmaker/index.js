@@ -17,7 +17,7 @@ winston.add(winston.transports.Console, {'timestamp': true, 'label': 'matchmaker
 const PORT = program.port;
 const SERVICES = config.services;
 
-winston.info('Unichat matchmaker service');
+winston.info('Unimeet matchmaker service');
 winston.info('Listening on port ' + PORT);
 
 let serviceSockets = [];

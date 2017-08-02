@@ -25,7 +25,7 @@ SECRET_KEY = ')cgk!kr7s)f^cw&0a6g^mpkfh^qy#-jolr!qk9h2=v8mgss_$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unichat.eu']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unimeet.eu']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'unichat'
+    'unimeet'
 ]
 
 MIDDLEWARE = [
@@ -133,9 +133,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'unichat.User'
+AUTH_USER_MODEL = 'unimeet.User'
 
-SESSION_COOKIE_DOMAIN = '.unichat.eu'
+SESSION_COOKIE_DOMAIN = '.unimeet.eu'
 
-CORS_ORIGIN_REGEX_WHITELIST = (r'^(http?://)?(\w+\.)?unichat\.eu$', )
+CORS_ORIGIN_REGEX_WHITELIST = (r'^(http?://)?(\w+\.)?unimeet\.eu$', )
 CORS_ALLOW_CREDENTIALS = True

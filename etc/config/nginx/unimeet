@@ -1,7 +1,7 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name unichat.eu www.unichat.eu;
+    server_name unimeet.eu www.unimeet.eu;
 
     root /path/to/frontend;
     index index.html;
@@ -13,7 +13,7 @@ server {
 
 server {
     listen 80;
-    server_name backend.unichat.eu www.backend.unichat.eu;
+    server_name backend.unimeet.eu www.backend.unimeet.eu;
 
     location / {
         include         uwsgi_params;
@@ -22,7 +22,7 @@ server {
 }
 
 server {
-    server_name presence.unichat.eu www.presence.unichat.eu;
+    server_name presence.unimeet.eu www.presence.unimeet.eu;
 
     location / {
         proxy_pass http://localhost:9870;
@@ -33,7 +33,7 @@ server {
 }
 
 server {
-    server_name realtime.unichat.eu www.realtime.unichat.eu;
+    server_name realtime.unimeet.eu www.realtime.unimeet.eu;
 
     location / {
         proxy_pass http://localhost:9871;
@@ -44,7 +44,7 @@ server {
 }
 
 server {
-    server_name matchmaker.unichat.eu www.matchmaker.unichat.eu;
+    server_name matchmaker.unimeet.eu www.matchmaker.unimeet.eu;
 
     location / {
         proxy_pass http://localhost:9872;

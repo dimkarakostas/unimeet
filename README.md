@@ -1,18 +1,18 @@
-Unichat
+Unimeet
 =======
 
-[Unichat](https://unichat.eu) is an anonymous chat service for university
+[Unimeet](https://unimeet.eu) is an anonymous chat service for university
 students.
 
 ## Got a question?
 
 Please ask us anything at
-[https://unichat.eu/contact](https://unichat.eu/contact).
+[https://unimeet.eu/contact](https://unimeet.eu/contact).
 
 ## Found a bug?
 
 We use Github as a bug tracker. If you have found a bug, please check the open
-issues [here](https://github.com/dimkarakostas/unichat/issues) and create a new
+issues [here](https://github.com/dimkarakostas/unimeet/issues) and create a new
 one if the problem has not been previously reported.
 
 ## Contributing code
@@ -32,4 +32,4 @@ Contributors:
 
 ## License
 
-Unichat is licensed under MIT. See [LICENSE](LICENSE) for more information.
+Unimeet is licensed under MIT. See [LICENSE](LICENSE) for more information.
