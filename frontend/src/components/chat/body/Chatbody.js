@@ -17,10 +17,7 @@ class Chatbody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            partner: {
-                gender: 'female',
-                school: 'University of Athens, Greece'
-            },
+            partner: {},
             me: {},
             messages: [],
             isFooterDisabled: true,
@@ -74,24 +71,13 @@ class Chatbody extends Component {
         }
     }
 
-    joinRoom = (realtimeUrl, roomId) => {
-        if (this._realtimeConnector === undefined) {
-            this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
-        }
-        else {
-            this._realtimeConnector.reconnect();
-        }
-        this._realtimeConnector.joinRoom(roomId);
-        this._presenceConnector.disconnect();
-    }
-
-    static get contextTypes() {
-        return {
-            router: React.PropTypes.object.isRequired,
-        };
-    }
-
-    componentDidMount() {
+    joinRoom = (realtimeUrl, roomId, partnerInfo) => {
+        this.setState({
+            partner: {
+                gender: partnerInfo.gender,
+                school: partnerInfo.school + ', ' + partnerInfo.university + ', ' + partnerInfo.country
+            }
+        });
         axios.get(config.backendUrl + '/user_info')
         .then(res => {
             this.setState({
@@ -100,11 +86,22 @@ class Chatbody extends Component {
                     school: res.data.school + ', ' + res.data.university + ', ' + res.data.country
                 }
             });
-            this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+            if (this._realtimeConnector === undefined) {
+                this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
+            }
+            else {
+                this._realtimeConnector.reconnect();
+            }
+            this._realtimeConnector.joinRoom(roomId);
+            this._presenceConnector.disconnect();
         })
         .catch(error => {
-            this.context.router.history.push('/');
+            console.log(error);
         })
+    }
+
+    componentDidMount() {
+        this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
     }
 
     render() {

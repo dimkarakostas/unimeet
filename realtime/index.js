@@ -35,8 +35,8 @@ socketIOServer.on('connection', (client) => {
     });
 
     // Frontend communication
-    client.on('client-join-room', (roomId, cookieId) => {
-        winston.debug('Client ' + client.id + ' with cookie (' + cookieId + ') joins room ' + roomId);
+    client.on('client-join-room', (roomId, token) => {
+        winston.debug('Client ' + client.id + ' with token (' + token + ') joins room ' + roomId);
         client._chatRoom = roomId;
         client.join(client._chatRoom);
         if (getRoomUsercount(client._chatRoom) > 1) {

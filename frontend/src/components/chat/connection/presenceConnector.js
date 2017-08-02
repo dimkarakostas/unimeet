@@ -5,8 +5,8 @@ function presenceConnector(token, presenceUrl, joinRoomCallback, alreadyConnecte
     this._socket.on('connect', () => {
         this._socket.emit('client-get-partner', token);
     });
-    this._socket.on('server-join-room', (realtimeUrl, roomId) => {
-        joinRoomCallback(realtimeUrl, roomId);
+    this._socket.on('server-join-room', (realtimeUrl, roomId, partnerInfo) => {
+        joinRoomCallback(realtimeUrl, roomId, partnerInfo);
     });
     this._socket.on('server-already-connected', () => {
         alreadyConnectedCallback();

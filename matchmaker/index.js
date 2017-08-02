@@ -17,8 +17,6 @@ winston.add(winston.transports.Console, {'timestamp': true, 'label': 'matchmaker
 const PORT = program.port;
 const SERVICES = config.services;
 
-const ROOMID = 'room1';
-
 winston.info('Unichat matchmaker service');
 winston.info('Listening on port ' + PORT);
 
@@ -37,19 +35,28 @@ for (var i=0; i < SERVICES.length; i++) {
         _socketIOServer.emit('register-matchmaker');
     });
 
-    _socketIOServer.on('presence-find-partner', (cookieId) => {
-        winston.debug('Finding partner for client with cookie: ' + cookieId);
+    _socketIOServer.on('presence-find-partner', (token) => {
+        winston.debug('Finding partner for client with token: ' + token);
         if (waitingClient === null) {
-            waitingClient = {'cookie': cookieId, 'presenceSocket': _socketIOServer};
+            waitingClient = {'token': token, 'presenceSocket': _socketIOServer};
         }
         else {
+            let client1 = waitingClient;
+            let client2 = {'token': token, 'presenceSocket': _socketIOServer};
             let roomId = Math.random().toString(36).substr(2, 5);
 
-            _socketIOServer.emit('matchmaker-send-to-room', cookieId, realtimeToUse.url, roomId);
-            winston.debug('Sent client with cookie (' + cookieId + ') to room: ' + roomId);
-            waitingClient.presenceSocket.emit('matchmaker-send-to-room', waitingClient.cookie, realtimeToUse.url, roomId);
-            winston.debug('Sent client with cookie (' + waitingClient.cookie + ') to room: ' + roomId);
+            _socketIOServer.emit('matchmaker-send-to-room', client1.token, realtimeToUse.url, roomId, client2.token);
+            winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
+            waitingClient.presenceSocket.emit('matchmaker-send-to-room', client2.token, realtimeToUse.url, roomId, client1.token);
+            winston.debug('Sent client with token (' + client2.token + ') to room: ' + roomId);
 
+            waitingClient = null;
+        }
+    });
+
+    _socketIOServer.on('presence-client-disconnected', (token) => {
+        if (waitingClient !== null) {
+            winston.debug('Removing from wait line client: ' + token);
             waitingClient = null;
         }
     });

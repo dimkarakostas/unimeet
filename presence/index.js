@@ -1,4 +1,6 @@
-const program = require('commander');
+const program = require('commander'),
+      axios = require('axios'),
+      serviceConfig = require('../config/services.json');
 
 program
     .version('1.0.0')
@@ -20,7 +22,7 @@ winston.info('Listening on port ' + PORT);
 
 const socketIOServer = io.listen(PORT);
 
-var cookieClients = {};
+var tokenClients = {};
 var matchmaker = null;
 var waitingClients = [];
 socketIOServer.on('connection', (client) => {
@@ -35,45 +37,67 @@ socketIOServer.on('connection', (client) => {
         }
     });
 
-    client.on('matchmaker-send-to-room', (cookieId, realtimeUrl, roomId) => {
+    client.on('matchmaker-send-to-room', (token, realtimeUrl, roomId, partnerToken) => {
         // Verify if the message actually came from the matchmaker client
         if (client.id === matchmaker) {
-            let frontendClient = cookieClients[cookieId];
-            socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId);
-            winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+            axios.get(serviceConfig.backend.url + '/user_info', {
+                params: {
+                    auth: serviceConfig.presence.auth,
+                    service: 'presence',
+                    token: partnerToken
+                }
+            })
+            .then(res => {
+                var partnerInfo = {
+                    gender: res.data.gender,
+                    school: res.data.school,
+                    university: res.data.university,
+                    country: res.data.country
+                }
 
-            var waitingIndex = waitingClients.indexOf(cookieId);
+                let frontendClient = tokenClients[token];
+                socketIOServer.to(frontendClient).emit('server-join-room', realtimeUrl, roomId, partnerInfo);
+                winston.debug('Sending client ' + frontendClient + ' to realtime (' + realtimeUrl + ') in room ' + roomId);
+            })
+            .catch(error => {
+                winston.error(error);
+            })
+
+            var waitingIndex = waitingClients.indexOf(token);
             if (waitingIndex > -1) {
                 waitingClients.splice(waitingIndex, 1);
             }
-            winston.debug('Deleted client with cookie (' + cookieId + ') from waiting queue.');
+            winston.debug('Deleted client with token (' + token + ') from waiting queue.');
         }
     });
 
     // Frontend communication
-    client.on('client-get-partner', (cookieId) => {
-        client._cookieId = cookieId;
-        if (cookieId in cookieClients) {
+    client.on('client-get-partner', (token) => {
+        client._token = token;
+        if (token in tokenClients) {
             client.emit('server-already-connected');
         }
         else {
-            cookieClients[cookieId] = client.id;
-            winston.debug('Client ' + client.id + ' with cookie (' + client._cookieId + ') wants partner.');
+            tokenClients[token] = client.id;
+            winston.debug('Client ' + client.id + ' with token (' + client._token + ') wants partner.');
             if (matchmaker === null) {
-                waitingClients.push(client._cookieId);
+                waitingClients.push(client._token);
             }
             else {
-                socketIOServer.to(matchmaker).emit('presence-find-partner', client._cookieId);
+                socketIOServer.to(matchmaker).emit('presence-find-partner', client._token);
             }
         }
     });
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
-        var waitingIndex = waitingClients.indexOf(client._cookieId);
+        var waitingIndex = waitingClients.indexOf(client._token);
         if (waitingIndex > -1) {
             waitingClients.splice(waitingIndex, 1);
         }
-        delete cookieClients[client._cookieId];
+        delete tokenClients[client._token];
+        if (matchmaker !== null) {
+            socketIOServer.to(matchmaker).emit('presence-client-disconnected', client._token);
+        }
     });
 });

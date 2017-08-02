@@ -1,4 +1,6 @@
+import * as config from '../../../config/services.json';
+
 module.exports = {
-    presenceUrl: 'http://presence.unichat.eu',
-    backendUrl: 'http://backend.unichat.eu/api',
+    presenceUrl: config.presence.url,
+    backendUrl: config.backend.url,
 };
