@@ -94,25 +94,28 @@ def user_info(request):
 
 @csrf_exempt
 def user_interests(request):
-    if request.user.is_authenticated():
-        if request.method == 'GET':
-            interestedInGender = str(request.user.interestedInGender)
-            interestedInSchools = [s.id for s in request.user.interestedInSchools.all()]
-            resp = JsonResponse({
-                'interestedInGender': interestedInGender,
-                'interestedInSchools': interestedInSchools
-            })
-        elif request.method == 'POST':
-            interest_params = json.loads(request.body.decode('utf-8'))
-            gender = interest_params['interestedInGender']
-            schools = interest_params['interestedInSchools']
-            request.user.interestedInGender = gender
-            request.user.interestedInSchools.set(schools)
-            request.user.save(update_fields=['interestedInGender'])
-            resp = HttpResponse('OK')
-    else:
-        resp = HttpResponseBadRequest('Bad credentials')
-    return resp
+    if request.method == 'GET':
+        if request.user.is_authenticated():
+            user = request.user
+        elif 'token' in request.GET:
+            user = User.objects.get(token=request.GET['token'])
+        else:
+            return HttpResponseBadRequest('Bad credentials')
+        interestedInGender = str(user.interestedInGender)
+        interestedInSchools = [s.id for s in user.interestedInSchools.all()]
+        return JsonResponse({
+            'interestedInGender': interestedInGender,
+            'interestedInSchools': interestedInSchools
+        })
+    elif request.method == 'POST':
+        interest_params = json.loads(request.body.decode('utf-8'))
+        gender = interest_params['interestedInGender']
+        schools = interest_params['interestedInSchools']
+        request.user.interestedInGender = gender
+        request.user.interestedInSchools.set(schools)
+        request.user.save(update_fields=['interestedInGender'])
+        return HttpResponse('OK')
+    return HttpResponseBadRequest('Bad credentials')
 
 
 @csrf_exempt
