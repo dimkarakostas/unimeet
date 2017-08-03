@@ -46,9 +46,9 @@ class DeleteAccountForm extends Component {
                     id="delete-account"
                     onClick={this.handleDeleteAccountButton}
                 >
-                    Delete account
+                    Διαγραφή λογαριασμού
                 </Button>
-                {this.state.displayDeleteAccountMessage ? <div className="delete-account-confirmation"><b>We hate to see you leaving. Are you sure?&nbsp;&nbsp;&nbsp;<a onClick={this.handleDeleteAccountConfirmation}>Yes</a> <a onClick={this.handleDeleteAccountChangemind}>No</a></b></div> : null}
+                {this.state.displayDeleteAccountMessage ? <div className="delete-account-confirmation"><b>Λυπούμαστε που φεύγεις. Σίγουρα θες?&nbsp;&nbsp;&nbsp;<a onClick={this.handleDeleteAccountConfirmation}>Ναι</a> <a onClick={this.handleDeleteAccountChangemind}>Όχι</a></b></div> : null}
             </div>
         );
     }

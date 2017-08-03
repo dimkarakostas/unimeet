@@ -52,14 +52,14 @@ class ContactForm extends Component {
                 <Form horizontal className="unimeet-contact-form" onSubmit={this.contactSubmit}>
                     <FormGroup>
                         <Col componentClass={ControlLabel} sm={2} smOffset={2}>
-                            Name
+                            Όνομα
                         </Col>
                         <Col sm={4}>
                             <FormControl
                                 type="text"
                                 name="name"
                                 autoComplete="off"
-                                placeholder="Full Name"
+                                placeholder="Ονοματεπώνυμο"
                                 autoFocus
                                 value={this.state.name}
                                 disabled={this.state.isContactButtonLoading}
@@ -89,7 +89,7 @@ class ContactForm extends Component {
                                 name="message"
                                 autoComplete="off"
                                 rows="8"
-                                placeholder="Write something to us..."
+                                placeholder="Πες μας κάτι..."
                                 value={this.state.message}
                                 disabled={this.state.isContactButtonLoading}
                                 onChange={this.handleInputChange}
@@ -103,7 +103,7 @@ class ContactForm extends Component {
                         disabled={this.state.isContactButtonLoading}
                         onClick={!this.state.isContactButtonLoading? this.contactSubmit : null}
                     >
-                        {this.state.isContactButtonLoading? 'Sending...' : 'Send'}
+                        {this.state.isContactButtonLoading? 'Αποστολή...' : 'Αποστολή'}
                     </Button>
                 </Form>
                 <ContactModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />

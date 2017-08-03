@@ -6,12 +6,12 @@ class ContactModal extends Component {
         return (
             <Modal show={this.props.isModalOpen} onHide={this.props.hideModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Message sent</Modal.Title>
+                    <Modal.Title>Μήνυμα εστάλη</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>
-                        We have received your message and will email back to you shortly.<br />
-                        Thank you for your interest!
+                        Πήραμε το μήνυμά σου και θα σου απαντήσουμε μέσω email σύντομα.<br />
+                        Ευχαριστούμε για το ενδιαφέρον!
                     </p>
                 </Modal.Body>
             </Modal>

@@ -39,18 +39,18 @@ class ForgotPasswordModal extends Component {
         return (
             <Modal show={this.props.isModalOpen} onHide={this.props.hideModal} onEnter={this.onModalEnter} >
                 <Modal.Header closeButton>
-                    <Modal.Title>Forgot password</Modal.Title>
+                    <Modal.Title>Ανάκτηση κωδικού</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {this.state.isPasswordResetMailSent ?
-                        <p>Please check your email and follow the link we have sent you to reset your password.</p> :
+                        <p>Έλεγξε το email σου για πληροφορίες ώστε να ανακτήσεις τον κωδικό.</p> :
                         <div>
-                            <p>Enter your email address and we will send you a link to reset your password.</p>
+                            <p>Δώσε τη διεύθυση email με την οποία έκανες εγγραφή στο Unimeet.</p>
                             <Form onSubmit={this.handlePasswordReset}>
                                 <FormGroup>
                                     <FormControl
                                         type="text"
-                                        placeholder="Enter your email address"
+                                        placeholder="Διεύθυνση email"
                                         name="email-password-reset"
                                         autoComplete="off"
                                         disabled={this.state.isForgotPasswordButtonLoading}
@@ -64,7 +64,7 @@ class ForgotPasswordModal extends Component {
                                     disabled={this.state.isForgotPasswordButtonLoading}
                                     onClick={!this.state.isForgotPasswordButtonLoading? this.handlePasswordReset: null}
                                 >
-                                    {this.state.isForgotPasswordButtonLoading? 'Sending mail...' : 'Send password reset email'}
+                                    {this.state.isForgotPasswordButtonLoading? 'Στέλνουμε το email...' : 'Στείλε email'}
                                 </Button>
                             </Form>
                         </div>

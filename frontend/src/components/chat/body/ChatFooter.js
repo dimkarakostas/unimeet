@@ -59,7 +59,7 @@ class ChatFooter extends Component {
                                     disabled={this.props.isFooterDisabled}
                                     onClick={this.props.handleNext}
                                 >
-                                    Next (Esc)
+                                    Επόμενο (Esc)
                                 </Button>
                                 </a>
                             </span>
@@ -68,7 +68,7 @@ class ChatFooter extends Component {
                                 name="chat-message"
                                 id="chat-message-input"
                                 bsSize="small"
-                                placeholder="Say something..."
+                                placeholder="Πες κάτι..."
                                 value={this.state.chatMessage}
                                 autoFocus
                                 autoComplete="off"
@@ -88,7 +88,7 @@ class ChatFooter extends Component {
                                     id="btn-send"
                                     disabled={this.props.isFooterDisabled}
                                 >
-                                    Send (Enter)
+                                    Αποστολή (Enter)
                                 </Button>
                                 </a>
                             </span>

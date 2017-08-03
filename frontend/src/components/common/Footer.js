@@ -10,15 +10,15 @@ class Footer extends Component {
                         <div className="col-sm-6 col-md-6 col-lg-6">
                             <ul className="list-inline">
                                 <li>
-                                    <Link to="/faq">F.A.Q.</Link>
+                                    <Link to="/faq">Συχνές ερωτήσεις</Link>
                                 </li>
                                 <li className="footer-menu-divider">&sdot;</li>
                                 <li>
-                                    <Link to="/contact">Contact</Link>
+                                    <Link to="/contact">Επικοινωνία</Link>
                                 </li>
                                 <li className="footer-menu-divider">&sdot;</li>
                                 <li>
-                                    <Link to="./security">Security</Link>
+                                    <Link to="./security">Ασφάλεια</Link>
                                 </li>
                             </ul>
                         </div>
