@@ -9,8 +9,8 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 const INFO_MESSAGES = {
-    queued: 'You are in queue, please wait...',
-    alreadyConnected: 'You have already connected in another device!'
+    queued: 'Είσαι στην ουρά...',
+    alreadyConnected: 'Έχεις ήδη συνδεθεί!'
 }
 
 class Chatbody extends Component {

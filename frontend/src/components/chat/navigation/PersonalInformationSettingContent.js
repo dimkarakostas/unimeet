@@ -49,9 +49,9 @@ class PersonalInformationSettingContent extends Component {
         return (
             <div className={this.isActive()}>
                 <div className="user-setting">
-                    <h4>Personal information</h4><hr/>
+                    <h4>Προσωπικές πληροφορίες</h4><hr/>
                     <Form horizontal onSubmit={this.handleSettingChange}>
-                        <b>I am a:</b>
+                        <b>Είμαι:</b>
                         <FormGroup className="interested-sex">
                             <Col sm={4}>
                                 <FormControl
@@ -62,9 +62,9 @@ class PersonalInformationSettingContent extends Component {
                                     defaultValue={this.state.selectedSex}
                                     onChange={this.handleSexChange}
                                 >
-                                    <option value="0">Undefined</option>
-                                    <option value="-1">Man</option>
-                                    <option value="1">Woman</option>
+                                    <option value="0">Μη ορισμένο</option>
+                                    <option value="-1">Άνδρας</option>
+                                    <option value="1">Γυναίκα</option>
                                 </FormControl>
                             </Col>
                         </FormGroup>
@@ -75,9 +75,9 @@ class PersonalInformationSettingContent extends Component {
                             disabled={this.state.isApplyButtonLoading}
                             onClick={!this.state.isApplyButtonLoading? this.handleSettingChange: null}
                         >
-                            {this.state.isApplyButtonLoading? 'Applying changes...' : 'Apply'}
+                            {this.state.isApplyButtonLoading? 'Αλλαγή...' : 'Αλλαγή'}
                         </Button>
-                        {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Your changes were saved.</b> : null}
+                        {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Οι αλλαγές σου αποθηκεύτηκαν.</b> : null}
                     </Form>
                 </div>
             </div>

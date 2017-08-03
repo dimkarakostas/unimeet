@@ -81,7 +81,7 @@ class LoginForm extends Component {
                             disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
                         />
-                        {this.state.showCredentialsInvalid ? <Tooltip id="tooltip" placement="bottom" className="in">Your credentials are invalid!</Tooltip> : ''}
+                        {this.state.showCredentialsInvalid ? <Tooltip id="tooltip" placement="bottom" className="in">Λάθος email ή password!</Tooltip> : ''}
                     </FormGroup>
                     {' '}
                     <FormGroup>
@@ -95,7 +95,7 @@ class LoginForm extends Component {
                     </FormGroup>
                     {' '}
                     <FormGroup className="welcome-forgot-password">
-                        <a onClick={this.showModal}><div>Forgot?</div></a>
+                        <a onClick={this.showModal}><div>Ξέχασες?</div></a>
                     </FormGroup>
                     {' '}
                     <Button
@@ -104,7 +104,7 @@ class LoginForm extends Component {
                         disabled={this.state.isLoginButtonLoading}
                         onClick={!this.state.isLoginButtonLoading? this.handleLogin : null}
                     >
-                        {this.state.isLoginButtonLoading? 'Logging in...' : 'Log in'}
+                        {this.state.isLoginButtonLoading? 'Σύνδεση...' : 'Σύνδεση'}
                     </Button>
                 </Form>
                 <ForgotPasswordModal isModalOpen={this.state.isModalOpen} hideModal={() => {this.hideModal()}} />

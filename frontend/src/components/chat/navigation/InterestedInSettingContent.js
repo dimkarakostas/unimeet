@@ -99,9 +99,9 @@ class InterestedInSettingContent extends Component {
         return (
             <div className={this.isActive()}>
                 <div className="interested-in-setting">
-                    <h4>Interested in</h4><hr/>
+                    <h4>Ενδιαφέροντα</h4><hr/>
                     <Form horizontal onSubmit={this.handleSettingChange}>
-                        <b>I want to talk to:</b>
+                        <b>Θέλω να μιλήσω με:</b>
                         <FormGroup className="interested-sex">
                             <Col sm={4}>
                                 <FormControl
@@ -112,21 +112,21 @@ class InterestedInSettingContent extends Component {
                                     defaultValue={this.state.interestedInGender}
                                     onChange={this.handleSexChange}
                                 >
-                                    <option value="0">Whatever</option>
-                                    <option value="-1">Men</option>
-                                    <option value="1">Women</option>
+                                    <option value="0">Οποιονδήποτε</option>
+                                    <option value="-1">Άνδρες</option>
+                                    <option value="1">Γυναίκες</option>
                                 </FormControl>
                             </Col>
                         </FormGroup>
 
                         {this.props.schoolsEnabled ?
                             <div>
-                                <b>from:</b>
+                                <b>από:</b>
                                 <FormGroup className="interested-universities">
                                     <BootstrapTable data={this.state.schools} selectRow={selectRowProp} hover condensed>
                                         <TableHeaderColumn dataField='id' isKey hidden>Id</TableHeaderColumn>
-                                        <TableHeaderColumn width='200' dataField='name'>School</TableHeaderColumn>
-                                        <TableHeaderColumn dataField='university'>University</TableHeaderColumn>
+                                        <TableHeaderColumn width='200' dataField='name'>Σχολή</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='university'>Πανεπιστήμιο</TableHeaderColumn>
                                     </BootstrapTable>
                                 </FormGroup>
                             </div>
@@ -138,9 +138,9 @@ class InterestedInSettingContent extends Component {
                             disabled={this.state.isApplyButtonLoading}
                             onClick={!this.state.isApplyButtonLoading? this.handleSettingChange: null}
                         >
-                            {this.state.isApplyButtonLoading? 'Applying changes...' : 'Apply'}
+                            {this.state.isApplyButtonLoading? 'Αλλαγή...' : 'Αλλαγή'}
                         </Button>
-                        {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Your changes were saved.</b> : null}
+                        {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Οι αλλαγές αποθηκεύτηκαν.</b> : null}
                     </Form>
                 </div>
             </div>

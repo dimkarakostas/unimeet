@@ -11,11 +11,11 @@ class AccountSettingContent extends Component {
         return (
             <div className={this.isActive()}>
                 <div className="password-setting">
-                    <h4>Change password</h4><hr/>
+                    <h4>Αλλαγή κωδικού</h4><hr/>
                     <PasswordChangeForm />
                 </div>
                 <div className="delete-account-setting">
-                    <h4>Delete Account</h4><hr/>
+                    <h4>Διαγραφή λογαριασμού</h4><hr/>
                     <DeleteAccountForm />
                 </div>
             </div>

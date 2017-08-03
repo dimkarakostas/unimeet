@@ -6,7 +6,7 @@ import SettingsModalContentList from './SettingsModalContentList';
 class SettingsModal extends Component {
     constructor(props) {
         super(props);
-        let options = ['Interested in', 'Personal info', 'Account'];
+        let options = ['Ενδιαφέροντα', 'Προσωπικές πληροφορίες', 'Λογαριασμός'];
         this.state = {
             optionsList: options,
             active: options[0]
@@ -21,7 +21,7 @@ class SettingsModal extends Component {
         return (
             <Modal className="chat-modal" show={this.props.isModalOpen} onHide={() => {this.props.hideModal('settings');}} >
                 <Modal.Header closeButton>
-                    <Modal.Title>Settings</Modal.Title>
+                    <Modal.Title>Ρυθμίσεις</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">

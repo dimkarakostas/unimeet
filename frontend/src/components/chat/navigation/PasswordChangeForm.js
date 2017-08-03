@@ -70,18 +70,18 @@ class PasswordChangeForm extends Component {
                 <FormGroup className="password-setting-input-field">
                     <FormControl
                         type="password"
-                        placeholder="Old password"
+                        placeholder="Παλιός κωδικός"
                         name="old-password"
                         onChange={this.handleInputChange}
                     />
-                    <a onClick={this.handleForgotPassword} id="forgot-password-setting">Forgot password?</a>
-                    {this.state.displayPasswordForgotMessage ? <b>Check your mail for instructions.</b> : null}
+                    <a onClick={this.handleForgotPassword} id="forgot-password-setting">Ξέχασες τον κωδικό?</a>
+                    {this.state.displayPasswordForgotMessage ? <b>Έλεγξε το email σου για οδηγίες.</b> : null}
                 </FormGroup>
 
                 <FormGroup className="password-setting-input-field">
                     <FormControl
                         type="password"
-                        placeholder="New password"
+                        placeholder="Νέος κωδικός"
                         name="new-password"
                         onChange={this.handleInputChange}
                     />
@@ -90,7 +90,7 @@ class PasswordChangeForm extends Component {
                 <FormGroup className="password-setting-input-field">
                     <FormControl
                         type="password"
-                        placeholder="Confirm new password"
+                        placeholder="Επιβεβαίωση νέου κωδικού"
                         name="new-password-verification"
                         onChange={this.handleInputChange}
                     />
@@ -102,9 +102,9 @@ class PasswordChangeForm extends Component {
                     disabled={this.state.isApplyButtonLoading}
                     onClick={!this.state.isApplyButtonLoading? this.handleSettingChange: null}
                 >
-                    {this.state.isApplyButtonLoading? 'Applying changes...' : 'Apply'}
+                    {this.state.isApplyButtonLoading? 'Αλλαγή...' : 'Αλλαγή'}
                 </Button>
-                {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Your changes were saved.</b> : null}
+                {this.state.displayChangesSavedMessage? <b className="changes-saved-message">Ο κωδικός σου άλλαξε.</b> : null}
             </Form>
         );
     }
