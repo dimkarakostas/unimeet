@@ -39,7 +39,7 @@ class ChatDropdownMenu extends Component {
         axios.get(config.backendUrl + '/logout')
         .then(res => {
             if (res.status === 200 && res.data === 'Logout OK') {
-                this.context.router.history.push('/');
+                window.location.reload();
             }
         })
         .catch(error => {
