@@ -43,7 +43,7 @@ for (var i=0; i < SERVICES.length; i++) {
         else {
             let client1 = waitingClient;
             let client2 = {'token': token, 'presenceSocket': _socketIOServer};
-            let roomId = Math.random().toString(36).substr(2, 5);
+            let roomId = Math.random().toString(36).substr(2, 35);
 
             _socketIOServer.emit('matchmaker-send-to-room', client1.token, realtimeToUse.url, roomId, client2.token);
             winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
