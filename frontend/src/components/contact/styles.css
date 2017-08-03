@@ -1,5 +1,5 @@
-.unichat-contact-form input,
-.unichat-contact-form textarea {
+.unimeet-contact-form input,
+.unimeet-contact-form textarea {
     padding: 10px;
     border: 1px solid #e5e5e5;
     width: 200px;
@@ -9,24 +9,24 @@
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
 
-.unichat-contact-form textarea {
+.unimeet-contact-form textarea {
     width: 400px;
     height: 150px;
     max-width: 400px;
     line-height: 18px;
 }
 
-.unichat-contact-form input:hover,
-.unichat-contact-form textarea:hover,
-.unichat-contact-form input:focus,
-.unichat-contact-form textarea:focus {
+.unimeet-contact-form input:hover,
+.unimeet-contact-form textarea:hover,
+.unimeet-contact-form input:focus,
+.unimeet-contact-form textarea:focus {
     border-color: 1px solid #c9c9c9;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
 }
 
-.unichat-contact-form {
+.unimeet-contact-form {
     margin-top: 60px;
     padding: 10px 0;
     text-align: center;

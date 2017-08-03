@@ -30,7 +30,7 @@ class HelpModal extends Component {
                         </div>
                     </div>
                     <hr/>
-                    <div className="copyright text-muted text-center">© 2017 Unichat. <a href="https://github.com/dimkarakostas/unichat" target="_blank">MIT licensed</a>, some rights reserved.</div>
+                    <div className="copyright text-muted text-center">© 2017 Unimeet. <a href="https://github.com/dimkarakostas/unimeet" target="_blank">MIT licensed</a>, some rights reserved.</div>
                 </Modal.Body>
             </Modal>
         );

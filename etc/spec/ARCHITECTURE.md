@@ -1,6 +1,6 @@
 # Overview
 
-Unichat is a service-based architecture system which contains multiple
+Unimeet is a service-based architecture system which contains multiple
 independent components. The main modules are the registrar, the presence, the
 realtime and the backend module.
 
@@ -12,7 +12,7 @@ implemented with [React](https://facebook.github.io/react/).
 ## Pages
 
 The frontend consists of two main dynamic pages and multiple static pages. The
-common component across all pages is the topbar that contains the Unichat logo
+common component across all pages is the topbar that contains the Unimeet logo
 and a navigation menu when necessary.
 
 See the [UX specification](UXSPECIFICATION.md) for more information.
@@ -20,17 +20,17 @@ See the [UX specification](UXSPECIFICATION.md) for more information.
 ## Code structure
 
 The code is structured on directories based on the functionality in the context
-of the Unichat website. It is structured in the common React project structure,
+of the Unimeet website. It is structured in the common React project structure,
 with a _public_ and a _src_ folder.
 
 The _public_ folder contains _index.html_. This file is the React HTML template
-and is used to include links to CSS libraries used across Unichat. These
+and is used to include links to CSS libraries used across Unimeet. These
 libraries are [__Bootstrap__](http://getbootstrap.com/),
 [__font-awesome__](http://fontawesome.io/) and
 [__react-bootstrap-table__](http://allenfang.github.io/react-bootstrap-table/).
 
 The base file is the _index.js_ that exists in the _src_ folder. This file
-contains the routes to the different pages of Unichat, imports the CSS
+contains the routes to the different pages of Unimeet, imports the CSS
 code that is common across the website and serves as the root of the React code.
 
 The components are then structured in the _components_ folder inside _src_.

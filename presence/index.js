@@ -17,7 +17,7 @@ winston.add(winston.transports.Console, {'timestamp': true, 'label': 'presence'}
 
 const PORT = program.port;
 
-winston.info('Unichat presence service');
+winston.info('Unimeet presence service');
 winston.info('Listening on port ' + PORT);
 
 const socketIOServer = io.listen(PORT);

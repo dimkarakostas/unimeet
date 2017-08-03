@@ -1,9 +1,9 @@
 {
-  "name": "unichat-matchmaker",
+  "name": "unimeet-matchmaker",
   "version": "1.0.0",
-  "description": "Unichat chat service matchmaker component",
+  "description": "Unimeet chat service matchmaker component",
   "author": "Dimitris Karakostas",
-  "homepage": "https://unichat.eu",
+  "homepage": "https://unimeet.gr",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",

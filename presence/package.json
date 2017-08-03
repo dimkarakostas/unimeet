@@ -1,9 +1,9 @@
 {
-  "name": "unichat-presence",
+  "name": "unimeet-presence",
   "version": "1.0.0",
-  "description": "Unichat chat service presence component",
+  "description": "Unimeet chat service presence component",
   "author": "Dimitris Karakostas",
-  "homepage": "https://unichat.eu",
+  "homepage": "https://unimeet.gr",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",

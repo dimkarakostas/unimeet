@@ -1,11 +1,11 @@
 module.exports = {
     services: [
         {
-            url: 'http://presence.unichat.eu',
+            url: 'http://presence.unimeet.gr',
             type: 'presence'
         },
         {
-            url: 'http://realtime.unichat.eu',
+            url: 'http://realtime.unimeet.gr',
             type: 'realtime'
         },
     ]

@@ -49,7 +49,7 @@ class ContactForm extends Component {
     render() {
         return (
             <div className="container">
-                <Form horizontal className="unichat-contact-form" onSubmit={this.contactSubmit}>
+                <Form horizontal className="unimeet-contact-form" onSubmit={this.contactSubmit}>
                     <FormGroup>
                         <Col componentClass={ControlLabel} sm={2} smOffset={2}>
                             Name

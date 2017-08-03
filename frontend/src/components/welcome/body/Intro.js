@@ -10,8 +10,8 @@ class Intro extends Component {
                     <div className="row">
                         <div className="col-lg-6 col-md-6 col-sm-6">
                             <div className="hello-message">
-                                <h1>Welcome to Unichat.</h1>
-                                <h3>Unichat is the <em>free</em>, <em>fast</em> and <em><b>secure</b></em> way to <u><b>chat anonymously</b></u> with other university students.</h3>
+                                <h1>Welcome to Unimeet.</h1>
+                                <h3>Unimeet is the <em>free</em>, <em>fast</em> and <em><b>secure</b></em> way to <u><b>chat anonymously</b></u> with other university students.</h3>
                                 <table>
                                     <tbody>
                                         <tr>
@@ -37,7 +37,7 @@ class Intro extends Component {
                         </div>
                         <div className="col-lg-3 col-lg-offset-2 col-md-4 col-md-offset-1 col-sm-5">
                             <div className="container form-container well text-center">
-                                <h4>New to Unichat? Sign up!</h4>
+                                <h4>New to Unimeet? Sign up!</h4>
                                 <hr/>
                                 <SignupForm />
                             </div>

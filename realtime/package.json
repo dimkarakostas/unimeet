@@ -1,9 +1,9 @@
 {
-  "name": "unichat-realtime",
+  "name": "unimeet-realtime",
   "version": "1.0.0",
-  "description": "Unichat chat service realtime component",
+  "description": "Unimeet chat service realtime component",
   "author": "Dimitris Karakostas",
-  "homepage": "https://unichat.eu",
+  "homepage": "https://unimeet.gr",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",

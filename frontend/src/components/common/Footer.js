@@ -23,7 +23,7 @@ class Footer extends Component {
                             </ul>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-6">
-                            <div className="copyright text-muted text-right">© 2017 Unichat. <a href="https://github.com/dimkarakostas/unichat" target="_blank">MIT licensed</a>, some rights reserved.</div>
+                            <div className="copyright text-muted text-right">© 2017 Unimeet. <a href="https://github.com/dimkarakostas/unimeet" target="_blank">MIT licensed</a>, some rights reserved.</div>
                         </div>
                     </div>
                 </div>

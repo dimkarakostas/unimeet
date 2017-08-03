@@ -4,7 +4,7 @@ from django.db import models
 
 
 class City(models.Model):
-    country = models.ForeignKey('unichat.Country')
+    country = models.ForeignKey('unimeet.Country')
 
     name = models.CharField(
         default='',

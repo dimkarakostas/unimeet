@@ -1,9 +1,9 @@
 {
-  "name": "unichat-frontend",
+  "name": "unimeet-frontend",
   "version": "1.0.0",
-  "description": "Unichat chat service frontend component",
+  "description": "Unimeet chat service frontend component",
   "author": "Dimitris Karakostas",
-  "homepage": "https://unichat.eu",
+  "homepage": "https://unimeet.gr",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
