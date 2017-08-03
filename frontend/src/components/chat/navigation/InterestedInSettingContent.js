@@ -119,14 +119,18 @@ class InterestedInSettingContent extends Component {
                             </Col>
                         </FormGroup>
 
-                        <b>from:</b>
-                        <FormGroup className="interested-universities">
-                            <BootstrapTable data={this.state.schools} selectRow={selectRowProp} hover condensed>
-                                <TableHeaderColumn dataField='id' isKey hidden>Id</TableHeaderColumn>
-                                <TableHeaderColumn width='200' dataField='name'>School</TableHeaderColumn>
-                                <TableHeaderColumn dataField='university'>University</TableHeaderColumn>
-                            </BootstrapTable>
-                        </FormGroup>
+                        {this.props.schoolsEnabled ?
+                            <div>
+                                <b>from:</b>
+                                <FormGroup className="interested-universities">
+                                    <BootstrapTable data={this.state.schools} selectRow={selectRowProp} hover condensed>
+                                        <TableHeaderColumn dataField='id' isKey hidden>Id</TableHeaderColumn>
+                                        <TableHeaderColumn width='200' dataField='name'>School</TableHeaderColumn>
+                                        <TableHeaderColumn dataField='university'>University</TableHeaderColumn>
+                                    </BootstrapTable>
+                                </FormGroup>
+                            </div>
+                        : null}
 
                         <Button
                             type="submit"

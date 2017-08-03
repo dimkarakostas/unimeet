@@ -48,6 +48,7 @@ class SettingsModalContentList extends Component {
                         option={this.props.options[0]}
                         interestedInGender={this.state.interestedInGender}
                         interestedInSchools={this.state.interestedInSchools}
+                        schoolsEnabled={false}
                     />
                 : ''}
                 {this.state.gender !== '' ?
