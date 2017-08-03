@@ -67,11 +67,8 @@ def user_info(request):
     if request.method == 'GET':
         if request.user.is_authenticated():
             user = request.user
-        elif all(x in request.GET for x in ['auth', 'service', 'token']):
-            if service_data[request.GET['service']]['auth'] == request.GET['auth']:
-                user = User.objects.get(token=request.GET['token'])
-            else:
-                return HttpResponseBadRequest('Bad credentials')
+        elif 'token' in request.GET:
+            user = User.objects.get(token=request.GET['token'])
         else:
             return HttpResponseBadRequest('Bad credentials')
         gender = str(user.gender)

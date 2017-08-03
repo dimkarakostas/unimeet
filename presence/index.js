@@ -42,8 +42,6 @@ socketIOServer.on('connection', (client) => {
         if (client.id === matchmaker) {
             axios.get(serviceConfig.backend.url + '/user_info', {
                 params: {
-                    auth: serviceConfig.presence.auth,
-                    service: 'presence',
                     token: partnerToken
                 }
             })
