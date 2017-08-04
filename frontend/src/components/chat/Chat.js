@@ -13,8 +13,13 @@ class Chat extends Component {
         this.state = {
             isLoggedIn: false,
             email: '',
-            token: ''
+            token: '',
+            infoUpdate: new Date()
         };
+    }
+
+    infoUpdated = () => {
+        this.setState({infoUpdate: new Date()});
     }
 
     static get contextTypes() {
@@ -42,8 +47,8 @@ class Chat extends Component {
             <div className="Chat">
                 {this.state.isLoggedIn ?
                     <div>
-                        <Topbar page={'chat'} email={this.state.email} />
-                        <Chatbody token={this.state.token} />
+                        <Topbar page={'chat'} email={this.state.email} infoUpdated={this.infoUpdated} />
+                        <Chatbody token={this.state.token} infoUpdate={this.state.infoUpdate} />
                     </div>
                 : ''}
             </div>

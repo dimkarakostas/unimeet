@@ -104,6 +104,15 @@ class Chatbody extends Component {
         this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.infoUpdate !== nextProps.infoUpdate) {
+            if (this._presenceConnector.isConnected) {
+                this._presenceConnector.disconnect();
+                this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+            }
+        }
+    }
+
     render() {
         return (
             <div className="Chatbox">

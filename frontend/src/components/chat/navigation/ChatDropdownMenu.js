@@ -68,7 +68,7 @@ class ChatDropdownMenu extends Component {
                     </NavDropdown>
                 </Nav>
                 <HelpModal isModalOpen={this.state.isHelpModalOpen} hideModal={this.hideModal} />
-                <SettingsModal isModalOpen={this.state.isSettingsModalOpen} hideModal={this.hideModal} />
+                <SettingsModal isModalOpen={this.state.isSettingsModalOpen} hideModal={this.hideModal} infoUpdated={this.props.infoUpdated} />
             </Navbar.Collapse>
         );
     }
