@@ -1,4 +1,6 @@
-const program = require('commander');
+const program = require('commander'),
+      axios = require('axios'),
+      serviceConfig = require('../config/services.json');
 
 program
     .version('1.0.0')
@@ -20,10 +22,20 @@ const SERVICES = config.services;
 winston.info('Unimeet matchmaker service');
 winston.info('Listening on port ' + PORT);
 
+function sendToRoom(client1, client2) {
+    let roomId = Math.random().toString(36).substr(2, 35);
+
+    client1.presenceSocket.emit('matchmaker-send-to-room', client1.token, realtimeToUse.url, roomId, client2.token);
+    winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
+    client2.presenceSocket.emit('matchmaker-send-to-room', client2.token, realtimeToUse.url, roomId, client1.token);
+    winston.debug('Sent client with token (' + client2.token + ') to room: ' + roomId);
+}
+
 let serviceSockets = [];
 let presenceToUse = '';
 let realtimeToUse = '';
 let waitingClient = null;
+let queue = [];
 for (var i=0; i < SERVICES.length; i++) {
     let _url = SERVICES[i].url;
     let _type = SERVICES[i].type;
@@ -37,27 +49,48 @@ for (var i=0; i < SERVICES.length; i++) {
 
     _socketIOServer.on('presence-find-partner', (token) => {
         winston.debug('Finding partner for client with token: ' + token);
-        if (waitingClient === null) {
-            waitingClient = {'token': token, 'presenceSocket': _socketIOServer};
-        }
-        else {
-            let client1 = waitingClient;
-            let client2 = {'token': token, 'presenceSocket': _socketIOServer};
-            let roomId = Math.random().toString(36).substr(2, 5);
-
-            _socketIOServer.emit('matchmaker-send-to-room', client1.token, realtimeToUse.url, roomId, client2.token);
-            winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
-            waitingClient.presenceSocket.emit('matchmaker-send-to-room', client2.token, realtimeToUse.url, roomId, client1.token);
-            winston.debug('Sent client with token (' + client2.token + ') to room: ' + roomId);
-
-            waitingClient = null;
-        }
+        var client = {'token': token, 'presenceSocket': _socketIOServer};
+        axios.get(serviceConfig.backend.url + '/user_info', {
+            params: {
+                token: token
+            }
+        })
+        .then(res => {
+            client.gender = res.data.gender;
+            axios.get(serviceConfig.backend.url + '/user_interests', {
+                params: {
+                    token: token
+                }
+            })
+            .then(res => {
+                client.interestedInGender = res.data.interestedInGender;
+                for (var i=0; i < queue.length; i++) {
+                    let candidate = queue[i];
+                    if (
+                        (client.interestedInGender === '0' || client.interestedInGender === candidate.gender) &&  // If the client is interested in the candidate...
+                        (candidate.interestedInGender === '0' || candidate.interestedInGender === client.gender)  // and the candidate is interested in the client
+                    ) {
+                        queue.splice(i, 1);
+                        sendToRoom(client, candidate);
+                        return;
+                    }
+                }
+                queue.push(client);
+            })
+            .catch(error => {
+                winston.error(error);
+            })
+        })
+        .catch(error => {
+            winston.error(error);
+        })
     });
 
     _socketIOServer.on('presence-client-disconnected', (token) => {
-        if (waitingClient !== null) {
-            winston.debug('Removing from wait line client: ' + token);
-            waitingClient = null;
+        for (var i=0; i < queue.length; i++) {
+            if (queue[i].token === token) {
+                queue.splice(i, 1);
+            }
         }
     });
 
