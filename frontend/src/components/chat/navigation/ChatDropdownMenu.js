@@ -60,7 +60,12 @@ class ChatDropdownMenu extends Component {
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
-                    <NavDropdown eventKey={'chatMenu'} title={this.state.username} id="basic-nav-dropdown" onSelect={this.handleMenuItem} >
+                    <NavDropdown
+                        eventKey={'chatMenu'}
+                        title={this.state.username}
+                        id="basic-nav-dropdown"
+                        onSelect={this.handleMenuItem}
+                    >
                         <MenuItem eventKey={'settings'}>Ρυθμίσεις</MenuItem>
                         <MenuItem eventKey={'help'}>Βοήθεια</MenuItem>
                         <MenuItem divider />
@@ -68,7 +73,11 @@ class ChatDropdownMenu extends Component {
                     </NavDropdown>
                 </Nav>
                 <HelpModal isModalOpen={this.state.isHelpModalOpen} hideModal={this.hideModal} />
-                <SettingsModal isModalOpen={this.state.isSettingsModalOpen} hideModal={this.hideModal} infoUpdated={this.props.infoUpdated} />
+                <SettingsModal
+                    isModalOpen={this.state.isSettingsModalOpen}
+                    hideModal={this.hideModal}
+                    infoUpdated={this.props.infoUpdated}
+                />
             </Navbar.Collapse>
         );
     }

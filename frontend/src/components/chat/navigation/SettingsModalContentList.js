@@ -53,7 +53,12 @@ class SettingsModalContentList extends Component {
                     />
                 : ''}
                 {this.state.gender !== '' ?
-                    <PersonalInformationSettingContent active={this.props.active} option={this.props.options[1]} gender={this.state.gender} infoUpdated={this.props.infoUpdated} />
+                    <PersonalInformationSettingContent
+                        active={this.props.active}
+                        option={this.props.options[1]}
+                        gender={this.state.gender}
+                        infoUpdated={this.props.infoUpdated}
+                    />
                 : ''}
                 <AccountSettingContent active={this.props.active} option={this.props.options[2]} />
             </div>
