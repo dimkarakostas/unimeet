@@ -25,8 +25,16 @@ class SettingsModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
-                        <SettingsModalOptionsList optionsList={this.state.optionsList} active={this.state.active} handleOptionSelection={this.handleOptionSelection} />
-                        <SettingsModalContentList active={this.state.active} options={this.state.optionsList} />
+                        <SettingsModalOptionsList
+                            optionsList={this.state.optionsList}
+                            active={this.state.active}
+                            handleOptionSelection={this.handleOptionSelection}
+                        />
+                        <SettingsModalContentList
+                            active={this.state.active}
+                            options={this.state.optionsList}
+                            infoUpdated={this.props.infoUpdated}
+                        />
                     </div>
                 </Modal.Body>
             </Modal>

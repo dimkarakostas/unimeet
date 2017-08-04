@@ -86,12 +86,7 @@ class Chatbody extends Component {
                     school: res.data.school + ', ' + res.data.university + ', ' + res.data.country
                 }
             });
-            if (this._realtimeConnector === undefined) {
-                this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
-            }
-            else {
-                this._realtimeConnector.reconnect();
-            }
+            this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
             this._realtimeConnector.joinRoom(roomId);
             this._presenceConnector.disconnect();
         })
@@ -102,6 +97,15 @@ class Chatbody extends Component {
 
     componentDidMount() {
         this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.infoUpdate !== nextProps.infoUpdate) {
+            if (this._presenceConnector.isConnected) {
+                this._presenceConnector.disconnect();
+                this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+            }
+        }
     }
 
     render() {

@@ -57,6 +57,7 @@ class InterestedInSettingContent extends Component {
                 isApplyButtonLoading: false,
                 displayChangesSavedMessage: true
             });
+            this.props.infoUpdated();
             setTimeout(() => {
                 this.setState({
                     displayChangesSavedMessage: false

@@ -14,6 +14,9 @@ function presenceConnector(token, presenceUrl, joinRoomCallback, alreadyConnecte
            this._socket.emit('client-get-partner', token);
         }, 10000);
     });
+    this.isConnected = function() {
+        return this._socket.connected;
+    }
     this.disconnect = function() {
         this._socket.disconnect();
     }
