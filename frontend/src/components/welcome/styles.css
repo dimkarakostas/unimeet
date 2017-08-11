@@ -62,4 +62,10 @@
     .signup-form {
         position: relative;
     }
+
+    .login-form .form-control {
+        width: 50%;
+        display: inline;
+    }
+
 }
