@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, FormControl, FormGroup, Button, Overlay, Popover} from 'react-bootstrap';
+import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import SignupModal from './SignupModal';
 import * as config from '../../config';
 import {Link} from 'react-router-dom';
@@ -45,11 +45,11 @@ class SignupForm extends Component {
         })
         .catch(error => {
             if (error.response.status === 400 && error.response.data === 'Invalid univesity email') {
-                console.log('Invalid mail');
                 this.setState({
                     isSignupButtonLoading: false,
                     invalidEmail: true
                 });
+                this.signupEmail.focus();
             }
             else {
                 console.log(error);
@@ -60,7 +60,8 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
-                <Form className="navbar-form signup-form" onSubmit={this.signupSubmit}>
+                Το <b>ακαδημαϊκό</b> σου email:
+                <Form horizontal className="signup-form" onSubmit={this.signupSubmit}>
                     <FormGroup
                         validationState={this.state.invalidEmail ? "warning" : null}
                         ref={(input) => { this.signupForm = input; }}
@@ -70,6 +71,7 @@ class SignupForm extends Component {
                             name="email"
                             autoComplete="off"
                             placeholder="example@uoa.gr"
+                            ref={(input) => { this.signupEmail = input; }}
                             value={this.state.email}
                             disabled={this.state.isSignupButtonLoading}
                             onChange={this.handleEmailChange}
@@ -82,19 +84,16 @@ class SignupForm extends Component {
                         disabled={this.state.isSignupButtonLoading}
                         onClick={!this.state.isSignupButtonLoading? this.signupSubmit : null}
                     >
-                        {this.state.isSignupButtonLoading? 'Signing up...' : 'Sign up'}
+                        {this.state.isSignupButtonLoading? 'Εγγραφή...' : 'Εγγραφή'}
                     </Button>
+                    {this.state.invalidEmail ?
+                        <div className="email-error">
+                            <b>Υπήρξε κάποιο πρόβλημα! Χρησιμοποίησες ένα <Link to="/faq" target="_blank">έγκυρο ακαδημαϊκό</Link> email?</b>
+                        </div>
+                    : null}
                 </Form>
+                <div className="copyright text-muted" id="email-disclaimer" >Η διεύθυνση email σου θα χρησιμοποιηθεί <b>μόνο</b> για να επιβεβαιωθεί ότι είσαι φοιτητής.</div>
                 <SignupModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
-                <Overlay
-                    show={this.state.invalidEmail}
-                    placement="bottom"
-                    container={this.signupForm}
-                >
-                    <Popover id="popover-contained">
-                        There was a problem! Did you use a <Link to="/faq" target="_blank">valid academic email</Link> address?
-                    </Popover>
-                </Overlay>
             </div>
         );
     }

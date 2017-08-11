@@ -70,7 +70,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <Form className="navbar-form navbar-right" onSubmit={this.handleLogin}>
+                <Form className="navbar-form navbar-right login-form" onSubmit={this.handleLogin}>
                     <FormGroup>
                         <FormControl
                             type="text"
