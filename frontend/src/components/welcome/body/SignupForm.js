@@ -91,6 +91,7 @@ class SignupForm extends Component {
                         </div>
                     : null}
                 </Form>
+                <div className="copyright text-muted" id="email-disclaimer" >Η διεύθυνση email σου θα χρησιμοποιηθεί <b>μόνο</b> για να επιβεβαιωθεί ότι είσαι φοιτητής.</div>
                 <SignupModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
             </div>
         );

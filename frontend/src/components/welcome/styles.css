@@ -43,6 +43,10 @@
     display: inline;
 }
 
+#email-disclaimer {
+    margin-top: 20px;
+}
+
 @media(min-width:768px) {
     #login-form {
         display: none;
