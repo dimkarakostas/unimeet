@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, FormControl, FormGroup, Button, Overlay, Popover} from 'react-bootstrap';
+import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import SignupModal from './SignupModal';
 import * as config from '../../config';
 import {Link} from 'react-router-dom';
@@ -84,17 +84,13 @@ class SignupForm extends Component {
                     >
                         {this.state.isSignupButtonLoading? 'Signing up...' : 'Sign up'}
                     </Button>
+                    {this.state.invalidEmail ?
+                        <div className="email-error">
+                            <b>Υπήρξε κάποιο πρόβλημα! Χρησιμοποίησες ένα <Link to="/faq" target="_blank">έγκυρο ακαδημαϊκό</Link> email?</b>
+                        </div>
+                    : null}
                 </Form>
                 <SignupModal isModalOpen={this.state.isModalOpen} hideModal={this.hideModal} />
-                <Overlay
-                    show={this.state.invalidEmail}
-                    placement="bottom"
-                    container={this.signupForm}
-                >
-                    <Popover id="popover-contained">
-                        There was a problem! Did you use a <Link to="/faq" target="_blank">valid academic email</Link> address?
-                    </Popover>
-                </Overlay>
             </div>
         );
     }

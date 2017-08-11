@@ -34,8 +34,8 @@
     position: relative;
 }
 
-.signup-form .popover.bottom {
-    margin-top: 43px;
+.signup-form .email-error {
+    margin-top: 10px;
 }
 
 .signup-form .form-control {
