@@ -45,7 +45,6 @@ class SignupForm extends Component {
         })
         .catch(error => {
             if (error.response.status === 400 && error.response.data === 'Invalid univesity email') {
-                console.log('Invalid mail');
                 this.setState({
                     isSignupButtonLoading: false,
                     invalidEmail: true
