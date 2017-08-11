@@ -19,33 +19,6 @@
     padding-bottom: 60px;
 }
 
-.hello-message {
-    position: relative;
-    padding-left: 20px;
-}
-
-.hello-message h1 {
-    font-size: 3.5em;
-    padding-top: 45px;
-    padding-bottom: 15px;
-}
-
-.hello-message h3 {
-    font-size: 1.5em;
-}
-
-.hello-message table {
-    font-size: 1.5em;
-}
-
-.hello-message td {
-    padding: 20px 0;
-}
-
-.hello-message i {
-    padding: 0 10px;
-}
-
 .form-container {
     color: #000000;
     margin: 120px 0;
@@ -65,8 +38,9 @@
     margin-top: 43px;
 }
 
-#btn-signup {
-    margin-top: 8px;
+.signup-form .form-control {
+    width: 50%;
+    display: inline;
 }
 
 @media(min-width:768px) {
@@ -76,10 +50,6 @@
 }
 
 @media(max-width:767px) {
-    .hello-message h1,
-    .hello-message table {
-        display: none;
-    }
     .form-container {
         margin-top: 20px;
         margin-bottom: 0px;
