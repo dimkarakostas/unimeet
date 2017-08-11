@@ -60,7 +60,8 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
-                <Form className="navbar-form signup-form" onSubmit={this.signupSubmit}>
+                Το <b>ακαδημαϊκό</b> σου email:
+                <Form horizontal className="signup-form" onSubmit={this.signupSubmit}>
                     <FormGroup
                         validationState={this.state.invalidEmail ? "warning" : null}
                         ref={(input) => { this.signupForm = input; }}
@@ -82,7 +83,7 @@ class SignupForm extends Component {
                         disabled={this.state.isSignupButtonLoading}
                         onClick={!this.state.isSignupButtonLoading? this.signupSubmit : null}
                     >
-                        {this.state.isSignupButtonLoading? 'Signing up...' : 'Sign up'}
+                        {this.state.isSignupButtonLoading? 'Εγγραφή...' : 'Εγγραφή'}
                     </Button>
                     {this.state.invalidEmail ?
                         <div className="email-error">
