@@ -49,6 +49,7 @@ class SignupForm extends Component {
                     isSignupButtonLoading: false,
                     invalidEmail: true
                 });
+                this.signupEmail.focus();
             }
             else {
                 console.log(error);
@@ -70,6 +71,7 @@ class SignupForm extends Component {
                             name="email"
                             autoComplete="off"
                             placeholder="example@uoa.gr"
+                            ref={(input) => { this.signupEmail = input; }}
                             value={this.state.email}
                             disabled={this.state.isSignupButtonLoading}
                             onChange={this.handleEmailChange}
