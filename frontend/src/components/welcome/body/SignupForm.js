@@ -70,6 +70,7 @@ class SignupForm extends Component {
                             type="text"
                             name="email"
                             autoComplete="off"
+                            autoFocus
                             placeholder="example@uoa.gr"
                             ref={(input) => { this.signupEmail = input; }}
                             value={this.state.email}
