@@ -2,6 +2,7 @@ from .models import School, User
 import re
 import string
 import random
+from mail import send_mail
 
 
 def get_school_list():
@@ -32,5 +33,4 @@ def create_user(email, school):
     user_obj = User.objects.create_user(email=email, school=school, password=password, token=token)
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
-    print 'Email:', email, 'Password:', password, 'Token:', token
-    # TODO: Send signup mail to user
+    send_mail(email, password, 'welcome')
