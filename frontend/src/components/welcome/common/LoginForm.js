@@ -76,7 +76,6 @@ class LoginForm extends Component {
                             type="text"
                             placeholder="Email"
                             name="username"
-                            autoFocus
                             autoComplete="off"
                             disabled={this.state.isLoginButtonLoading}
                             onChange={this.handleInputChange}
