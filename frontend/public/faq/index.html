@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
+    <link rel="stylesheet" href="css/unimeet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script> <!-- Modernizr -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"</script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
+    <title>Unimeet</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="http://unimeet.gr" class="navbar-brand">
+                <img src="https://raw.githubusercontent.com/dimkarakostas/unimeet/master/frontend/src/components/common/img/unimeetLogo.png" alt="The Unimeet logo">
+            </a>
+        </div>
+    </div>
+</nav>
+<section class="cd-faq">
+    <ul class="cd-faq-categories">
+        <li><a class="selected" href="#basics">Γενικά</a></li>
+        <li><a href="#account">Λογαριασμός</a></li>
+        <li><a href="#conversation">Συνομιλία</a></li>
+        <li><a href="#security">Ασφάλεια</a></li>
+    </ul> <!-- cd-faq-categories -->
+
+    <div class="cd-faq-items">
+        <ul id="basics" class="cd-faq-group">
+            <li class="cd-faq-title"><h2>Γενικά</h2></li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Τι είναι το Unimeet;</a>
+                <div class="cd-faq-content">
+                    <p>Το Unimeet είναι ένα δωρεάν, ανώνυμο και ασφαλές chat το οποίο απευθύνεται σε φοιτητές.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Μπορώ να εγγραφώ αν δεν είμαι φοιτητής;</a>
+                <div class="cd-faq-content">
+                    <p>Δυστυχώς όχι. Για να ξεκινήσεις να μιλάς θα πρέπει να κάνεις εγγραφή με το ακαδημαϊκό σου email. Με αυτόν τον τρόπο εξασφαλίζουμε πως όλοι/ες όσοι/ες έχουν κάνει εγγραφή (και που θα μιλήσεις) είναι φοιτητές/τριες.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Τι είναι το ακαδημαϊκό email;</a>
+                <div class="cd-faq-content">
+                    <p>Το ακαδημαϊκό email είναι η διεύθυνση email την οποία σου παρέχει το πανεπιστήμιο επειδή είσαι φοιτητής, πχ το Εθνικό Μετσόβιο Πολυτεχνείο παρέχει σε όλους τους φοιτητές από μια διεύθυνση email της μορφής "<αριθμός_φοιτητή>@mail.ntua.gr".</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Τι κάνω αν δεν έχω ακαδημαϊκό email;</a>
+                <div class="cd-faq-content">
+                    <p>Γνωρίζουμε πως ορισμένες σχολές δεν προσφέρουν ακαδημαϊκά email στους φοιτητές. Δυστυχώς δεν μπορούμε να κάνουμε κάτι για αυτό. Σου προτείνουμε ωστόσο να κάνεις αίτημα στις υπηρεσίες της σχολής σου ώστε να το ενεργοποιήσουν όσο το δυνατόν πιο γρήγορα, ώστε να μπορείς να γίνεις και εσύ μέλος του Unimeet.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Έχω ακαδημαϊκό email αλλά όταν κάνω εγγραφή το απορρίπτει. Ποιο είναι το πρόβλημα;</a>
+                <div class="cd-faq-content">
+                    <p>Προς το παρόν το Unimeet είναι διαθέσιμο μόνο για τους φοιτητές του Εθνικού Μετσόβιου Πολυτεχνείου και ορισμένων σχολών του Εθνικού Καποδιστριακού Πανεπιστημίου Αθηνών. Θα ήταν εξαιρετικά χρήσιμο να μας στείλεις τη διεύθυνση email σου μαζί με τη σχολή και το πανεπιστήμιο στο οποίο σπουδάζεις χρησιμοποιώντας τη <a href="http://unimeet.gr/contact">φόρμα επικοινωνίας</a> και το επόμενο διάστημα υποσχόμαστε να προσθέσουμε επιπλέον σχολές και πανεπιστήμια.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+        </ul> <!-- cd-faq-group -->
+
+        <ul id="account" class="cd-faq-group">
+            <li class="cd-faq-title"><h2>Λογαριασμός</h2></li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Τι στοιχεία αποθηκεύονται στο λογαριασμό μου;</a>
+                <div class="cd-faq-content">
+                    <p>
+                        Χρησιμοποιώντας τη διεύθυνση του email σου μπορούμε να βρούμε σε ποια σχολή και ποιο πανεπιστήμιο φοιτάς. Από εκεί και πέρα, μπορείς να ορίσεις το φύλο σου, καθώς και το φύλο των ανθρώπων με τους οποίους θέλεις να μιλήσεις.
+                    </p>
+                </div> <!-- cd-faq-content -->
+            </li>
+
+            <li>
+                <a class="cd-faq-trigger" href="#0">Γιατί να ορίσω το φύλο μου;</a>
+                <div class="cd-faq-content">
+                    <p>
+                        Σκέψου την παρακάτω περίπτωση:<br>
+                        Έστω ότι είσαι άντρας και θέλεις να μιλήσεις με γυναίκες. Παράλληλα, είναι συνδεδεμένη κάποια γυναίκα στο Unimeet, η οποία έχει δηλώσει ότι θέλει να μιλήσει με άντρες. Αν δεν έχεις ορίσει το φύλο σου, τότε εξ ορισμού είναι "Μη ορισμένο", άρα δε θα συνδεθείτε.<br>
+                    </p>
+                </div> <!-- cd-faq-content -->
+            </li>
+        </ul> <!-- cd-faq-group -->
+
+        <ul id="conversation" class="cd-faq-group">
+            <li class="cd-faq-title"><h2>Συνομιλία</h2></li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Πώς επιλέγετε ποιος θα μιλήσει με ποιον;</a>
+                <div class="cd-faq-content">
+                    <p>
+                        Όταν μπαίνεις στο Unimeet, σε τοποθετούμε σε μια ουρά μαζί με όσους δεν έχουν βρει ταίρι. Κάθε φορά που κάποιος καινούριος χρήστης συνδέεται, ψάχνουμε την ουρά από την αρχή έως ότου βρούμε κάποιον με τον οποίον ταιριάζουν τα ενδιαφέροντα.
+                    </p>
+                </div> <!-- cd-faq-content -->
+            </li>
+
+            <li>
+                <a class="cd-faq-trigger" href="#0">Πόση ώρα θα περιμένω μέχρι να μιλήσω με κάποιον όμως;</a>
+                <div class="cd-faq-content">
+                    <p>
+                        Δυστυχώς αυτό εξαρτάται από το πόσοι χρησιμοποιούν το Unimeet όταν θα συνδεθείς. Εφόσον όμως έχεις ορίσει τα ενδιαφέροντά σου όπως αναφέραμε παραπάνω, αργά ή γρήγορα θα βρεθεί κάποιος χρήστης με τον οποίο θα ταιριάξετε.
+                    </p>
+                </div> <!-- cd-faq-content -->
+            </li>
+        </ul> <!-- cd-faq-group -->
+
+        <ul id="security" class="cd-faq-group">
+            <li class="cd-faq-title"><h2>Ασφάλεια</h2></li>
+            <li>
+                <a class="cd-faq-trigger" href="#0">Γιατί να βάλω το ακαδημαϊκό email μου;</a>
+                <div class="cd-faq-content">
+                    <p>Το ακαδημαϊκό email σου χρησιμοποιείται μόνο για την αρχική εγγραφή στο Unimeet και την ανάκτηση του κωδικού σου σε περίπτωση που τον ξεχάσεις. Δεν πρόκειται να χρησιμοποιήσουμε τη διεύθυνση email σου με <b>κανέναν</b> άλλο τρόπο.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+
+            <li>
+                <a class="cd-faq-trigger" href="#0">Ποιος μπορεί να δει αυτά που γράφω;</a>
+                <div class="cd-faq-content">
+                    <p>Το Unimeet χρησιμοποιεί <a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank">HTTPS</a>, το οποίο σημαίνει πως όλα τα μηνύματα που ανταλλάσσονται μέσω του Unimeet κρυπτογραφούνται πριν σταλούν στο δίκτυο. Αυτό σημαίνει πρακτικά πως όσα γράφεις είναι προφυλαγμένα από τα μάτια του παρόχου Internet ή των γονιών που βρίσκονται στο διπλανό δωμάτιο και στο wifi σου :)</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+
+            <li>
+                <a class="cd-faq-trigger" href="#0">Δηλαδή η ομάδα του Unimeet δεν μπορεί να διαβάσει όσα γράφω;</a>
+                <div class="cd-faq-content">
+                    <p>Επειδή το Unimeet είναι ανώνυμο, είναι αδύνατον να εφαρμόζουμε <a href="https://en.wikipedia.org/wiki/End-to-end_encryption" target="_blank">end-to-end encryption</a>, το οποίο σημαίνει πως το Unimeet λειτουργεί ως μεσάζοντας μεταξύ των δύο συνομιλητών, όπως ακριβώς λειτουργεί και το Facebook, το Skype κ.ά. Ωστόσο, τίποτα από όσα γράφεις δεν καταγράφεται ούτε αποθηκεύεται για να χρησιμοποιηθεί με οποιονδήποτε τρόπο.</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+
+            <li>
+                <a class="cd-faq-trigger" href="#0">Χμμμμ, σχεδόν με έχετε πείσει. Μπορώ να επιβεβαιώσω κάπως αυτά που λέτε;</a>
+                <div class="cd-faq-content">
+                    <p>Σε νιώθουμε παρανοϊκέ μας φίλε. Αν θέλεις, ρίξε μια ματιά στον <a href="https://github.com/dimkarakostas/unimeet" target="_blank">κώδικα του Unimeet</a>, είναι Open Source κάτω από MIT License οπότε μπορείς να χρησιμοποιήσεις όποιο κομμάτι του θέλεις και για κάποιο δικό σου project! :)</p>
+                </div> <!-- cd-faq-content -->
+            </li>
+        </ul> <!-- cd-faq-group -->
+    </div> <!-- cd-faq-items -->
+    <a href="#0" class="cd-close-panel">Close</a>
+</section> <!-- cd-faq -->
+</body>
+</html>

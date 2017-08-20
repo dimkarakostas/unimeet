@@ -1,0 +1,16 @@
+body {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+nav {
+    font-weight: 700;
+}
+
+.navbar-brand {
+    padding-top: 7px;
+    padding-left: 35px;
+}
+.navbar-brand>img {
+    float: left;
+    width: 150px;
+}
