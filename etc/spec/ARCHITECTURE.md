@@ -72,12 +72,17 @@ socket.io client corresponds to the matchmaker service.
 
 The matchmaker receives a _presence-find-partner_ message from a presence
 service in order to start searching for a match for the given user, who is
-identified by the cookie that is included in the message request. The matchmaker
+identified by the token that is included in the message request. The matchmaker
 then searches for a match based on the user's preferences and interests. When
 such a match is found, it emits a _matchmaker-send-to-room_ message to the
 presence service that originally sent the _presence-find-partner_ message,
-which includes the cookie of the user, the realtime URL and the room Id that the
-user should connect to.
+which includes the token of the user, the realtime URL, the room Id that the
+user should connect to and the token of the user's partner.
+
+### presence-client-disconnected
+
+When the matchmaker receives a _presence-client-disconnected_, it removes the
+client from the queue based on its token.
 
 # Presence
 
@@ -108,15 +113,18 @@ The client initiates the connection with the presence server using a hardcoded U
 address. Upon receiving the _connect_ message from the presence it proceeds to find
 a partner.
 
-### client-get-partner / presence-find-partner
+### client-get-partner / presence-find-partner / server-already-connected
 
 When the client wishes to start chatting it emits a _client-get-partner_
-message. Upon receiving it, the presence sends a _presence-find-partner_ to the
-matchmaker service to try and find a match for the user based on its interests
-and preferences. Both message requests include the client's cookie, in order to
-identify the user that made the request.
+message. Upon receiving it, if the user is already connected using a different
+client, eg a different device, TOR session etc, it immediately emits a
+_server-already-connected_ message and takes no further action.  Otherwise the
+presence sends a _presence-find-partner_ to the matchmaker service to try and
+find a match for the user based on its interests and preferences. Both message
+requests include the client's token, in order to identify the user that made the
+request.
 
-The presence keeps a list of the cookies all clients that have not been matched
+The presence keeps a list of the tokens all clients that have not been matched
 yet. If the matchmaker connection drops, upon reconnection it reissues the
 _presence-find-partner_ message for all clients so that the matchmaker can start
 its process again.
@@ -124,10 +132,11 @@ its process again.
 ### matchmaker-send-to-room / server-join-room
 
 When a match has been found, the matchmaker has sent a _matchmaker-send-to-room_
-message with the realtime, roomId and cookie parameters to the presence. When
-the presence receives it, it emits a _server-join-room_ to the client identified
-by the cookie that contains the realtime URL that the client should connect to
-and the room id that it should join.
+message with the realtime, roomId and token parameters to the presence. When
+the presence receives it, it contacts the backend to get the partner's info
+based on its token. Then it emits a _server-join-room_ to the client identified
+by the token that contains the realtime URL that the client should connect to,
+the room id that it should join and its partner's info.
 
 ### disconnect / reconnect
 
