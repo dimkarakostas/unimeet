@@ -16,10 +16,6 @@ class Footer extends Component {
                                 <li>
                                     <Link to="/contact">Επικοινωνία</Link>
                                 </li>
-                                <li className="footer-menu-divider">&sdot;</li>
-                                <li>
-                                    <Link to="./security">Ασφάλεια</Link>
-                                </li>
                             </ul>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-6">
