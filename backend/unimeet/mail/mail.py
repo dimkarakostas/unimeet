@@ -38,6 +38,23 @@ def send_mail(user_mail, password, subject):
         print e
 
 
+def send_contact_form(name, email_address, message):
+    email = MIMEMultipart('alternative')
+    email['From'] = UNIMEET_MAIL
+    email['To'] = UNIMEET_MAIL
+    email['Subject'] = '[Contact form]'
+    email.attach(MIMEText('Name: {}\nEmail: {}\nMessage: {}'.format(name, email_address, message), 'plain'))
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com')
+        server.ehlo()
+        server.login(UNIMEET_MAIL, PASSWORD)
+        server.sendmail(email['From'], email['To'], email.as_string())
+        server.close()
+    except Exception, e:
+        print e
+
+
 def send_contact_response(email_address):
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
