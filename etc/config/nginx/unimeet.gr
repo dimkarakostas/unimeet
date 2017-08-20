@@ -9,6 +9,11 @@ server {
     location / {
         try_files $uri $uri/ /index.html;
     }
+
+    location /faq {
+        autoindex on;
+        try_files $uri $uri/ /faq/index.html;
+    }
 }
 
 server {
