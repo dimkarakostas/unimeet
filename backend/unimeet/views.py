@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import json
-from helpers import get_school_list, get_school_by_email, create_user
+from helpers import get_school_list, get_school_by_email, create_user, update_password
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 import os
 from django.conf import settings
@@ -143,6 +143,19 @@ def delete_user(request):
             request.user.delete()
             return HttpResponse('OK')
     return HttpResponseBadRequest('Bad credentials')
+
+
+@csrf_exempt
+def forgot_password(request):
+    if request.method == 'POST':
+        forgot_params = json.loads(request.body.decode('utf-8'))
+        email = forgot_params['email']
+        try:
+            update_password(email)
+        except Exception, e:
+            print e
+            return HttpResponseBadRequest('Error in password update')
+    return HttpResponse('OK')
 
 
 @csrf_exempt

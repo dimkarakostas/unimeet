@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {Modal, Form, FormGroup, FormControl, Button} from 'react-bootstrap';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class ForgotPasswordModal extends Component {
     constructor(props) {
@@ -7,7 +11,8 @@ class ForgotPasswordModal extends Component {
         this.state = {
             emailPasswordReset: '',
             isForgotPasswordButtonLoading: false,
-            isPasswordResetMailSent: false
+            isPasswordResetMailSent: false,
+            resetMessage: ''
         };
     }
 
@@ -27,12 +32,24 @@ class ForgotPasswordModal extends Component {
 
     handlePasswordReset = (event) => {
         event.preventDefault();
-        console.log('password-reset-mail: ' + this.state.emailPasswordReset); //TODO: remove
         this.setState({isForgotPasswordButtonLoading: true});
-        //TODO: Reset password request to backend
-        setTimeout(() => {
-            this.setState({isForgotPasswordButtonLoading: false, isPasswordResetMailSent: true});
-        }, 2000);
+
+        axios.post(config.backendUrl + '/forgot_password', {email: this.state.emailPasswordReset})
+        .then(res => {
+            this.setState({
+                isForgotPasswordButtonLoading: false,
+                isPasswordResetMailSent: true,
+                resetMessage: 'Έλεγξε το email σου για πληροφορίες ώστε να ανακτήσεις τον κωδικό.'
+            });
+        })
+        .catch(error => {
+            this.setState({
+                isForgotPasswordButtonLoading: false,
+                isPasswordResetMailSent: true,
+                resetMessage: 'Κάτι πήγε στραβά. Παρακαλώ προσπάθησε ξανά.'
+            });
+            console.log(error);
+        })
     }
 
     render() {
@@ -43,9 +60,9 @@ class ForgotPasswordModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     {this.state.isPasswordResetMailSent ?
-                        <p>Έλεγξε το email σου για πληροφορίες ώστε να ανακτήσεις τον κωδικό.</p> :
+                        <p>{this.state.resetMessage}</p> :
                         <div>
-                            <p>Δώσε τη διεύθυση email με την οποία έκανες εγγραφή στο Unimeet.</p>
+                            <p>Δώσε τη διεύθυνση email με την οποία έκανες εγγραφή στο Unimeet.</p>
                             <Form onSubmit={this.handlePasswordReset}>
                                 <FormGroup>
                                     <FormControl
