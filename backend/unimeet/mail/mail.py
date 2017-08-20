@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
@@ -25,6 +27,23 @@ def send_mail(user_mail, password, subject):
     email['To'] = user_mail
     email['Subject'] = SUBJECTS[subject][0]
     email.attach(MIMEText(body, 'html'))
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.gmail.com')
+        server.ehlo()
+        server.login(UNIMEET_MAIL, PASSWORD)
+        server.sendmail(email['From'], email['To'], email.as_string())
+        server.close()
+    except Exception, e:
+        print e
+
+
+def send_contact_response(email_address):
+    email = MIMEMultipart('alternative')
+    email['From'] = UNIMEET_MAIL
+    email['To'] = email_address
+    email['Subject'] = '[Unimeet] Φόρμα επικοινωνίας'
+    email.attach(MIMEText('Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet', 'plain'))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
