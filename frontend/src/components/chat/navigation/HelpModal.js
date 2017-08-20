@@ -12,9 +12,9 @@ class HelpModal extends Component {
                 <Modal.Body>
                     <div className="row help-modal-row">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
-                            <Link to="/faq" target="_blank" className="list-group-item text-center">
+                            <a href="http://unimeet.gr/faq" target="_blank" className="list-group-item text-center">
                                 Συχνές ερωτήσεις
-                            </Link>
+                            </a>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 settings-modal-element">
                             <Link to="/contact" target="_blank" className="list-group-item text-center">
