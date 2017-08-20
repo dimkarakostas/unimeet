@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {Form, FormControl, FormGroup, Button, Col, ControlLabel} from 'react-bootstrap';
 import ContactModal from './ContactModal';
+import * as config from '../../config';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class ContactForm extends Component {
     constructor(props) {
@@ -34,8 +38,9 @@ class ContactForm extends Component {
         event.preventDefault();
         console.log('name: ' + this.state.name + ' email: ' + this.state.email + ' message: ' + this.state.message); //TODO: remove
         this.setState({isContactButtonLoading: true});
-        //TODO: Contact request to backend
-        setTimeout(() => {
+
+        axios.post(config.backendUrl + '/contact', {name: this.state.name, email: this.state.email, message: this.state.message})
+        .then(res => {
             this.setState({
                 name: '',
                 email: '',
@@ -43,7 +48,13 @@ class ContactForm extends Component {
                 isModalOpen: true,
                 isContactButtonLoading: false
             });
-        }, 2000);
+        })
+        .catch(error => {
+            this.setState({
+                isContactButtonLoading: false
+            });
+            console.log(error);
+        })
     }
 
     render() {
