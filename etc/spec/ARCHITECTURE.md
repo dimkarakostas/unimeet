@@ -200,43 +200,109 @@ the user closes the browser, the realtime checks if the only client in the room
 is the user's partner, in which case it emits a _server-next_ message to the
 entire room to notify the user's partner to search for a new partner.
 
-# Registrar
+# Backend
 
-This component is responsible for client registration, database management and
-user manipulation.
+This component is responsible for client registration, logging in and database
+management.
 
-It is implemented in [Node.js](https://nodejs.org/en/) and
-[Sequelize](http://docs.sequelizejs.com/en/v3/). The websocket API
-exposed by the registrar service is explained below.
+It is implemented in [Django](https://www.djangoproject.com/). The API exposed by the
+backend service is explained below.
 
-## client <-> registrar protocol
+## API
 
-The client / real-time protocol is implemented using
-[socket.io](http://socket.io/) websockets.
+The backend offers a RESTful API that is explained below.
 
-### client-hello / server-hello
+### /signup
 
-Same as with the realtime communication, the initialization of the connection
-between the client and the registrar is achieved by the _client-hello_ and
-_server-hello_ requests.
+POST parameters:
+- email: The academic email of the user
 
-### register / server-register
+If the email is valid, it registers the user to the database and responds with
+200, otherwise it responds with 400.
 
-The client emits a _register_ request in order to register a new user with the
-registrar. This request includes the following data fields:
-    email - the user's email address,
-    sex - the user's sex (false -> male, true -> female),
-    password - the user's chosen password,
-    password_confirmation - the password verification field,
-    UniversityId - the database id of the user's university.
-The server emits a _server-register_ request when the process is complete and
-sends a message, either of registration verification or an error that occured.
+### /login
 
-### start-chat / server-start-chat
+POST parameters:
+- email: The academic email of the user
+- password: The user's password
 
-The client emits a _start-chat_ in order to initiate a chat conversation. The
-server then is responsible for finding a proper partner and alerting both the
-client and the partner with _server-start-chat_ requests. These requests contain
-two fields:
-    partnerEmail - the email address of the chosen chat partner,
-    roomId - the Id of the room in the realtime server.
+If the email/password match, then it logs the user in, sets the Django auth
+cookies and responds with a 200 and the React frontend code redirects to the
+chat page, otherwise it responds with 400.
+
+### /logout
+
+GET request that is accessed using the Django auth cookies. If the cookies are
+valid it responds with 200 otherwise 400.
+
+### /is\_user\_logged\_in
+
+If the GET request includes valid Django auth cookies, then it responds with 200
+JSON response with the email and the Unimeet auth token of the user. If no
+cookies are offered, it responds with a redirect to the Unimeet welcome page.
+
+### /user\_info
+
+For a GET request, it must either offer the Django auth cookies or the Unimeet
+auth token for a user. In that case it responds with 200 JSON that contains the
+gender and school info of the user. Otherwise it responds with 400.
+
+For a POST request, it must offer the Django auth cookies and set the POST
+parameters:
+- gender: The new gender setting of the user (integer)
+
+In that case it updates the user's gender and responds with 200, otherwise 400.
+
+### /user\_interests
+
+Authenticates exactly as the /user\_info.
+
+GET response JSON contains the gender the user is interested in and the list of
+school codes.
+
+POST request parameters:
+- interestedInGender: The new gender setting of the user (integer)
+- interestedInSchools: A list of school codes for the new interests of the user
+
+### /change\_password
+
+Needs Django auth cookies for authentication.
+
+POST parameters:
+- oldPassword: the current active password for the user
+- newPassword: the new password
+- newPasswordVerification: the new password verification
+
+If the new password matches the verification and the old password the current,
+it updates the password and the Django session cookies and responds with 200,
+otherwise 400.
+
+### /delete\_user
+
+Needs Django auth cookies for authentication and accepts only DELETE requests.
+In that case, it deletes the user from the database and responds with 200
+otherwise 400.
+
+### /forgot\_password
+
+POST parameters:
+- email: the email of the user
+
+If the user exists in the database, it updates its password, sends an email to
+the given address with the new password and then responds with 200, otherwise
+400.
+
+Note: This is a design choice that results in information leakage. Specifically,
+anybody can try email addresses and, in case of 200, can recognise that the
+address is signed up for Unimeet.
+
+### /contact
+
+POST parameters:
+- name: The name of the user
+- email: The email of the user
+- message: The contact form message
+
+It tries to send a self-email to the Unimeet email address with the contact form
+message and then a reassuring email to the user's address. If all go well it
+responds with 200, otherwise 400.
