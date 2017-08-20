@@ -72,12 +72,17 @@ socket.io client corresponds to the matchmaker service.
 
 The matchmaker receives a _presence-find-partner_ message from a presence
 service in order to start searching for a match for the given user, who is
-identified by the cookie that is included in the message request. The matchmaker
+identified by the token that is included in the message request. The matchmaker
 then searches for a match based on the user's preferences and interests. When
 such a match is found, it emits a _matchmaker-send-to-room_ message to the
 presence service that originally sent the _presence-find-partner_ message,
-which includes the cookie of the user, the realtime URL and the room Id that the
-user should connect to.
+which includes the token of the user, the realtime URL, the room Id that the
+user should connect to and the token of the user's partner.
+
+### presence-client-disconnected
+
+When the matchmaker receives a _presence-client-disconnected_, it removes the
+client from the queue based on its token.
 
 # Presence
 
@@ -108,15 +113,18 @@ The client initiates the connection with the presence server using a hardcoded U
 address. Upon receiving the _connect_ message from the presence it proceeds to find
 a partner.
 
-### client-get-partner / presence-find-partner
+### client-get-partner / presence-find-partner / server-already-connected
 
 When the client wishes to start chatting it emits a _client-get-partner_
-message. Upon receiving it, the presence sends a _presence-find-partner_ to the
-matchmaker service to try and find a match for the user based on its interests
-and preferences. Both message requests include the client's cookie, in order to
-identify the user that made the request.
+message. Upon receiving it, if the user is already connected using a different
+client, eg a different device, TOR session etc, it immediately emits a
+_server-already-connected_ message and takes no further action.  Otherwise the
+presence sends a _presence-find-partner_ to the matchmaker service to try and
+find a match for the user based on its interests and preferences. Both message
+requests include the client's token, in order to identify the user that made the
+request.
 
-The presence keeps a list of the cookies all clients that have not been matched
+The presence keeps a list of the tokens all clients that have not been matched
 yet. If the matchmaker connection drops, upon reconnection it reissues the
 _presence-find-partner_ message for all clients so that the matchmaker can start
 its process again.
@@ -124,10 +132,11 @@ its process again.
 ### matchmaker-send-to-room / server-join-room
 
 When a match has been found, the matchmaker has sent a _matchmaker-send-to-room_
-message with the realtime, roomId and cookie parameters to the presence. When
-the presence receives it, it emits a _server-join-room_ to the client identified
-by the cookie that contains the realtime URL that the client should connect to
-and the room id that it should join.
+message with the realtime, roomId and token parameters to the presence. When
+the presence receives it, it contacts the backend to get the partner's info
+based on its token. Then it emits a _server-join-room_ to the client identified
+by the token that contains the realtime URL that the client should connect to,
+the room id that it should join and its partner's info.
 
 ### disconnect / reconnect
 
@@ -200,43 +209,109 @@ the user closes the browser, the realtime checks if the only client in the room
 is the user's partner, in which case it emits a _server-next_ message to the
 entire room to notify the user's partner to search for a new partner.
 
-# Registrar
+# Backend
 
-This component is responsible for client registration, database management and
-user manipulation.
+This component is responsible for client registration, logging in and database
+management.
 
-It is implemented in [Node.js](https://nodejs.org/en/) and
-[Sequelize](http://docs.sequelizejs.com/en/v3/). The websocket API
-exposed by the registrar service is explained below.
+It is implemented in [Django](https://www.djangoproject.com/). The API exposed by the
+backend service is explained below.
 
-## client <-> registrar protocol
+## API
 
-The client / real-time protocol is implemented using
-[socket.io](http://socket.io/) websockets.
+The backend offers a RESTful API that is explained below.
 
-### client-hello / server-hello
+### /signup
 
-Same as with the realtime communication, the initialization of the connection
-between the client and the registrar is achieved by the _client-hello_ and
-_server-hello_ requests.
+POST parameters:
+- email: The academic email of the user
 
-### register / server-register
+If the email is valid, it registers the user to the database and responds with
+200, otherwise it responds with 400.
 
-The client emits a _register_ request in order to register a new user with the
-registrar. This request includes the following data fields:
-    email - the user's email address,
-    sex - the user's sex (false -> male, true -> female),
-    password - the user's chosen password,
-    password_confirmation - the password verification field,
-    UniversityId - the database id of the user's university.
-The server emits a _server-register_ request when the process is complete and
-sends a message, either of registration verification or an error that occured.
+### /login
 
-### start-chat / server-start-chat
+POST parameters:
+- email: The academic email of the user
+- password: The user's password
 
-The client emits a _start-chat_ in order to initiate a chat conversation. The
-server then is responsible for finding a proper partner and alerting both the
-client and the partner with _server-start-chat_ requests. These requests contain
-two fields:
-    partnerEmail - the email address of the chosen chat partner,
-    roomId - the Id of the room in the realtime server.
+If the email/password match, then it logs the user in, sets the Django auth
+cookies and responds with a 200 and the React frontend code redirects to the
+chat page, otherwise it responds with 400.
+
+### /logout
+
+GET request that is accessed using the Django auth cookies. If the cookies are
+valid it responds with 200 otherwise 400.
+
+### /is\_user\_logged\_in
+
+If the GET request includes valid Django auth cookies, then it responds with 200
+JSON response with the email and the Unimeet auth token of the user. If no
+cookies are offered, it responds with a redirect to the Unimeet welcome page.
+
+### /user\_info
+
+For a GET request, it must either offer the Django auth cookies or the Unimeet
+auth token for a user. In that case it responds with 200 JSON that contains the
+gender and school info of the user. Otherwise it responds with 400.
+
+For a POST request, it must offer the Django auth cookies and set the POST
+parameters:
+- gender: The new gender setting of the user (integer)
+
+In that case it updates the user's gender and responds with 200, otherwise 400.
+
+### /user\_interests
+
+Authenticates exactly as the /user\_info.
+
+GET response JSON contains the gender the user is interested in and the list of
+school codes.
+
+POST request parameters:
+- interestedInGender: The new gender setting of the user (integer)
+- interestedInSchools: A list of school codes for the new interests of the user
+
+### /change\_password
+
+Needs Django auth cookies for authentication.
+
+POST parameters:
+- oldPassword: the current active password for the user
+- newPassword: the new password
+- newPasswordVerification: the new password verification
+
+If the new password matches the verification and the old password the current,
+it updates the password and the Django session cookies and responds with 200,
+otherwise 400.
+
+### /delete\_user
+
+Needs Django auth cookies for authentication and accepts only DELETE requests.
+In that case, it deletes the user from the database and responds with 200
+otherwise 400.
+
+### /forgot\_password
+
+POST parameters:
+- email: the email of the user
+
+If the user exists in the database, it updates its password, sends an email to
+the given address with the new password and then responds with 200, otherwise
+400.
+
+Note: This is a design choice that results in information leakage. Specifically,
+anybody can try email addresses and, in case of 200, can recognise that the
+address is signed up for Unimeet.
+
+### /contact
+
+POST parameters:
+- name: The name of the user
+- email: The email of the user
+- message: The contact form message
+
+It tries to send a self-email to the Unimeet email address with the contact form
+message and then a reassuring email to the user's address. If all go well it
+responds with 200, otherwise 400.
