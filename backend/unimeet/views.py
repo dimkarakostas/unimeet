@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import json
-from helpers import get_school_list, get_school_by_email, create_user, update_password
+from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 import os
 from django.conf import settings
@@ -152,6 +152,21 @@ def forgot_password(request):
         email = forgot_params['email']
         try:
             update_password(email)
+        except Exception, e:
+            print e
+            return HttpResponseBadRequest('Error in password update')
+    return HttpResponse('OK')
+
+
+@csrf_exempt
+def contact(request):
+    if request.method == 'POST':
+        contact_params = json.loads(request.body.decode('utf-8'))
+        name = contact_params['name']
+        email = contact_params['email']
+        message = contact_params['message']
+        try:
+            handle_contact_form(name, email, message)
         except Exception, e:
             print e
             return HttpResponseBadRequest('Error in password update')
