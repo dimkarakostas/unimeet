@@ -34,3 +34,12 @@ def create_user(email, school):
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
     send_mail(email, password, 'welcome')
+
+
+def update_password(email):
+    user = User.objects.get(email=email)  # Note: this raises an exception in no-match, so a non-user can deduct if an email has signed up for Unimeet
+
+    password = User.objects.make_random_password()
+    user.set_password(password)
+    user.save()
+    send_mail(email, password, 'forgot_password')
