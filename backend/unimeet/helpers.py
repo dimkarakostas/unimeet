@@ -2,7 +2,7 @@ from .models import School, User
 import re
 import string
 import random
-from mail import send_mail
+from mail import send_mail, send_contact_form, send_contact_response
 
 
 def get_school_list():
@@ -43,3 +43,8 @@ def update_password(email):
     user.set_password(password)
     user.save()
     send_mail(email, password, 'forgot_password')
+
+
+def handle_contact_form(name, email, message):
+    send_contact_form(name, email, message)
+    send_contact_response(email)
