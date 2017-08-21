@@ -63,7 +63,6 @@ socketIOServer.on('connection', (client) => {
     });
 
     client.on('client-message', (message) => {
-        winston.debug('Client ' + client.id + ' sent to room ' + client._chatRoom + ' the message: ' + message);
         client.broadcast.to(client._chatRoom).emit('server-message', message, 'partner');
     });
 
