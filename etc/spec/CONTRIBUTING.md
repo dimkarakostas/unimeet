@@ -154,6 +154,39 @@ domains point to your localhost as below:
 Finally, when running __start.sh__, don't forget to answer __y__ when asked
 about Nginx.
 
+## Systemd setup
+
+In order to set the Unimeet modules to run automatically, you need to add them
+as systemd services.
+
+We provide basic service config files for all modules [here](../config/systemd).
+In order for them to work you neet to make a few changes:
+
+- Change /path/to/node with the path of your node installation (i.e. the result
+  of _which node_).
+
+- Change /path/to/unimeet with the path of the directory where you have checked
+  out the Unimeet repository.
+
+- Change /path/to/uwsgi with the path of your uwsgi installation (usually the
+  path of your virtual environment).
+
+After you have made the changes above, copy all service files to
+_/lib/systemd/system_, reload the systemd daemon by running:
+
+```
+sudo systemctl daemon-reload
+```
+
+and start all modules by running:
+
+```
+sudo systemctl start unimeet_backend
+sudo systemctl start unimeet_realtime
+sudo systemctl start unimeet_matchmaker
+sudo systemctl start unimeet_presence
+```
+
 ## Tests
 
 Please test your code! New code that is not tested __will not__ be merged to
