@@ -169,7 +169,7 @@ def contact(request):
             handle_contact_form(name, email, message)
         except Exception, e:
             print e
-            return HttpResponseBadRequest('Error in password update')
+            return HttpResponseBadRequest('Error in contact form')
     return HttpResponse('OK')
 
 
