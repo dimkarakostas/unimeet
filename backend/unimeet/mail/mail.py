@@ -26,7 +26,7 @@ def send_mail(user_mail, password, subject):
     email['From'] = UNIMEET_MAIL
     email['To'] = user_mail
     email['Subject'] = SUBJECTS[subject][0]
-    email.attach(MIMEText(body, 'html'))
+    email.attach(MIMEText(body, 'html', 'utf-8'))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -43,7 +43,11 @@ def send_contact_form(name, email_address, message):
     email['From'] = UNIMEET_MAIL
     email['To'] = UNIMEET_MAIL
     email['Subject'] = '[Contact form]'
-    email.attach(MIMEText('Name: {}\nEmail: {}\nMessage: {}'.format(name, email_address, message), 'plain'))
+    email.attach(MIMEText(
+        'Name: {}\nEmail: {}\nMessage: {}'.format(name, email_address, message.encode('utf-8')),
+        'plain',
+        'utf-8'
+    ))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -60,7 +64,11 @@ def send_contact_response(email_address):
     email['From'] = UNIMEET_MAIL
     email['To'] = email_address
     email['Subject'] = '[Unimeet] Φόρμα επικοινωνίας'
-    email.attach(MIMEText('Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet', 'plain'))
+    email.attach(MIMEText(
+        'Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet',
+        'plain',
+        'utf-8'
+    ))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
