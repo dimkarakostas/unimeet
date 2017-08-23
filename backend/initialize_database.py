@@ -16,20 +16,16 @@ logging.basicConfig(format='%(message)s')
 
 def setup_schools(data):
     for country in data['countries']:
-        country_obj = Country(name=country['name'])
-        country_obj.save()
+        country_obj, created = Country.objects.get_or_create(name=country['name'])
         logger.debug(country_obj.name)
         for city in country['cities']:
-            city_obj = City(name=city['name'], country=country_obj)
-            city_obj.save()
+            city_obj, created = City.objects.get_or_create(name=city['name'], country=country_obj)
             logger.debug(2 * ' ' + city_obj.name)
             for university in city['universities']:
-                university_obj = University(name=university['name'], city=city_obj)
-                university_obj.save()
+                university_obj, created = University.objects.get_or_create(name=university['name'], city=city_obj)
                 logger.debug(4 * ' ' + university_obj.name)
                 for school in university['schools']:
-                    school_obj = School(name=school['name'], site=school['site'], mailRegex=school['mailRegex'], university=university_obj)
-                    school_obj.save()
+                    school_obj, created = School.objects.get_or_create(name=school['name'], site=school['site'], mailRegex=school['mailRegex'], university=university_obj)
                     logger.debug(6 * ' ' + school_obj.name)
 
 
