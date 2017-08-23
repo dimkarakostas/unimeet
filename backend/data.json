@@ -14,12 +14,12 @@
                                 {
                                     "name": "Τμήμα Πληροφορικής και Τηλεπικοινωνιών",
                                     "site": "http://www.di.uoa.gr",
-                                    "mailRegex": "sdi(\\d*)@(di\\.)?uoa\\.gr"
+                                    "mailRegex": "(sdi(\\d*)@(di\\.)?uoa\\.gr)|(.*@di\\.uoa.gr)"
                                 },
                                 {
                                     "name": "Τμήμα Φυσικής",
                                     "site": "http://www.phys.uoa.gr/",
-                                    "mailRegex": "sph(\\d*)@(phys\\.)?uoa\\.gr"
+                                    "mailRegex": "(sph(\\d*)@(phys\\.)?uoa\\.gr)|(.*@phys\\.uoa.gr)"
                                 }
                             ]
                         },
