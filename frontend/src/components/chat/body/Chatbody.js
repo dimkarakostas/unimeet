@@ -75,7 +75,7 @@ class Chatbody extends Component {
         this.setState({
             partner: {
                 gender: partnerInfo.gender,
-                school: partnerInfo.school + ', ' + partnerInfo.university + ', ' + partnerInfo.country
+                school: partnerInfo.school + ', ' + partnerInfo.university
             }
         });
         axios.get(config.backendUrl + '/user_info')
@@ -83,7 +83,7 @@ class Chatbody extends Component {
             this.setState({
                 me: {
                     gender: res.data.gender,
-                    school: res.data.school + ', ' + res.data.university + ', ' + res.data.country
+                    school: res.data.school + ', ' + res.data.university
                 }
             });
             this._realtimeConnector = new realtimeConnector(this.props.token, realtimeUrl, this.handleNewMessage, this.handleNext, this.disableChat);
