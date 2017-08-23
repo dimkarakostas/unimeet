@@ -63,9 +63,9 @@ def send_contact_response(email_address):
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
     email['To'] = email_address
-    email['Subject'] = '[Unimeet] Φόρμα επικοινωνίας'
+    email['Subject'] = '[Unimeet] Contact form'
     email.attach(MIMEText(
-        'Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet',
+        u'Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet'.encode('utf-8'),
         'plain',
         'utf-8'
     ))
