@@ -9,8 +9,9 @@ from config import UNIMEET_MAIL, PASSWORD
 
 template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 SUBJECTS = {
-    'welcome': ['Welcome to Unimeet', os.path.join(template_dir, 'welcome.html')],
-    'forgot_password': ['Unimeet Password Reset', os.path.join(template_dir, 'forgot_password.html')]
+    'welcome': ['Welcome to Unimeet', os.path.join(template_dir, 'welcome.txt')],
+    'forgot_password': ['Unimeet Password Reset', os.path.join(template_dir, 'forgot_password.txt')],
+    'contact_response': ['[Unimeet] Contact form', os.path.join(template_dir, 'contact_response.txt')]
 }
 
 
@@ -26,7 +27,7 @@ def send_mail(user_mail, password, subject):
     email['From'] = UNIMEET_MAIL
     email['To'] = user_mail
     email['Subject'] = SUBJECTS[subject][0]
-    email.attach(MIMEText(body, 'html'))
+    email.attach(MIMEText(body, 'plain', 'utf-8'))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -43,7 +44,11 @@ def send_contact_form(name, email_address, message):
     email['From'] = UNIMEET_MAIL
     email['To'] = UNIMEET_MAIL
     email['Subject'] = '[Contact form]'
-    email.attach(MIMEText('Name: {}\nEmail: {}\nMessage: {}'.format(name, email_address, message), 'plain'))
+    email.attach(MIMEText(
+        'Name: {}\nEmail: {}\nMessage: {}'.format(name, email_address, message.encode('utf-8')),
+        'plain',
+        'utf-8'
+    ))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -56,11 +61,14 @@ def send_contact_form(name, email_address, message):
 
 
 def send_contact_response(email_address):
+    with open(SUBJECTS['contact_response'][1], 'r') as f:
+        body = f.read()
+
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
     email['To'] = email_address
-    email['Subject'] = '[Unimeet] Φόρμα επικοινωνίας'
-    email.attach(MIMEText('Πήραμε το αίτημά σου και θα σου απαντήσουμε όσο πιο άμεσα μπορούμε.\n\nΕυχαριστούμε για την επικοινωνία!\n\n- Η ομάδα του Unimeet', 'plain'))
+    email['Subject'] = SUBJECTS['contact_response'][0]
+    email.attach(MIMEText(body, 'plain', 'utf-8'))
 
     try:
         server = smtplib.SMTP_SSL('smtp.gmail.com')

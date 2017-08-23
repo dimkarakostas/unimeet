@@ -1,74 +1,74 @@
 {
     "countries": [
         {
-            "name": "Greece",
+            "name": "Ελλάδα",
             "code": "gr",
             "cities": [
                 {
-                    "name": "Athens",
+                    "name": "Αθήνα",
                     "universities": [
                         {
-                            "name": "University of Athens",
+                            "name": "ΕΚΠΑ",
                             "site": "http://www.uoa.gr",
                             "schools": [
                                 {
-                                    "name": "Department of Informatics and Telecommunications",
+                                    "name": "Τμήμα Πληροφορικής και Τηλεπικοινωνιών",
                                     "site": "http://www.di.uoa.gr",
-                                    "mailRegex": "sdi(\\d*)@(di\\.)?uoa\\.gr"
+                                    "mailRegex": "(sdi(\\d*)@(di\\.)?uoa\\.gr)|(.*@di\\.uoa.gr)"
                                 },
                                 {
-                                    "name": "Department of Physics",
+                                    "name": "Τμήμα Φυσικής",
                                     "site": "http://www.phys.uoa.gr/",
-                                    "mailRegex": "sph(\\d*)@(phys\\.)?uoa\\.gr"
+                                    "mailRegex": "(sph(\\d*)@(phys\\.)?uoa\\.gr)|(.*@phys\\.uoa.gr)"
                                 }
                             ]
                         },
                         {
-                            "name": "National Technical University of Athens",
+                            "name": "ΕΜΠ",
                             "site": "https://www.ntua.gr/",
                             "schools": [
                                 {
-                                    "name": "School of Electrical and Computer Engineering",
+                                    "name": "Σχολή Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών",
                                     "site": "https://www.ece.ntua.gr",
                                     "mailRegex": "el(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Mechanical Engineering",
+                                    "name": "Σχολή Μηχανολόγων Μηχανικών",
                                     "site": "http://www.mech.ntua.gr",
                                     "mailRegex": "mc(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Civil Engineering",
+                                    "name": "Σχολή Πολιτικών Μηχανικών",
                                     "site": "http://www.civil.ntua.gr",
                                     "mailRegex": "cv(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Architecture",
+                                    "name": "Σχολή Αρχιτεκτόνων Μηχανικών",
                                     "site": "http://www.arch.ntua.gr",
                                     "mailRegex": "ar(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Chemical Engineering",
+                                    "name": "Σχολή Χημικών Μηχανικών",
                                     "site": "http://www.chemeng.ntua.gr",
                                     "mailRegex": "ch(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Rural and Surveying Engineering",
+                                    "name": "Σχολή Αγρονόμων και Τοπογράφων Μηχανικών",
                                     "site": "http://www.survey.ntua.gr",
                                     "mailRegex": "rs(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Naval Architecture and Marine Engineering",
+                                    "name": "Σχολή Ναυπηγών Μηχανολόγων Μηχανικών",
                                     "site": "http://www.naval.ntua.gr",
                                     "mailRegex": "nm(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Mining and Metallurgical Engineering",
+                                    "name": "Σχολή Μηχανικών Μεταλλείων - Μεταλλουργών",
                                     "site": "http://www.metal.ntua.gr",
                                     "mailRegex": "mm(\\d*)@(central|mail)\\.ntua\\.gr"
                                 },
                                 {
-                                    "name": "School of Applied Mathematical and Physical Studies",
+                                    "name": "Σχολή Εφαρμοσμένων Μαθηματικών και Φυσικών Επιστημών",
                                     "site": "http://www.semfe.ntua.gr",
                                     "mailRegex": "ge(\\d*)@(central|mail)\\.ntua\\.gr"
                                 }

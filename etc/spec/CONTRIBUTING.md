@@ -140,6 +140,9 @@ You also need to change the backend uwsgi ini file:
   nginx virtual host (if you followed the recommendations, that is
   _/var/www/unimeet.gr_).
 
+- Change <user> to the name of your user. This user should have permissions for
+  the directory where the Unix socket for uwsgi will be set up.
+
 You may also change the _/etc/hosts_ file of your system, so that the module
 domains point to your localhost as below:
 

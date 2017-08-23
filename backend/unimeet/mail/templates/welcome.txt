@@ -1,0 +1,7 @@
+Καλωσήρθες στο Unimeet!
+
+Συνδέσου στο Unimeet με τους παρακάτω κωδικούς:
+Username: {}
+Password: {}
+
+- Η ομάδα του Unimeet
