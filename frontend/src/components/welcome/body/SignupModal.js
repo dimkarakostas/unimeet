@@ -6,10 +6,10 @@ class SignupModal extends Component {
         return (
             <Modal show={this.props.isModalOpen} onHide={this.props.hideModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Signup complete</Modal.Title>
+                    <Modal.Title>Εγγραφή</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Please check your email and follow the link we have sent you to start chatting.</p>
+                    <p>Η εγγραφή ολοκληρώθηκε! Σου έχουμε στείλει ένα email με τον κωδικό για να συνδεθείς.</p>
                 </Modal.Body>
             </Modal>
         );
