@@ -420,7 +420,6 @@ Main components
 .cd-faq-content p {
   font-size: 14px;
   line-height: 1.4;
-  color: #6c7d8e;
 }
 @media only screen and (min-width: 768px) {
   .cd-faq-content {
@@ -433,4 +432,9 @@ Main components
   .no-js .cd-faq-content {
     display: block;
   }
+}
+
+.school-table {
+    width: 100%;
+    font-size: small;
 }
