@@ -434,3 +434,8 @@ Main components
     display: block;
   }
 }
+
+.school-table {
+    width: 100%;
+    font-size: small;
+}
