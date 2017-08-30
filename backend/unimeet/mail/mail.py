@@ -17,13 +17,14 @@ SUBJECTS = {
 
 def send_mail(**kwargs):
     user_mail = kwargs['user_mail']
+    password = kwargs['password']
     subject = kwargs['subject']
     if subject not in SUBJECTS:
         print 'Invalid subject parameter'
         return
 
     with open(SUBJECTS[subject][1], 'r') as f:
-        body = f.read().format(user_mail, kwargs['password'])
+        body = f.read().format(user_mail, password)
 
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
