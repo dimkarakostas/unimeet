@@ -5,6 +5,10 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from config import UNIMEET_MAIL, PASSWORD
+import json
+
+with open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))), 'config', 'services.json'), 'r') as f:
+    service_data = json.load(f)
 
 
 template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -15,18 +19,27 @@ SUBJECTS = {
 }
 
 
-def send_mail(user_mail, password, subject):
+def send_mail(**kwargs):
+    user_mail = kwargs['user_mail']
+    password = kwargs['password']
+
+    subject = kwargs['subject']
     if subject not in SUBJECTS:
         print 'Invalid subject parameter'
         return
 
+    try:
+        welcome_link = service_data['backend']['url'] + '/login?token=' + kwargs['welcome_token']
+    except KeyError:
+        welcome_link = ''
+
     with open(SUBJECTS[subject][1], 'r') as f:
-        body = f.read().format(user_mail, password)
+        body = f.read().format(user_mail, password, welcome_link)
 
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
     email['To'] = user_mail
-    email['Subject'] = SUBJECTS[subject][0]
+    email['Subject'] = SUBJECTS[kwargs['subject']][0]
     email.attach(MIMEText(body, 'plain', 'utf-8'))
 
     try:

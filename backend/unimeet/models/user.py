@@ -64,3 +64,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_index=True,
         help_text=("The user's authentication token for unimeet")
     )
+
+    welcomeToken = models.CharField(
+        default='',
+        max_length=255,
+        db_index=True,
+        help_text=('The one-time authentication token used in welcome link.')
+    )
