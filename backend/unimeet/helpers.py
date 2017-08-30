@@ -30,10 +30,11 @@ def get_school_by_email(email):
 def create_user(email, school):
     password = User.objects.make_random_password()
     token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(40))
-    user_obj = User.objects.create_user(email=email, school=school, password=password, token=token)
+    welcome_token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(60))
+    user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
-    send_mail(user_mail=email, password=password, subject='welcome')
+    send_mail(user_mail=email, password=password, subject='welcome', welcome_token=welcome_token)
 
 
 def update_password(email):
