@@ -31,16 +31,24 @@ def signup(request):
 
 @csrf_exempt
 def login(request):
-    login_parameters = json.loads(request.body.decode('utf-8'))
-    email = login_parameters['email']
-    password = login_parameters['password']
-    user = authenticate(request, email=email, password=password)
-    if user is not None:
-        Django_login(request, user)
-        resp = HttpResponse('Login OK')
-    else:
-        resp = HttpResponseBadRequest('Bad credentials')
-    return resp
+    if request.method == 'POST':
+        login_parameters = json.loads(request.body.decode('utf-8'))
+        email = login_parameters['email']
+        password = login_parameters['password']
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            Django_login(request, user)
+            return HttpResponse('Login OK')
+    elif request.method == 'GET':
+        welcome_token = request.GET['token']
+        if welcome_token != '':
+            user = User.objects.get(welcomeToken=welcome_token)
+            if user is not None:
+                user.welcomeToken = ''
+                user.save(update_fields=['welcomeToken'])
+                Django_login(request, user)
+                return HttpResponseRedirect(service_data['frontend']['url'])
+    return HttpResponseBadRequest('Bad credentials')
 
 
 @csrf_exempt
