@@ -33,7 +33,7 @@ def create_user(email, school):
     user_obj = User.objects.create_user(email=email, school=school, password=password, token=token)
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
-    send_mail(email, password, 'welcome')
+    send_mail(user_mail=email, password=password, subject='welcome')
 
 
 def update_password(email):
@@ -42,7 +42,7 @@ def update_password(email):
     password = User.objects.make_random_password()
     user.set_password(password)
     user.save()
-    send_mail(email, password, 'forgot_password')
+    send_mail(user_mail=email, password=password, subject='forgot_password')
 
 
 def handle_contact_form(name, email, message):

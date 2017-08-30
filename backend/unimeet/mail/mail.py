@@ -15,18 +15,20 @@ SUBJECTS = {
 }
 
 
-def send_mail(user_mail, password, subject):
+def send_mail(**kwargs):
+    user_mail = kwargs['user_mail']
+    subject = kwargs['subject']
     if subject not in SUBJECTS:
         print 'Invalid subject parameter'
         return
 
     with open(SUBJECTS[subject][1], 'r') as f:
-        body = f.read().format(user_mail, password)
+        body = f.read().format(user_mail, kwargs['password'])
 
     email = MIMEMultipart('alternative')
     email['From'] = UNIMEET_MAIL
     email['To'] = user_mail
-    email['Subject'] = SUBJECTS[subject][0]
+    email['Subject'] = SUBJECTS[kwargs['subject']][0]
     email.attach(MIMEText(body, 'plain', 'utf-8'))
 
     try:
