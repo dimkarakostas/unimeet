@@ -9,15 +9,23 @@ program
 
 
 const io = require('socket.io-client'),
-      winston = require('winston'),
-      config = require('./config.js');
+      winston = require('winston');
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {'timestamp': true, 'label': 'matchmaker'});
 
 const PORT = program.port;
-const SERVICES = config.services;
+const SERVICES = [
+    {
+        url: serviceConfig.presence.url,
+        type: 'presence'
+    },
+    {
+        url: serviceConfig.realtime.url,
+        type: 'realtime'
+    },
+]
 
 winston.info('Unimeet matchmaker service');
 winston.info('Listening on port ' + PORT);
