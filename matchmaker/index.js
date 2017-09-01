@@ -1,15 +1,13 @@
 const program = require('commander'),
       axios = require('axios'),
+      io = require('socket.io-client'),
+      winston = require('winston'),
       serviceConfig = require('../config/services.json');
 
 program
     .version('1.0.0')
     .option('-p, --port <port>', 'specify the websocket port to listen to [9872]', 9872)
     .parse(process.argv);
-
-
-const io = require('socket.io-client'),
-      winston = require('winston');
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
