@@ -1,5 +1,7 @@
 const program = require('commander'),
       axios = require('axios'),
+      io = require('socket.io-client'),
+      winston = require('winston'),
       serviceConfig = require('../config/services.json');
 
 program
@@ -7,17 +9,21 @@ program
     .option('-p, --port <port>', 'specify the websocket port to listen to [9872]', 9872)
     .parse(process.argv);
 
-
-const io = require('socket.io-client'),
-      winston = require('winston'),
-      config = require('./config.js');
-
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {'timestamp': true, 'label': 'matchmaker'});
 
 const PORT = program.port;
-const SERVICES = config.services;
+const SERVICES = [
+    {
+        url: serviceConfig.presence.url,
+        type: 'presence'
+    },
+    {
+        url: serviceConfig.realtime.url,
+        type: 'realtime'
+    },
+]
 
 winston.info('Unimeet matchmaker service');
 winston.info('Listening on port ' + PORT);
@@ -92,6 +98,7 @@ for (var i=0; i < SERVICES.length; i++) {
                 queue.splice(i, 1);
             }
         }
+        winston.debug('Client disconnected: ' + token);
     });
 
     serviceSockets.push(_socketIOServer);
