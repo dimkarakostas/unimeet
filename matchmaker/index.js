@@ -98,6 +98,7 @@ for (var i=0; i < SERVICES.length; i++) {
                 queue.splice(i, 1);
             }
         }
+        winston.debug('Client disconnected: ' + token);
     });
 
     serviceSockets.push(_socketIOServer);
