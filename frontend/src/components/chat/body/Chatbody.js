@@ -4,6 +4,7 @@ import ChatFooter from './ChatFooter';
 import realtimeConnector from '../connection/realtimeConnector';
 import presenceConnector from '../connection/presenceConnector';
 import * as config from '../../config';
+import QueueMessage from './QueueMessage';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -118,6 +119,7 @@ class Chatbody extends Component {
                     isFooterDisabled={this.state.isFooterDisabled}
                     footerInfoMessage={this.state.footerInfoMessage}
                 />
+                <QueueMessage />
             </div>
         );
     }

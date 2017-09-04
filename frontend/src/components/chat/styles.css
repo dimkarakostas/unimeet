@@ -297,3 +297,19 @@
 .emoji-popover.top{
     margin-top: -20px;
 }
+
+.QueueMessage {
+    margin: auto;
+    z-index: 1040;
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    right: 40%;
+    width: auto;
+}
+
+.loading-element {
+    position: relative;
+    left: 40%;
+    right: 40%;
+}
