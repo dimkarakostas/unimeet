@@ -118,7 +118,9 @@ class Chatbody extends Component {
                     handleNewMessage={this.handleNewMessage}
                     isFooterDisabled={this.state.isFooterDisabled}
                 />
-                <QueueMessage infoMessage={this.state.infoMessage} />
+                { this.state.infoMessage !== '' ?
+                    <QueueMessage infoMessage={this.state.infoMessage} />
+                : null }
             </div>
         );
     }
