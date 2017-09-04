@@ -15,6 +15,7 @@ class QueueMessage extends Component {
     render() {
         return (
             <div className="QueueMessage container well text-center">
+                <h4>{this.props.infoMessage}</h4>
                 <ReactLoading className="loading-element" type="spinningBubbles" color="#000000" />
             </div>
         );
