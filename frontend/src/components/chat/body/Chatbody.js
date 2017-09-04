@@ -4,6 +4,7 @@ import ChatFooter from './ChatFooter';
 import realtimeConnector from '../connection/realtimeConnector';
 import presenceConnector from '../connection/presenceConnector';
 import * as config from '../../config';
+import QueueMessage from './QueueMessage';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -21,21 +22,21 @@ class Chatbody extends Component {
             me: {},
             messages: [],
             isFooterDisabled: true,
-            footerInfoMessage: INFO_MESSAGES.queued
+            infoMessage: INFO_MESSAGES.queued
         };
     }
 
     disableChat = (disableOption) => {
         if (disableOption) {
-            this.setState({isFooterDisabled: disableOption, footerInfoMessage: INFO_MESSAGES.queued});
+            this.setState({isFooterDisabled: disableOption, infoMessage: INFO_MESSAGES.queued});
         }
         else {
-            this.setState({isFooterDisabled: disableOption, footerInfoMessage: ''});
+            this.setState({isFooterDisabled: disableOption, infoMessage: ''});
         }
     }
 
     alreadyConnected = () => {
-        this.setState({footerInfoMessage: INFO_MESSAGES.alreadyConnected});
+        this.setState({infoMessage: INFO_MESSAGES.alreadyConnected});
     }
 
     handleNext = (origin) => {
@@ -116,8 +117,10 @@ class Chatbody extends Component {
                     handleNext={this.handleNext}
                     handleNewMessage={this.handleNewMessage}
                     isFooterDisabled={this.state.isFooterDisabled}
-                    footerInfoMessage={this.state.footerInfoMessage}
                 />
+                { this.state.infoMessage !== '' ?
+                    <QueueMessage infoMessage={this.state.infoMessage} />
+                : null }
             </div>
         );
     }
