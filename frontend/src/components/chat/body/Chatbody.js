@@ -14,6 +14,12 @@ const INFO_MESSAGES = {
     alreadyConnected: 'Έχεις ήδη συνδεθεί!'
 }
 
+const GENDERS = {
+    '0': '(Μη-ορισμένο φύλο)',
+    '1': 'γυναίκα',
+    '-1': 'άνδρα'
+}
+
 class Chatbody extends Component {
     constructor(props) {
         super(props);
@@ -22,13 +28,14 @@ class Chatbody extends Component {
             me: {},
             messages: [],
             isFooterDisabled: true,
-            infoMessage: INFO_MESSAGES.queued
+            infoMessage: INFO_MESSAGES.queued,
+            footerInfoMessage: ''
         };
     }
 
     disableChat = (disableOption) => {
         if (disableOption) {
-            this.setState({isFooterDisabled: disableOption, infoMessage: INFO_MESSAGES.queued});
+            this.setState({isFooterDisabled: disableOption, infoMessage: INFO_MESSAGES.queued, footerInfoMessage: ''});
         }
         else {
             this.setState({isFooterDisabled: disableOption, infoMessage: ''});
@@ -76,7 +83,8 @@ class Chatbody extends Component {
         this.setState({
             partner: {
                 gender: partnerInfo.gender,
-                school: partnerInfo.school + ', ' + partnerInfo.university
+                school: partnerInfo.school + ', ' + partnerInfo.university,
+                footerInfoMessage: 'Έχεις συνδεθεί με ' + GENDERS[partnerInfo.gender] + ' από ' + partnerInfo.school + ', ' + partnerInfo.university
             }
         });
         axios.get(config.backendUrl + '/user_info')
@@ -116,6 +124,7 @@ class Chatbody extends Component {
                 <ChatFooter
                     handleNext={this.handleNext}
                     handleNewMessage={this.handleNewMessage}
+                    footerInfoMessage={this.state.footerInfoMessage}
                     isFooterDisabled={this.state.isFooterDisabled}
                 />
                 { this.state.infoMessage !== '' ?
