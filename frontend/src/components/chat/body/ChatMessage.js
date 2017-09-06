@@ -6,7 +6,7 @@ class ChatMessage extends Component {
     render() {
         let position = this.props.message.from === 'me' ? 'right' : 'left';
         let tooltipPosition = this.props.message.from === 'me' ? 'left' : 'right';
-        let icon = this.props.message.gender === '0' ? 'genderless' : this.props.message.gender === '1' ? 'venus' : 'mars';
+        let icon = this.props.message.gender === '0' ? 'intersex' : this.props.message.gender === '1' ? 'venus' : 'mars';
         let timeMins = Math.round((((new Date() - this.props.message.timestamp) % 86400000) % 3600000) / 60000);
         let timeMessage = timeMins < 1 ? 'now' : timeMins + (timeMins === 1 ? ' min' : ' mins') + ' ago';
         const timeTooltip = (<Tooltip id="tooltip">{timeMessage}</Tooltip>);

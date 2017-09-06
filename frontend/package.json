@@ -13,6 +13,7 @@
     "react-dom": "^15.5.4",
     "react-emoji": "^0.5.0",
     "react-emoji-picker": "^1.0.13",
+    "react-loading": "^0.1.4",
     "react-router-dom": "^4.1.1",
     "react-scroll": "^1.5.2",
     "socket.io-client": "^1.7.3"
