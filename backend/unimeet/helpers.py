@@ -1,4 +1,4 @@
-from .models import School, User
+from .models import School, User, Service
 import re
 import string
 import random
@@ -49,3 +49,12 @@ def update_password(email):
 def handle_contact_form(name, email, message):
     send_contact_form(name, email, message)
     send_contact_response(email)
+
+
+def handle_service_stats(name, token, activeUsers):
+    service = Service.objects.get(name=name, token=token)
+    if service is None:
+        raise ValueError("Invalid service token/name")
+    else:
+        service.activeUsers = activeUsers
+        service.save(update_fields=['activeUsers'])
