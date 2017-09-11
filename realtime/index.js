@@ -1,13 +1,11 @@
-const program = require('commander');
+const program = require('commander'),
+      io = require('socket.io'),
+      winston = require('winston');
 
 program
     .version('1.0.0')
     .option('-p, --port <port>', 'specify the websocket port to listen to [9871]', 9871)
     .parse(process.argv);
-
-
-const io = require('socket.io'),
-      winston = require('winston');
 
 winston.level = 'debug';
 winston.remove(winston.transports.Console);
