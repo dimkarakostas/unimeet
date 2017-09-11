@@ -6,7 +6,7 @@ import logging
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 django.setup()
 
-from unimeet.models import Country, City, University, School
+from unimeet.models import Country, City, University, School, Service
 
 level = logging.DEBUG
 logger = logging.getLogger(__name__)
@@ -29,6 +29,16 @@ def setup_schools(data):
                     logger.debug('{} '.format('New' if created else 'Old') + 6 * ' ' + school_obj.name)
 
 
+def setup_services(data):
+    for service in data:
+        try:
+            token = data[service]['auth']
+        except KeyError:
+            continue
+        service_obj, created = Service.objects.get_or_create(name=service, token=token)
+        logger.debug('{} '.format('New' if created else 'Old') + service_obj.name)
+
+
 if __name__ == '__main__':
     try:
         with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data.json'), 'r') as f:
@@ -37,3 +47,10 @@ if __name__ == '__main__':
         logger.error('IOError: %s' % err)
         exit(1)
     setup_schools(data)
+    try:
+        with open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'config', 'services.json'), 'r') as f:
+            data = json.load(f)
+    except IOError, err:
+        logger.error('IOError: %s' % err)
+        exit(1)
+    setup_services(data)
