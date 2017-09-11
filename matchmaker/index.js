@@ -25,6 +25,8 @@ const SERVICES = [
     },
 ]
 
+const AUTH_TOKEN = serviceConfig.matchmaker.auth;
+
 winston.info('Unimeet matchmaker service');
 winston.info('Listening on port ' + PORT);
 
@@ -35,6 +37,20 @@ function sendToRoom(client1, client2) {
     winston.debug('Sent client with token (' + client1.token + ') to room: ' + roomId);
     client2.presenceSocket.emit('matchmaker-send-to-room', client2.token, realtimeToUse.url, roomId, client1.token);
     winston.debug('Sent client with token (' + client2.token + ') to room: ' + roomId);
+}
+
+function backendStats(queue) {
+    axios.post(serviceConfig.backend.url + '/service_stats', {
+        name: 'matchmaker',
+        token: AUTH_TOKEN,
+        activeUsers: queue.length
+    })
+    .then(res => {
+        winston.debug("Updated backend stats, new active users: " + queue.length.toString());
+    })
+    .catch(error => {
+        winston.error(error);
+    })
 }
 
 let serviceSockets = [];
@@ -78,10 +94,12 @@ for (var i=0; i < SERVICES.length; i++) {
                     ) {
                         queue.splice(i, 1);
                         sendToRoom(client, candidate);
+                        backendStats(queue);
                         return;
                     }
                 }
                 queue.push(client);
+                backendStats(queue);
             })
             .catch(error => {
                 winston.error(error);
@@ -96,6 +114,7 @@ for (var i=0; i < SERVICES.length; i++) {
         for (var i=0; i < queue.length; i++) {
             if (queue[i].token === token) {
                 queue.splice(i, 1);
+                backendStats(queue);
             }
         }
         winston.debug('Client disconnected: ' + token);
