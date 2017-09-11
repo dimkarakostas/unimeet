@@ -40,8 +40,11 @@ function backendStats(activeClients) {
 }
 
 var matchmaker = '';
+var activeClients = -1;  // Matchmaker counts as a connection, so starting from -1 depicts only frontend clients
 socketIOServer.on('connection', (client) => {
     winston.debug('New connection from client ' + client.id);
+    activeClients += 1;
+    backendStats(activeClients);
 
     // Matchmaker communication
     client.on('register-matchmaker', () => {
@@ -83,6 +86,8 @@ socketIOServer.on('connection', (client) => {
 
     client.on('disconnect', () => {
         winston.debug('Client ' + client.id + ' disconnected');
+        activeClients -= 1;
+        backendStats(activeClients);
         // If a user disconnects by closing the browser and its partner is still in the room,
         // notify it to search for a new one
         let room = socketIOServer.sockets.adapter.rooms[client._chatRoom];
