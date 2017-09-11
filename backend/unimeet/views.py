@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import json
-from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form
+from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form, handle_service_stats
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 import os
 from django.conf import settings
@@ -188,6 +188,11 @@ def service_stats(request):
         name = service_params['name']
         token = service_params['token']
         activeUsers = service_params['activeUsers']
+        try:
+            handle_service_stats(name, token, activeUsers)
+        except Exception, e:
+            print e
+            return HttpResponseBadRequest('Error in service stats update')
     return HttpResponse('OK')
 
 
