@@ -1,6 +1,7 @@
 const program = require('commander'),
       io = require('socket.io'),
-      winston = require('winston');
+      winston = require('winston'),
+      serviceConfig = require('../config/services.json');
 
 program
     .version('1.0.0')
@@ -12,6 +13,7 @@ winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, {'timestamp': true, 'label': 'realtime'});
 
 const PORT = program.port;
+const AUTH_TOKEN = serviceConfig.realtime.auth;
 
 winston.info('Unimeet realtime service');
 winston.info('Listening on port ' + PORT);
