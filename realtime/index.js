@@ -1,6 +1,7 @@
 const program = require('commander'),
       io = require('socket.io'),
       winston = require('winston'),
+      axios = require('axios'),
       serviceConfig = require('../config/services.json');
 
 program
@@ -22,6 +23,20 @@ const socketIOServer = io.listen(PORT);
 
 function getRoomUsercount(room) {
     return socketIOServer.sockets.adapter.rooms[room].length;
+}
+
+function backendStats(activeClients) {
+    axios.post(serviceConfig.backend.url + '/service_stats', {
+        name: 'realtime',
+        token: AUTH_TOKEN,
+        activeUsers: activeClients
+    })
+    .then(res => {
+        winston.debug("Updated backend stats, new active users: " + activeClients.toString());
+    })
+    .catch(error => {
+        winston.error(error);
+    })
 }
 
 var matchmaker = '';
