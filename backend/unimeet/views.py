@@ -182,6 +182,16 @@ def contact(request):
 
 
 @csrf_exempt
+def service_stats(request):
+    if request.method == 'POST':
+        service_params = json.loads(request.body.decode('utf-8'))
+        name = service_params['name']
+        token = service_params['token']
+        activeUsers = service_params['activeUsers']
+    return HttpResponse('OK')
+
+
+@csrf_exempt
 def check(request):
     if request.session.test_cookie_worked():
         message = 'worked'

@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^delete_user$', views.delete_user, name='delete_user'),
     url(r'^forgot_password$', views.forgot_password, name='forgot_password'),
     url(r'^contact$', views.contact, name='contact'),
+    url(r'^service_stats$', views.service_stats, name='service_stats'),
     url(r'^check$', views.check, name='check'),
 ]
