@@ -78,6 +78,52 @@
                                     "mailRegex": "ge(\\d*)@(central|mail)\\.ntua\\.gr"
                                 }
                             ]
+                        },
+                        {
+                            "name": "ΟΠΑ",
+                            "site": "https://www.aueb.gr/",
+                            "schools": [
+                                {
+                                    "name": "Τμήμα Διεθνών και Ευρωπαϊκών Οικονομικών Σπουδών",
+                                    "site": "https://www.dept.aueb.gr/deos",
+                                    "mailRegex": "e4(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Οικονομικής Επιστήμης",
+                                    "site": "https://www.dept.aueb.gr/econ",
+                                    "mailRegex": "o1(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Διοικητικής Επιστήμης και Τεχνολογίας",
+                                    "site": "https://www.dept.aueb.gr/dmst",
+                                    "mailRegex": "t8(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Οργάνωσης και Διοίκησης Επιχειρήσεων",
+                                    "site": "https://www.dept.aueb.gr/ode",
+                                    "mailRegex": "d2(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Μάρκετινγκ & Επικοινωνίας",
+                                    "site": "https://www.dept.aueb.gr/mbc",
+                                    "mailRegex": "m5(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήματος Στατιστικής",
+                                    "site": "https://www.dept.aueb.gr/stat",
+                                    "mailRegex": "s6(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Πληροφορικής",
+                                    "site": "https://www.dept.aueb.gr/cs",
+                                    "mailRegex": "p3(\\d*)@dias\\.aueb\\.gr"
+                                },
+                                {
+                                    "name": "Τμήμα Λογιστικής & Χρηματοοικονομικής",
+                                    "site": "https://www.dept.aueb.gr/loxri",
+                                    "mailRegex": "l7(\\d*)@dias\\.aueb\\.gr"
+                                }
+                            ]
                         }
                     ]
                 }
