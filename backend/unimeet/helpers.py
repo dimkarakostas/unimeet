@@ -2,7 +2,7 @@ from .models import School, User, Service
 import re
 import string
 import random
-from mail import send_mail, send_contact_form, send_contact_response
+from mail import send_mail, send_contact_form, send_contact_response, verify_email_address
 
 
 def get_school_list():
@@ -34,6 +34,7 @@ def create_user(email, school):
     user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
+    verify_email_address(email)
     send_mail(user_mail=email, password=password, subject='welcome', welcome_token=welcome_token)
 
 
@@ -43,10 +44,12 @@ def update_password(email):
     password = User.objects.make_random_password()
     user.set_password(password)
     user.save()
+    verify_email_address(email)
     send_mail(user_mail=email, password=password, subject='forgot_password')
 
 
 def handle_contact_form(name, email, message):
+    verify_email_address(email)
     send_contact_form(name, email, message)
     send_contact_response(email)
 
