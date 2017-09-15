@@ -28,7 +28,7 @@ def get_school_by_email(email):
 
 
 def create_user(email, school):
-    verify_email_address(email)
+    # verify_email_address(email)
     password = User.objects.make_random_password()
     token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(40))
     welcome_token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(60))
@@ -39,7 +39,7 @@ def create_user(email, school):
 
 
 def update_password(email):
-    verify_email_address(email)
+    # verify_email_address(email)
     user = User.objects.get(email=email)  # Note: this raises an exception in no-match, so a non-user can deduct if an email has signed up for Unimeet
 
     password = User.objects.make_random_password()
@@ -49,7 +49,7 @@ def update_password(email):
 
 
 def handle_contact_form(name, email, message):
-    verify_email_address(email)
+    # verify_email_address(email)
     send_contact_form(name, email, message)
     send_contact_response(email)
 
