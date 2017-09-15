@@ -28,23 +28,23 @@ def get_school_by_email(email):
 
 
 def create_user(email, school):
+    verify_email_address(email)
     password = User.objects.make_random_password()
     token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(40))
     welcome_token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(60))
     user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
-    verify_email_address(email)
     send_mail(user_mail=email, password=password, subject='welcome', welcome_token=welcome_token)
 
 
 def update_password(email):
+    verify_email_address(email)
     user = User.objects.get(email=email)  # Note: this raises an exception in no-match, so a non-user can deduct if an email has signed up for Unimeet
 
     password = User.objects.make_random_password()
     user.set_password(password)
     user.save()
-    verify_email_address(email)
     send_mail(user_mail=email, password=password, subject='forgot_password')
 
 
