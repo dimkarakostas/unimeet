@@ -6,6 +6,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from config import UNIMEET_MAIL, PASSWORD
 import json
+import dns.resolver
+import socket
+import re
 
 with open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))), 'config', 'services.json'), 'r') as f:
     service_data = json.load(f)
@@ -91,3 +94,29 @@ def send_contact_response(email_address):
         server.close()
     except Exception, e:
         print e
+
+
+def verify_email_address(addressToVerify):
+    match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
+
+    if match is None:
+        print('Bad Syntax')
+        raise ValueError('Bad Syntax')
+
+    records = dns.resolver.query('emailhippo.com', 'MX')
+    mxRecord = records[0].exchange
+    mxRecord = str(mxRecord)
+
+    host = socket.gethostname()  # Get local server hostname
+    server = smtplib.SMTP()  # SMTP lib setup
+
+    # SMTP Conversation
+    server.connect(mxRecord)
+    server.helo(host)
+    server.mail('info.unimeet@gmail.com')
+    code, message = server.rcpt(str(addressToVerify))
+    server.quit()
+
+    # Assume 250 as Success
+    if code != 250:
+        raise ValueError('Bad Address')
