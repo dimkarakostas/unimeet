@@ -44,16 +44,12 @@ class SignupForm extends Component {
             }
         })
         .catch(error => {
-            if (error.response.status === 400 && error.response.data === 'Invalid univesity email') {
-                this.setState({
-                    isSignupButtonLoading: false,
-                    invalidEmail: true
-                });
-                this.signupEmail.focus();
-            }
-            else {
-                console.log(error);
-            }
+            this.setState({
+                isSignupButtonLoading: false,
+                invalidEmail: true
+            });
+            this.signupEmail.focus();
+            console.log(error);
         })
     }
 
