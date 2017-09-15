@@ -22,11 +22,12 @@ def signup(request):
     email = signup_parameters['email']
     school = get_school_by_email(email)
     if school is not None:
-        create_user(email, school)
-        resp = HttpResponse('Signup OK')
-    else:
-        resp = HttpResponseBadRequest('Invalid univesity email')
-    return resp
+        try:
+            create_user(email, school)
+            return HttpResponse('Signup OK')
+        except ValueError:
+            return HttpResponseBadRequest('Invalid email')
+    return HttpResponseBadRequest('Invalid univesity email')
 
 
 @csrf_exempt
