@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import json
+from urlparse import urlparse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,8 +27,13 @@ SECRET_KEY = ')cgk!kr7s)f^cw&0a6g^mpkfh^qy#-jolr!qk9h2=v8mgss_$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'backend.unimeet.gr']
+with open(os.path.join(BASE_DIR, '..', 'config', 'services.json')) as json_services_file:
+    json_services = json.load(json_services_file)
 
+backend_service_url = json_services['backend']['url']
+backend_service_hostname = urlparse(backend_service_url).hostname
+
+ALLOWED_HOSTS = ['127.0.0.2', 'localhost', backend_service_hostname]
 
 # Application definition
 
