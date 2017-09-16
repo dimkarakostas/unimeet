@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Form, FormControl, FormGroup, Button} from 'react-bootstrap';
 import SignupModal from './SignupModal';
 import * as config from '../../config';
@@ -63,7 +64,9 @@ class SignupForm extends Component {
                         invalidEmail: true
                     });
             };
-            this.signupEmail.focus();
+            var signupEmailElement = ReactDOM.findDOMNode(this.signupEmail);
+            signupEmailElement.focus();
+            signupEmailElement.select();
             console.log(error);
         })
     }
