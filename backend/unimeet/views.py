@@ -1,7 +1,7 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import json
-from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form, handle_service_stats
+from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form, handle_service_stats, DuplicateEmailError
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 import os
 from django.conf import settings
@@ -25,6 +25,8 @@ def signup(request):
         try:
             create_user(email, school)
             return HttpResponse('Signup OK')
+        except DuplicateEmailError:
+            return HttpResponse(content='Duplicate email', status=409)
         except ValueError:
             return HttpResponseBadRequest('Invalid email')
     return HttpResponseBadRequest('Invalid univesity email')
