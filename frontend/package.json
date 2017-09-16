@@ -16,6 +16,7 @@
     "react-loading": "^0.1.4",
     "react-router-dom": "^4.1.1",
     "react-scroll": "^1.5.2",
+    "react-sound": "^0.8.0",
     "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
