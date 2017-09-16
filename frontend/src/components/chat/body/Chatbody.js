@@ -92,8 +92,8 @@ class Chatbody extends Component {
             partner: {
                 gender: partnerInfo.gender,
                 school: partnerInfo.school + ', ' + partnerInfo.university,
-                footerInfoMessage: 'Έχεις συνδεθεί με ' + GENDERS[partnerInfo.gender] + ' από ' + partnerInfo.school + ', ' + partnerInfo.university
-            }
+            },
+            footerInfoMessage: 'Έχεις συνδεθεί με ' + GENDERS[partnerInfo.gender] + ' από ' + partnerInfo.school + ', ' + partnerInfo.university
         });
         axios.get(config.backendUrl + '/user_info')
         .then(res => {
