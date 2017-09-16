@@ -5,6 +5,7 @@ import realtimeConnector from '../connection/realtimeConnector';
 import presenceConnector from '../connection/presenceConnector';
 import * as config from '../../config';
 import QueueMessage from './QueueMessage';
+import Sound from 'react-sound';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -29,7 +30,8 @@ class Chatbody extends Component {
             messages: [],
             isFooterDisabled: true,
             infoMessage: INFO_MESSAGES.queued,
-            footerInfoMessage: ''
+            footerInfoMessage: '',
+            playSound: ''
         };
     }
 
@@ -71,6 +73,9 @@ class Chatbody extends Component {
                 newMessage.school = this.state.me.school;
             }
             else {
+                if (!document.hasFocus()) {
+                    this.setState({playSound: Sound.status.PLAYING});
+                }
                 newMessage.gender = this.state.partner.gender;
                 newMessage.school = this.state.partner.school;
             }
@@ -80,6 +85,9 @@ class Chatbody extends Component {
     }
 
     joinRoom = (realtimeUrl, roomId, partnerInfo) => {
+        if (!document.hasFocus()) {
+            this.setState({playSound: Sound.status.PLAYING});
+        }
         this.setState({
             partner: {
                 gender: partnerInfo.gender,
@@ -126,6 +134,10 @@ class Chatbody extends Component {
                     handleNewMessage={this.handleNewMessage}
                     footerInfoMessage={this.state.footerInfoMessage}
                     isFooterDisabled={this.state.isFooterDisabled}
+                />
+                <Sound
+                    url="ring.mp3"
+                    playStatus={this.state.playSound}
                 />
                 { this.state.infoMessage !== '' ?
                     <QueueMessage infoMessage={this.state.infoMessage} />
