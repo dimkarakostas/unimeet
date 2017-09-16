@@ -14,8 +14,10 @@ class SignupForm extends Component {
             email: '',
             isModalOpen: false,
             isSignupButtonLoading: false,
-            invalidEmail: false
+            invalidEmail: false,
+            duplicateEmail: false
         };
+        this.forgot = this.forgot.bind(this);
     }
 
     hideModal = () => {
@@ -24,9 +26,10 @@ class SignupForm extends Component {
 
     handleEmailChange = (event) => {
         this.setState({email: event.target.value});
-        if (this.state.invalidEmail) {
-            this.setState({invalidEmail: false});
-        }
+        this.setState({
+            invalidEmail: false,
+            duplicateEmail: false
+        });
     }
 
     signupSubmit = (event) => {
@@ -46,11 +49,29 @@ class SignupForm extends Component {
         .catch(error => {
             this.setState({
                 isSignupButtonLoading: false,
-                invalidEmail: true
+                duplicateEmail: false,
+                invalidEmail: false
             });
+            switch (error.response.status) {
+                case 409:
+                    this.setState({
+                        duplicateEmail: true
+                    });
+                    break;
+                default:
+                    this.setState({
+                        invalidEmail: true
+                    });
+            };
             this.signupEmail.focus();
             console.log(error);
         })
+    }
+
+    forgot(e) {
+        e.preventDefault();
+
+        this.props.onforgot();
     }
 
     render() {
@@ -86,6 +107,10 @@ class SignupForm extends Component {
                     {this.state.invalidEmail ?
                         <div className="email-error">
                             <b>Υπήρξε κάποιο πρόβλημα! Χρησιμοποίησες ένα <Link to="/faq" target="_blank">έγκυρο ακαδημαϊκό</Link> email?</b>
+                        </div>
+                    : this.state.duplicateEmail ?
+                        <div className="email-error">
+                            <b>Το email που επέλεξες χρησιμοποιείται ήδη! <a onClick={this.forgot} href=''>Επανάφερε τον κωδικό σου</a>.</b>
                         </div>
                     : null}
                 </Form>
