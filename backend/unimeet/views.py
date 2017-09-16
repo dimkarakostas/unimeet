@@ -7,6 +7,7 @@ import os
 from django.conf import settings
 from models import User
 
+
 with open(os.path.join(os.path.dirname(settings.BASE_DIR), 'config', 'services.json'), 'r') as f:
     service_data = json.load(f)
 
