@@ -27,10 +27,10 @@ SECRET_KEY = ')cgk!kr7s)f^cw&0a6g^mpkfh^qy#-jolr!qk9h2=v8mgss_$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-with open(os.path.join(BASE_DIR, '..', 'config', 'services.json')) as json_services_file:
-    json_services = json.load(json_services_file)
+with open(os.path.join(os.path.dirname(BASE_DIR), 'config', 'services.json')) as json_services_file:
+    SERVICE_DATA = json.load(json_services_file)
 
-backend_service_url = json_services['backend']['url']
+backend_service_url = SERVICE_DATA['backend']['url']
 backend_service_hostname = urlparse(backend_service_url).hostname
 
 ALLOWED_HOSTS = ['127.0.0.2', 'localhost', backend_service_hostname]
