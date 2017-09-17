@@ -22,6 +22,10 @@ class LoginForm extends Component {
         this.setState({isModalOpen: false});
     }
 
+    forgot = () => {
+        this.showModal();
+    }
+
     showModal = () => {
         this.setState({isModalOpen: true});
     }

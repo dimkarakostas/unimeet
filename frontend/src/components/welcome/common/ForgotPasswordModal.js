@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Modal, Form, FormGroup, FormControl, Button} from 'react-bootstrap';
 import * as config from '../../config';
 
@@ -21,6 +22,8 @@ class ForgotPasswordModal extends Component {
             isForgotPasswordButtonLoading: false,
             isPasswordResetMailSent: false
         });
+        var emailElement = ReactDOM.findDOMNode(this.refs.email);
+        emailElement.focus();
     }
 
 
@@ -72,6 +75,7 @@ class ForgotPasswordModal extends Component {
                                         autoComplete="off"
                                         disabled={this.state.isForgotPasswordButtonLoading}
                                         onChange={this.handleInputChange}
+                                        ref="email"
                                     />
                                 </FormGroup>
                                 <Button

@@ -3,6 +3,11 @@ import re
 import string
 import random
 from mail import send_mail, send_contact_form, send_contact_response, verify_email_address
+from django.db import IntegrityError
+
+
+class DuplicateEmailError(Exception):
+    pass
 
 
 def get_school_list():
@@ -32,7 +37,10 @@ def create_user(email, school):
     password = User.objects.make_random_password()
     token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(40))
     welcome_token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(60))
-    user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
+    try:
+        user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
+    except IntegrityError:
+        raise DuplicateEmailError()
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
     user_obj.save()
     send_mail(user_mail=email, password=password, subject='welcome', welcome_token=welcome_token)

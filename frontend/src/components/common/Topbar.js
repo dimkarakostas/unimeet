@@ -6,6 +6,10 @@ import logo from './img/unimeetLogo.png';
 import './styles.css';
 
 class Topbar extends Component {
+    forgot() {
+        this.refs.welcometopmenu.forgot();
+    }
+
     render() {
         return (
             <Navbar fixedTop>
@@ -21,7 +25,7 @@ class Topbar extends Component {
                     }
                 </Navbar.Header>
                 {this.props.page === 'welcome' ?
-                    <WelcomeTopMenu /> :
+                    <WelcomeTopMenu ref='welcometopmenu' /> :
                 this.props.page === 'contact' ?
                     null :
                 this.props.page === 'chat' ?

@@ -13,6 +13,11 @@ class Welcome extends Component {
         this.state = {
             isLoggedOut: false
         };
+        this.forgot = this.forgot.bind(this);
+    }
+
+    forgot() {
+        this.refs.topbar.forgot();
     }
 
     static get contextTypes() {
@@ -36,8 +41,8 @@ class Welcome extends Component {
             <div className="Welcome">
                 {this.state.isLoggedOut ?
                     <div>
-                        <Topbar page={'welcome'} />
-                        <Intro />
+                        <Topbar page={'welcome'} ref='topbar' />
+                        <Intro onforgot={this.forgot} />
                         <Footer />
                     </div>
                 : ''}

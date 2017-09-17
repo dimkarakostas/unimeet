@@ -3,6 +3,15 @@ import SignupForm from './SignupForm';
 import LoginForm from '../common/LoginForm';
 
 class Intro extends Component {
+    constructor(props) {
+        super(props);
+        this.forgot = this.forgot.bind(this);
+    }
+
+    forgot() {
+        this.props.onforgot();
+    }
+
     render() {
         return (
             <div className="intro-section">
@@ -12,7 +21,7 @@ class Intro extends Component {
                             <div className="container form-container well text-center">
                                 <h4>Μίλα ανώνυμα με άλλους φοιτητές</h4>
                                 <hr/>
-                                <SignupForm />
+                                <SignupForm onforgot={this.forgot} />
                             </div>
                             <div className="container form-container well text-center" id="login-form">
                                 <h4>Σύνδεση</h4>
