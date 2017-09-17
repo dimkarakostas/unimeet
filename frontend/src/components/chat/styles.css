@@ -309,7 +309,5 @@
 }
 
 .loading-element {
-    position: relative;
-    left: 50%;
-    right: 50%;
+    margin: auto;
 }
