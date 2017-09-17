@@ -144,5 +144,5 @@ AUTH_USER_MODEL = 'unimeet.User'
 
 SESSION_COOKIE_DOMAIN = '.unimeet.gr'
 
-CORS_ORIGIN_REGEX_WHITELIST = (r'^((http|https)?://)?(\w+\.)?unimeet\.gr$', )
+CORS_ORIGIN_REGEX_WHITELIST = (r'^((http|https)?://)?((\w+\.)*)unimeet\.gr$', )
 CORS_ALLOW_CREDENTIALS = True
