@@ -93,10 +93,6 @@ class LoginForm extends Component {
                         />
                     </FormGroup>
                     {' '}
-                    <FormGroup className="welcome-forgot-password">
-                        <a onClick={this.showModal}><div>Ξέχασες?</div></a>
-                    </FormGroup>
-                    {' '}
                     <Button
                         type="submit"
                         bsStyle="primary"
@@ -105,6 +101,10 @@ class LoginForm extends Component {
                     >
                         {this.state.isLoginButtonLoading? 'Σύνδεση...' : 'Σύνδεση'}
                     </Button>
+                    {' '}
+                    <FormGroup className="welcome-forgot-password">
+                        <a onClick={this.showModal}><div>Ξέχασες?</div></a>
+                    </FormGroup>
                 </Form>
                 <ForgotPasswordModal isModalOpen={this.state.isModalOpen} hideModal={() => {this.hideModal()}} />
             </div>

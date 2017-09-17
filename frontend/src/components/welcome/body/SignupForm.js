@@ -56,7 +56,7 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
-                Το <b>ακαδημαϊκό</b> σου email:
+                <p>Το <b>ακαδημαϊκό</b> σου email:</p>
                 <Form horizontal className="signup-form" onSubmit={this.signupSubmit}>
                     <FormGroup
                         validationState={this.state.invalidEmail ? "warning" : null}
