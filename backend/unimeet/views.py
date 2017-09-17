@@ -3,13 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form, handle_service_stats, DuplicateEmailError
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
-import os
 from django.conf import settings
 from models import User
-
-
-with open(os.path.join(os.path.dirname(settings.BASE_DIR), 'config', 'services.json'), 'r') as f:
-    service_data = json.load(f)
 
 
 def get_schools(request):
@@ -51,7 +46,7 @@ def login(request):
                 user.welcomeToken = ''
                 user.save(update_fields=['welcomeToken'])
                 Django_login(request, user)
-                return HttpResponseRedirect(service_data['frontend']['url'])
+                return HttpResponseRedirect(settings.SERVICE_DATA['frontend']['url'])
     return HttpResponseBadRequest('Bad credentials')
 
 
@@ -70,7 +65,7 @@ def is_user_logged_in(request):
     if request.user.is_authenticated():
         resp = JsonResponse({'email': request.user.email, 'token': request.user.token})
     else:
-        resp = HttpResponseRedirect(service_data['frontend']['url'])
+        resp = HttpResponseRedirect(settings.SERVICE_DATA['frontend']['url'])
     return resp
 
 
