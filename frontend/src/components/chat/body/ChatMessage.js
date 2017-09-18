@@ -32,17 +32,25 @@ class ChatMessage extends Component {
 
         return (
             <li className={position + " clearfix"}>
-                <span className={"chat-img pull-" + position}>
-                    <OverlayTrigger placement={tooltipPosition} overlay={uniTooltip}>
-                        <h4><i className={"fa fa-" + icon} aria-hidden="true"></i></h4>
-                    </OverlayTrigger>
-                </span>
+                {this.props.message.from !== 'unimeet' ?
+                    <span className={"chat-img pull-" + position}>
+                        <OverlayTrigger placement={tooltipPosition} overlay={uniTooltip}>
+                            <h4><i className={"fa fa-" + icon} aria-hidden="true"></i></h4>
+                        </OverlayTrigger>
+                    </span>
+                : null }
                 <div className="chat-body clearfix">
-                    <OverlayTrigger placement={tooltipPosition} overlay={timeTooltip}>
+                    {this.props.message.from !== 'unimeet' ?
+                        <OverlayTrigger placement={tooltipPosition} overlay={timeTooltip}>
+                            <p className="chat-message">
+                                {ReactEmoji.emojify(this.props.message.content)}
+                            </p>
+                        </OverlayTrigger>
+                    :
                         <p className="chat-message">
                             {ReactEmoji.emojify(this.props.message.content)}
                         </p>
-                    </OverlayTrigger>
+                    }
                 </div>
             </li>
         );
