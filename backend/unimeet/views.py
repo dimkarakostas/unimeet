@@ -3,13 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from helpers import get_school_list, get_school_by_email, create_user, update_password, handle_contact_form, handle_service_stats, DuplicateEmailError
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
-import os
 from django.conf import settings
 from models import User
-
-
-with open(os.path.join(os.path.dirname(settings.BASE_DIR), 'config', 'services.json'), 'r') as f:
-    service_data = json.load(f)
 
 
 def get_schools(request):
@@ -20,7 +15,7 @@ def get_schools(request):
 @csrf_exempt
 def signup(request):
     signup_parameters = json.loads(request.body.decode('utf-8'))
-    email = signup_parameters['email']
+    email = signup_parameters.get('email')
     school = get_school_by_email(email)
     if school is not None:
         try:
@@ -37,21 +32,21 @@ def signup(request):
 def login(request):
     if request.method == 'POST':
         login_parameters = json.loads(request.body.decode('utf-8'))
-        email = login_parameters['email']
-        password = login_parameters['password']
+        email = login_parameters.get('email')
+        password = login_parameters.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
             Django_login(request, user)
             return HttpResponse('Login OK')
     elif request.method == 'GET':
-        welcome_token = request.GET['token']
+        welcome_token = request.GET.get('token')
         if welcome_token != '':
             user = User.objects.get(welcomeToken=welcome_token)
             if user is not None:
                 user.welcomeToken = ''
                 user.save(update_fields=['welcomeToken'])
                 Django_login(request, user)
-                return HttpResponseRedirect(service_data['frontend']['url'])
+                return HttpResponseRedirect(settings.SERVICE_DATA['frontend']['url'])
     return HttpResponseBadRequest('Bad credentials')
 
 
@@ -70,7 +65,7 @@ def is_user_logged_in(request):
     if request.user.is_authenticated():
         resp = JsonResponse({'email': request.user.email, 'token': request.user.token})
     else:
-        resp = HttpResponseRedirect(service_data['frontend']['url'])
+        resp = HttpResponseRedirect(settings.SERVICE_DATA['frontend']['url'])
     return resp
 
 
@@ -97,7 +92,7 @@ def user_info(request):
         })
     elif request.method == 'POST' and request.user.is_authenticated():
         personal_params = json.loads(request.body.decode('utf-8'))
-        gender = personal_params['gender']
+        gender = personal_params.get('gender')
         request.user.gender = gender
         request.user.save(update_fields=['gender'])
         return HttpResponse('OK')
@@ -110,7 +105,7 @@ def user_interests(request):
         if request.user.is_authenticated():
             user = request.user
         elif 'token' in request.GET:
-            user = User.objects.get(token=request.GET['token'])
+            user = User.objects.get(token=request.GET.get('token'))
         else:
             return HttpResponseBadRequest('Bad credentials')
         interestedInGender = str(user.interestedInGender)
@@ -121,8 +116,8 @@ def user_interests(request):
         })
     elif request.method == 'POST':
         interest_params = json.loads(request.body.decode('utf-8'))
-        gender = interest_params['interestedInGender']
-        schools = interest_params['interestedInSchools']
+        gender = interest_params.get('interestedInGender')
+        schools = interest_params.get('interestedInSchools')
         request.user.interestedInGender = gender
         request.user.interestedInSchools.set(schools)
         request.user.save(update_fields=['interestedInGender'])
@@ -135,9 +130,9 @@ def change_password(request):
     if request.user.is_authenticated():
         email = request.user.email
         password_params = json.loads(request.body.decode('utf-8'))
-        old = str(password_params['oldPassword'])
-        new = str(password_params['newPassword'])
-        verification = str(password_params['newPasswordVerification'])
+        old = str(password_params.get('oldPassword'))
+        new = str(password_params.get('newPassword'))
+        verification = str(password_params.get('newPasswordVerification'))
         user = authenticate(request, email=email, password=old)
         if user is not None:
             if new == verification:
@@ -161,7 +156,7 @@ def delete_user(request):
 def forgot_password(request):
     if request.method == 'POST':
         forgot_params = json.loads(request.body.decode('utf-8'))
-        email = forgot_params['email']
+        email = forgot_params.get('email')
         try:
             update_password(email)
         except Exception, e:
@@ -174,9 +169,9 @@ def forgot_password(request):
 def contact(request):
     if request.method == 'POST':
         contact_params = json.loads(request.body.decode('utf-8'))
-        name = contact_params['name']
-        email = contact_params['email']
-        message = contact_params['message']
+        name = contact_params.get('name')
+        email = contact_params.get('email')
+        message = contact_params.get('message')
         try:
             handle_contact_form(name, email, message)
         except Exception, e:
@@ -189,9 +184,9 @@ def contact(request):
 def service_stats(request):
     if request.method == 'POST':
         service_params = json.loads(request.body.decode('utf-8'))
-        name = service_params['name']
-        token = service_params['token']
-        activeUsers = service_params['activeUsers']
+        name = service_params.get('name')
+        token = service_params.get('token')
+        activeUsers = service_params.get('activeUsers')
         try:
             handle_service_stats(name, token, activeUsers)
         except Exception, e:

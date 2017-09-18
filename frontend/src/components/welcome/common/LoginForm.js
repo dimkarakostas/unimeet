@@ -56,16 +56,24 @@ class LoginForm extends Component {
             }
         })
         .catch(error => {
-            if (error.response.status === 400 && error.response.data === 'Bad credentials') {
+            this.setState({
+                isLoginButtonLoading: false
+            });
+            if (error.response && error.response.status === 400 && error.response.data === 'Bad credentials') {
                 this.setState({
-                    showCredentialsInvalid: true,
-                    isLoginButtonLoading: false
+                    showCredentialsInvalid: true
                 });
                 setTimeout(() => {
                     this.setState({showCredentialsInvalid: false});
                 }, 3000);
             }
             else {
+                this.setState({
+                    unknownLoginError: true
+                });
+                setTimeout(() => {
+                    this.setState({unknownLoginError: false});
+                }, 3000);
                 console.log(error);
             }
         })
@@ -85,6 +93,8 @@ class LoginForm extends Component {
                             onChange={this.handleInputChange}
                         />
                         {this.state.showCredentialsInvalid ? <Tooltip id="tooltip" placement="bottom" className="in">Λάθος email ή password!</Tooltip> : ''}
+                        {this.state.unknownLoginError ? <Tooltip id="tooltip" placement="bottom"
+                        className="in">Προσπάθησε ξανά αργότερα</Tooltip> : ''}
                     </FormGroup>
                     {' '}
                     <FormGroup>
