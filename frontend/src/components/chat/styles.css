@@ -201,6 +201,11 @@
     text-align: left;
 }
 
+.ChatMessages li.center .chat-body {
+    margin: 0 40px;
+    text-align: center;
+}
+
 .ChatMessages li.right .chat-body {
     margin: 0 40px;
     text-align: right;
@@ -233,6 +238,10 @@
 
 .ChatMessages li.left .chat-message {
     background: #eee;
+}
+
+.ChatMessages li.center .chat-message {
+    background: cadetblue;
 }
 
 #btn-next {
