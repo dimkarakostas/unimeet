@@ -51,19 +51,32 @@ class SignupForm extends Component {
             this.setState({
                 isSignupButtonLoading: false,
                 duplicateEmail: false,
-                invalidEmail: false
+                invalidEmail: false,
+                unknownSignupError: false
             });
-            switch (error.response.status) {
-                case 409:
-                    this.setState({
-                        duplicateEmail: true
-                    });
-                    break;
-                default:
-                    this.setState({
-                        invalidEmail: true
-                    });
-            };
+            if (error.response) {
+                switch (error.response.status) {
+                    case 409:
+                        this.setState({
+                            duplicateEmail: true
+                        });
+                        break;
+                    case 400:
+                        this.setState({
+                            invalidEmail: true
+                        });
+                        break;
+                    default:
+                        this.setState({
+                            unknownSignupError: true
+                        });
+                };
+            }
+            else {
+                this.setState({
+                    unknownSignupError: true
+                });
+            }
             var signupEmailElement = ReactDOM.findDOMNode(this.signupEmail);
             signupEmailElement.focus();
             signupEmailElement.select();
@@ -114,6 +127,10 @@ class SignupForm extends Component {
                     : this.state.duplicateEmail ?
                         <div className="email-error">
                             <b>Το email που επέλεξες χρησιμοποιείται ήδη! <a onClick={this.forgot} href=''>Επανάφερε τον κωδικό σου</a>.</b>
+                        </div>
+                    : this.state.unknownSignupError ?
+                        <div className="email-error">
+                            <b>Προσπάθησε ξανά αργότερα.</b>
                         </div>
                     : null}
                 </Form>
