@@ -88,12 +88,22 @@ class Chatbody extends Component {
         if (!document.hasFocus()) {
             this.setState({playSound: Sound.status.PLAYING});
         }
+        let connectedWithMessage = 'Έχεις συνδεθεί με ' + GENDERS[partnerInfo.gender] + ' από ' + partnerInfo.school + ', ' + partnerInfo.university;
+        let newMessages = this.state.messages;
+        let newMessage = {
+            content: connectedWithMessage,
+            gender: '2',
+            timestamp: new Date(),
+            from: 'unimeet'
+        };
+        newMessages.push(newMessage);
         this.setState({
             partner: {
                 gender: partnerInfo.gender,
                 school: partnerInfo.school + ', ' + partnerInfo.university,
             },
-            footerInfoMessage: 'Έχεις συνδεθεί με ' + GENDERS[partnerInfo.gender] + ' από ' + partnerInfo.school + ', ' + partnerInfo.university
+            footerInfoMessage: connectedWithMessage,
+            messages: newMessages
         });
         axios.get(config.backendUrl + '/user_info')
         .then(res => {
