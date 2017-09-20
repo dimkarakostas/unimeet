@@ -17,6 +17,11 @@ def signup(request):
     signup_parameters = json.loads(request.body.decode('utf-8'))
     email = signup_parameters.get('email')
     school = get_school_by_email(email)
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
     if school is not None:
         try:
             create_user(email, school)
