@@ -48,6 +48,10 @@ class Chatbody extends Component {
         this.setState({infoMessage: INFO_MESSAGES.alreadyConnected});
     }
 
+    updateQueuePosition = (queuePosition) => {
+        this.setState({infoMessage: INFO_MESSAGES.queued + ' (Θέση: ' + queuePosition.toString() + ')'});
+    }
+
     handleNext = (origin) => {
         if (origin === 'me') {
             this._realtimeConnector.broadcastNext();
