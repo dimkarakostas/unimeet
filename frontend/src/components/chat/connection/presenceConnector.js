@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-function presenceConnector(token, presenceUrl, joinRoomCallback, alreadyConnectedCallback) {
+function presenceConnector(token, presenceUrl, joinRoomCallback, alreadyConnectedCallback, queueUpdatePositionCallback) {
     this._socket = io.connect(presenceUrl, {'forceNew': true});
     this._socket.on('connect', () => {
         this._socket.emit('client-get-partner', token);
@@ -13,6 +13,9 @@ function presenceConnector(token, presenceUrl, joinRoomCallback, alreadyConnecte
         setTimeout(() => {
            this._socket.emit('client-get-partner', token);
         }, 10000);
+    });
+    this._socket.on('queue-position', (queuePosition) => {
+        queueUpdatePositionCallback(queuePosition);
     });
     this.isConnected = function() {
         return this._socket.connected;
