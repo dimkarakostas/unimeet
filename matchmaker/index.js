@@ -95,11 +95,15 @@ for (var i=0; i < SERVICES.length; i++) {
                         queue.splice(i, 1);
                         sendToRoom(client, candidate);
                         backendStats(queue);
+                        for (var j=0; j < queue.length; j++) {
+                            queue[j].presenceSocket.emit('matchmaker-update-queue', queue[j].token, j+1);
+                        }
                         return;
                     }
                 }
                 queue.push(client);
                 backendStats(queue);
+                client.presenceSocket.emit('matchmaker-update-queue', client.token, queue.length);
             })
             .catch(error => {
                 winston.error(error);
@@ -115,6 +119,9 @@ for (var i=0; i < SERVICES.length; i++) {
             if (queue[i].token === token) {
                 queue.splice(i, 1);
                 backendStats(queue);
+                for (var j=0; j < queue.length; j++) {
+                    queue[j].presenceSocket.emit('matchmaker-update-queue', queue[j].token, j+1);
+                }
             }
         }
         winston.debug('Client disconnected: ' + token);
