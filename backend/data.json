@@ -137,7 +137,7 @@
                                 {
                                     "name": "Τμήμα Μηχανικών Η/Υ και Πληροφορικής",
                                     "site": "http://cse.uoi.gr/",
-                                    "mailRegex": "@cse?.uoi.gr"
+                                    "mailRegex": "(.*)@cse?\\.uoi\\.gr"
                                 }
                             ]
                         }
