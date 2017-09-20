@@ -60,6 +60,10 @@ class Chatbody extends Component {
         this._presenceConnector.reconnect();
     }
 
+    stopRinging = () => {
+        this.setState({playSound: ''});
+    }
+
     handleNewMessage = (message, from) => {
         if (message !== '') {
             if (from === undefined) {
@@ -152,6 +156,7 @@ class Chatbody extends Component {
                 <Sound
                     url="ring.mp3"
                     playStatus={this.state.playSound}
+                    onFinishedPlaying={this.stopRinging}
                 />
                 { this.state.infoMessage !== '' ?
                     <QueueMessage infoMessage={this.state.infoMessage} />
