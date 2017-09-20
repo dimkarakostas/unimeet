@@ -69,6 +69,12 @@ socketIOServer.on('connection', (client) => {
         }
     });
 
+    client.on('matchmaker-update-queue', (token, queuePosition) => {
+        let client = tokenClients[token];
+        socketIOServer.to(client).emit('queue-position', queuePosition);
+        winston.debug('Client with token (' + token + ') is now in position ' + queuePosition + '.');
+    });
+
     // Frontend communication
     client.on('client-get-partner', (token) => {
         client._token = token;

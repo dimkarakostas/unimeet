@@ -48,6 +48,10 @@ class Chatbody extends Component {
         this.setState({infoMessage: INFO_MESSAGES.alreadyConnected});
     }
 
+    updateQueuePosition = (queuePosition) => {
+        this.setState({infoMessage: INFO_MESSAGES.queued + ' (Θέση: ' + queuePosition.toString() + ')'});
+    }
+
     handleNext = (origin) => {
         if (origin === 'me') {
             this._realtimeConnector.broadcastNext();
@@ -123,14 +127,14 @@ class Chatbody extends Component {
     }
 
     componentDidMount() {
-        this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+        this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected, this.updateQueuePosition );
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.infoUpdate !== nextProps.infoUpdate) {
             if (this._presenceConnector.isConnected) {
                 this._presenceConnector.disconnect();
-                this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected);
+                this._presenceConnector = new presenceConnector(this.props.token, config.presenceUrl, this.joinRoom, this.alreadyConnected, this.updateQueuePosition );
             }
         }
     }
