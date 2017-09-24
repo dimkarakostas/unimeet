@@ -260,6 +260,18 @@
     overflow-wrap: break-word;
 }
 
+.ChatMessages .chat-message a {
+    text-decoration: underline;
+}
+
+.ChatMessages li.right .chat-message a {
+    color: white;
+}
+
+.ChatMessages li.left .chat-message a {
+    color: black;
+}
+
 .react-bs-container-body tr,
 .react-bs-container-body input,
 .interested-sex select {
