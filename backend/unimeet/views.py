@@ -46,6 +46,9 @@ def login(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             Django_login(request, user)
+            if not user.is_active:
+                user.is_active = True
+                user.save(update_fields=['is_active'])
             return HttpResponse('Login OK')
     elif request.method == 'GET':
         welcome_token = request.GET.get('token')
@@ -55,6 +58,9 @@ def login(request):
                 user.welcomeToken = ''
                 user.save(update_fields=['welcomeToken'])
                 Django_login(request, user)
+                if not user.is_active:
+                    user.is_active = True
+                    user.save(update_fields=['is_active'])
                 return HttpResponseRedirect(settings.SERVICE_DATA['frontend']['url'])
     return HttpResponseBadRequest('Bad credentials')
 
