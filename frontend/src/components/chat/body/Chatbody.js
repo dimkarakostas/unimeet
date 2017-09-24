@@ -65,31 +65,29 @@ class Chatbody extends Component {
     }
 
     handleNewMessage = (message, from) => {
-        if (message !== '') {
-            if (from === undefined) {
-                from = 'me';
-            }
-            let newMessages = this.state.messages;
-            let newMessage = {
-                content: message,
-                timestamp: new Date(),
-                from: from
-            };
-            if (from === 'me') {
-                this._realtimeConnector.broadcastMessage(message);
-                newMessage.gender = this.state.me.gender;
-                newMessage.school = this.state.me.school;
-            }
-            else {
-                if (!document.hasFocus()) {
-                    this.setState({playSound: Sound.status.PLAYING});
-                }
-                newMessage.gender = this.state.partner.gender;
-                newMessage.school = this.state.partner.school;
-            }
-            newMessages.push(newMessage);
-            this.setState({messages: newMessages});
+        if (from === undefined) {
+            from = 'me';
         }
+        let newMessages = this.state.messages;
+        let newMessage = {
+            content: message,
+            timestamp: new Date(),
+            from: from
+        };
+        if (from === 'me') {
+            this._realtimeConnector.broadcastMessage(message);
+            newMessage.gender = this.state.me.gender;
+            newMessage.school = this.state.me.school;
+        }
+        else {
+            if (!document.hasFocus()) {
+                this.setState({playSound: Sound.status.PLAYING});
+            }
+            newMessage.gender = this.state.partner.gender;
+            newMessage.school = this.state.partner.school;
+        }
+        newMessages.push(newMessage);
+        this.setState({messages: newMessages});
     }
 
     joinRoom = (realtimeUrl, roomId, partnerInfo) => {
