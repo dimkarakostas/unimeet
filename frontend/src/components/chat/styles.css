@@ -256,6 +256,10 @@
     border-radius: 4px;
 }
 
+.ChatMessages .chat-message {
+    overflow-wrap: break-word;
+}
+
 .react-bs-container-body tr,
 .react-bs-container-body input,
 .interested-sex select {
