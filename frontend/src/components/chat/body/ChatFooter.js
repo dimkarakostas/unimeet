@@ -26,8 +26,10 @@ class ChatFooter extends Component {
 
     handleMessageSubmit = (event) => {
         event.preventDefault();
-        this.props.handleNewMessage(this.state.chatMessage);
-        this.setState({chatMessage: ''});
+        if (this.state.chatMessage.replace(/\s/g, '').length) {
+            this.props.handleNewMessage(this.state.chatMessage);
+            this.setState({chatMessage: ''});
+        }
     }
 
     handleKeyPress = (event) => {

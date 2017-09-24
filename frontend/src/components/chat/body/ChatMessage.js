@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap';
 import ReactEmoji from 'react-emoji';
+import Linkify from 'react-linkify';
 
 class ChatMessage extends Component {
     render() {
@@ -43,7 +44,9 @@ class ChatMessage extends Component {
                     {this.props.message.from !== 'unimeet' ?
                         <OverlayTrigger placement={tooltipPosition} overlay={timeTooltip}>
                             <p className="chat-message">
-                                {ReactEmoji.emojify(this.props.message.content)}
+                                <Linkify properties={{'target': '_blank'}}>
+                                    {ReactEmoji.emojify(this.props.message.content)}
+                                </Linkify>
                             </p>
                         </OverlayTrigger>
                     :
