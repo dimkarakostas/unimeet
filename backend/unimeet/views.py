@@ -28,7 +28,7 @@ def signup(request):
         return HttpResponse(content='Multiple registrations', status=403)
     if school is not None:
         try:
-            create_user(email, school)
+            create_user(email, school, ip)
             return HttpResponse('Signup OK')
         except DuplicateEmailError:
             return HttpResponse(content='Duplicate email', status=409)
