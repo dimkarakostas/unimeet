@@ -71,3 +71,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_index=True,
         help_text=('The one-time authentication token used in welcome link.')
     )
+
+    registrationIP = models.GenericIPAddressField(
+        default='127.0.0.1',
+        db_index=True,
+        help_text=('The IP that the user used for registration.')
+    )

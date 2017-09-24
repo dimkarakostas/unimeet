@@ -29,7 +29,8 @@ class SignupForm extends Component {
         this.setState({email: event.target.value});
         this.setState({
             invalidEmail: false,
-            duplicateEmail: false
+            duplicateEmail: false,
+            multipleRegistrations: false
         });
     }
 
@@ -59,6 +60,11 @@ class SignupForm extends Component {
                     case 409:
                         this.setState({
                             duplicateEmail: true
+                        });
+                        break;
+                    case 403:
+                        this.setState({
+                            multipleRegistrations: true
                         });
                         break;
                     case 400:
@@ -127,6 +133,10 @@ class SignupForm extends Component {
                     : this.state.duplicateEmail ?
                         <div className="email-error">
                             <b>Το email που επέλεξες χρησιμοποιείται ήδη! <a onClick={this.forgot} href=''>Επανάφερε τον κωδικό σου</a>.</b>
+                        </div>
+                    : this.state.multipleRegistrations ?
+                        <div className="email-error">
+                            <b>Έχουν γίνει πολλές εγγραφές από τον υπολογιστή σου σήμερα. Περίμενε μια μέρα και ξαναδοκίμασε.</b>
                         </div>
                     : this.state.unknownSignupError ?
                         <div className="email-error">

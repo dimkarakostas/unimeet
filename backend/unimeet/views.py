@@ -5,6 +5,7 @@ from helpers import get_school_list, get_school_by_email, create_user, update_pa
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 from django.conf import settings
 from models import User
+from datetime import date, timedelta
 
 
 def get_schools(request):
@@ -17,9 +18,17 @@ def signup(request):
     signup_parameters = json.loads(request.body.decode('utf-8'))
     email = signup_parameters.get('email')
     school = get_school_by_email(email)
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    previousDailyRegistrations = User.objects.filter(registrationIP=ip, date_joined__gte=(date.today() - timedelta(1)))
+    if len(previousDailyRegistrations) > 5:
+        return HttpResponse(content='Multiple registrations', status=403)
     if school is not None:
         try:
-            create_user(email, school)
+            create_user(email, school, ip)
             return HttpResponse('Signup OK')
         except DuplicateEmailError:
             return HttpResponse(content='Duplicate email', status=409)

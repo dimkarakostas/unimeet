@@ -32,13 +32,20 @@ def get_school_by_email(email):
     return None
 
 
-def create_user(email, school):
+def create_user(email, school, ip):
     # verify_email_address(email)
     password = User.objects.make_random_password()
     token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(40))
     welcome_token = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(60))
     try:
-        user_obj = User.objects.create_user(email=email, school=school, password=password, token=token, welcomeToken=welcome_token)
+        user_obj = User.objects.create_user(
+            email=email,
+            school=school,
+            password=password,
+            token=token,
+            welcomeToken=welcome_token,
+            registrationIP=ip
+        )
     except IntegrityError:
         raise DuplicateEmailError()
     user_obj.interestedInSchools.set(School.objects.all().values_list('id', flat=True))
