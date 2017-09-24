@@ -5,6 +5,7 @@ from helpers import get_school_list, get_school_by_email, create_user, update_pa
 from django.contrib.auth import authenticate, login as Django_login, logout as Django_logout, update_session_auth_hash
 from django.conf import settings
 from models import User
+from datetime import date, timedelta
 
 
 def get_schools(request):
@@ -22,6 +23,9 @@ def signup(request):
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
+    previousDailyRegistrations = User.objects.filter(registrationIP=ip, date_joined__gte=(date.today() - timedelta(1)))
+    if len(previousDailyRegistrations) > 5:
+        return HttpResponse(content='Multiple registrations', status=403)
     if school is not None:
         try:
             create_user(email, school)
