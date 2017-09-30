@@ -142,6 +142,92 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Θεσσαλονίκη",
+                    "universities": [
+                        {
+                            "name": "ΑΠΘ",
+                            "site": "http://www.auth.gr",
+                            "schools": [
+                                {
+                                    "name": "Τμήμα Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών",
+                                    "site": "http://www.ee.auth.gr",
+                                    "mailRegex": "((.*)@ece\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Πολιτικών Μηχανικών",
+                                    "site": "http://www.civil.auth.gr/",
+                                    "mailRegex": "((.*)@civil\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Αρχιτεκτόνων Μηχανικών",
+                                    "site": "http://www.arch.auth.gr/",
+                                    "mailRegex": "((.*)@arch\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Πολιτικών Μηχανικών",
+                                    "site": "http://www.civil.auth.gr/",
+                                    "mailRegex": "((.*)@civil\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Μηχανολόγων Μηχανικών",
+                                    "site": "http://www.meng.auth.gr/",
+                                    "mailRegex": "((.*)@meng\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Χημικών Μηχανικών",
+                                    "site": "http://www.cheng.auth.gr/",
+                                    "mailRegex": "((.*)@cheng\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Αγρονόμων και Τοπογράφων Μηχανικών",
+                                    "site": "http://www.topo.auth.gr/",
+                                    "mailRegex": "((.*)@topo\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Μηχανικών Χωροταξίας και Ανάπτυξης",
+                                    "site": "http://www.plandevel.auth.gr/",
+                                    "mailRegex": "((.*)@plandevel\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Φυσικής",
+                                    "site": "http://www.physics.auth.gr/",
+                                    "mailRegex": "((.*)@physics\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Μαθηματικών",
+                                    "site": "http://www.math.auth.gr/",
+                                    "mailRegex": "((.*)@math\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Χημείας",
+                                    "site": "http://www.chem.auth.gr/",
+                                    "mailRegex": "((.*)@chem\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Βιολογίας",
+                                    "site": "http://www.bio.auth.gr/",
+                                    "mailRegex": "((.*)@bio\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Γεωλογίας",
+                                    "site": "http://www.geo.auth.gr/",
+                                    "mailRegex": "((.*)@geo\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Πληροφορικής",
+                                    "site": "http://www.csd.auth.gr/",
+                                    "mailRegex": "((.*)@csd\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Νομικής",
+                                    "site": "http://www.law.auth.gr/",
+                                    "mailRegex": "((.*)@law\\.auth\\.gr)"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
