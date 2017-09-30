@@ -224,6 +224,76 @@
                                     "name": "Τμήμα Νομικής",
                                     "site": "http://www.law.auth.gr/",
                                     "mailRegex": "((.*)@law\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Θεολογίας",
+                                    "site": "http://www.theo.auth.gr/",
+                                    "mailRegex": "((.*)@theo\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Ποιμαντικής και Κοινωνικής Θεολογίας",
+                                    "site": "http://www.past.auth.gr/",
+                                    "mailRegex": "((.*)@past\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Φιλολογίας",
+                                    "site": "http://www.lit.auth.gr/",
+                                    "mailRegex": "((.*)@lit\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Ιστορίας και Αρχαιολογίας",
+                                    "site": "http://www.hist.auth.gr/",
+                                    "mailRegex": "((.*)@hist\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Φιλοσοφίας και Παιδαγωγικής",
+                                    "site": "http://www.edlit.auth.gr/",
+                                    "mailRegex": "((.*)@edlit\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Ψυχολογίας",
+                                    "site": "http://www.psy.auth.gr/",
+                                    "mailRegex": "((.*)@psy\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Αγγλικής Γλώσσας και Φιλολογίας",
+                                    "site": "http://www.enl.auth.gr/",
+                                    "mailRegex": "((.*)@enl\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Γαλλικής Γλώσσας και Φιλολογίας",
+                                    "site": "http://www.frl.auth.gr/",
+                                    "mailRegex": "((.*)@frl\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Γερμανικής Γλώσσας και Φιλολογίας",
+                                    "site": "http://www.del.auth.gr/",
+                                    "mailRegex": "((.*)@del\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Ιταλικής Γλώσσας και Φιλολογίας",
+                                    "site": "http://www.itl.auth.gr/",
+                                    "mailRegex": "((.*)@itl\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Ιατρικής",
+                                    "site": "http://www.med.auth.gr/",
+                                    "mailRegex": "((.*)@med\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Κτηνιατρικής",
+                                    "site": "http://www.vet.auth.gr/",
+                                    "mailRegex": "((.*)@vet\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Οδοντιατρικής",
+                                    "site": "http://www.dent.auth.gr/",
+                                    "mailRegex": "((.*)@dent\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Φαρμακευτικής",
+                                    "site": "http://www.pharm.auth.gr/",
+                                    "mailRegex": "((.*)@pharm\\.auth\\.gr)"
                                 }
                             ]
                         }
