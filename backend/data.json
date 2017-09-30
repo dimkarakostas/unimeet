@@ -294,6 +294,71 @@
                                     "name": "Τμήμα Φαρμακευτικής",
                                     "site": "http://www.pharm.auth.gr/",
                                     "mailRegex": "((.*)@pharm\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Οικονομικών Επιστημών",
+                                    "site": "http://www.econ.auth.gr/",
+                                    "mailRegex": "((.*)@econ\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Πολιτικών Επιστημών",
+                                    "site": "http://www.polsci.auth.gr/",
+                                    "mailRegex": "((.*)@polsci\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Δημοσιογραφίας και Μέσων Μαζικής Επικοινωνίας",
+                                    "site": "http://www.jour.auth.gr/",
+                                    "mailRegex": "((.*)@jour\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Εικαστικών και Εφαρμοσμένων Τεχνών",
+                                    "site": "http://www.vis.auth.gr/",
+                                    "mailRegex": "((.*)@vis\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Μουσικών Σπουδών",
+                                    "site": "http://www.mus.auth.gr/",
+                                    "mailRegex": "((.*)@mus\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Θεάτρου",
+                                    "site": "http://www.thea.auth.gr/",
+                                    "mailRegex": "((.*)@thea\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Κινηματογράφου",
+                                    "site": "http://www.film.auth.gr/",
+                                    "mailRegex": "((.*)@film\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Παιδαγωγικό Τμήμα Δημοτικής Εκπαίδευσης",
+                                    "site": "http://www.eled.auth.gr/",
+                                    "mailRegex": "((.*)@eled\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Επιστημών Προσχολικής Αγωγής και Εκπαίδευσης",
+                                    "site": "http://www.nured.auth.gr/",
+                                    "mailRegex": "((.*)@nured\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Επιστήμης Φυσικής Αγωγής και Αθλητισμού",
+                                    "site": "http://www.phed.auth.gr/",
+                                    "mailRegex": "((.*)@phed\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Επιστήμης Φυσικής Αγωγής και Αθλητισμού Σερρών",
+                                    "site": "http://www.phed-sr.auth.gr/",
+                                    "mailRegex": "((.*)@phed-sr\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Γεωπονίας",
+                                    "site": "http://www.agro.auth.gr/",
+                                    "mailRegex": "((.*)@agro\\.auth\\.gr)"
+                                },
+                                {
+                                    "name": "Τμήμα Δασολογίας και Φυσικού Περιβάλλοντος",
+                                    "site": "http://www.for.auth.gr/",
+                                    "mailRegex": "((.*)@for\\.auth\\.gr)"
                                 }
                             ]
                         }
