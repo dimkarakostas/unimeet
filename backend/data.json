@@ -166,11 +166,6 @@
                                     "mailRegex": "((.*)@arch\\.auth\\.gr)"
                                 },
                                 {
-                                    "name": "Τμήμα Πολιτικών Μηχανικών",
-                                    "site": "http://www.civil.auth.gr/",
-                                    "mailRegex": "((.*)@civil\\.auth\\.gr)"
-                                },
-                                {
                                     "name": "Τμήμα Μηχανολόγων Μηχανικών",
                                     "site": "http://www.meng.auth.gr/",
                                     "mailRegex": "((.*)@meng\\.auth\\.gr)"
